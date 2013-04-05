@@ -1,0 +1,6 @@
+HOME=C:\wamp\www\TBGains - dev
+HOST=localhost
+USER=root
+PASSE=
+BASE=ecole
+GZ=NON

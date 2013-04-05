@@ -1,0 +1,410 @@
+/*
+Rappel : MARGIN... top ... right... bottom... left
+        margin-top = marge supérieure
+        margin-right = marge de droite
+        margin-bottom = marge inférieure
+        margin-left = marge de gauche
+        à preferer sur une ligne car incompatible IE6
+*/
+/* ------------------------------------------------------------------------------ */
+/* structure generale                                                             */
+/* ------------------------------------------------------------------------------ */
+div#conteneur { /*clear: both;*/
+	/*margin:auto;*/
+	background-color: #0c3471; /*#AF0017;*/
+	border-radius: 30px;
+}
+
+div#entete { /*position: absolute;*/ /*top: 0;*/
+	/*width: 100%;*/
+	height: 80px;
+	/*background: url("/images/jardin_mini.jpg") center no-repeat;*/
+	/*background: url("/images/logoCar.png") no-repeat;
+	background-size: 30%;*/
+}
+
+#entete .icones {
+	float: right;
+	padding: 10px;
+}
+
+#entete .icones img {
+	width: 30px;
+	height: 30px;
+}
+
+div#entete h1 {
+	padding-top: 10px;
+}
+
+div#entete .image_entete {
+	width: 18%;
+	height: 100%;
+	float: left;
+	background-color: white;
+	text-align: center;
+}
+
+div#entete .image_entete img {
+	height: 100%;
+}
+
+div#gauche {
+	width: 18%;
+	float: left;
+	/*background: url("/images/menu-fond.png");*/ /*nt-size: 1.1em;*/
+	background-color: /*#F99999*/ #0c3471 ; /*#148623;*/
+	padding-top: 1%;
+	border-radius: 0px 0px 0px 30px;
+	min-height: 670px;
+	max-height: 300%;
+	overflow: auto;
+}
+
+#gauche #titre {
+	text-align: center;
+}
+
+#gauche #titre a { /* Les liens qui ne sont pas sous le curseur. */
+	color: #c7d3e0;
+}
+
+#gauche #titre a:visited { /* Les liens visités. */
+	color: #c7d3e0;
+}
+
+#gauche #titre img {
+	width: 20px;
+	height: 20px;
+}
+
+div#centre {
+	padding-left: 1%;
+	padding-right: 1%;
+	background-color: #788eb0;
+	width: 80%;
+	min-height: 690px;
+	max-height: 300%;
+	overflow: auto;
+	border-radius: 0px 0px 30px 0px;
+}
+
+div#pied { /*clear: both;*/
+	/*    background-color: #2EB549;*/
+	background-color: /*#F99999*/ #002A69 ; /*#148623;*/
+	text-align: center;
+}
+
+/*Lien de modification (editer)*/
+a img {
+	border: none;
+}
+
+#centre a { /* Les liens qui ne sont pas sous le curseur. */
+	color: black;
+}
+
+#centre a:visited { /* Les liens visités. */
+	color: black;
+}
+
+.photo {
+	float: left;
+	/*width: 150px;*/ /*height: 150px;*/ /*    background-color: #FF3300;*/
+}
+
+.erreur {
+	text-align: center;
+	color: red;
+}
+
+.notice {
+	text-align: center;
+	color: #436497;
+	font-style: italic;
+}
+
+/*TABLE*/
+.liste {
+	border: 1px solid black;
+	border-spacing: 0px;
+	border-collapse: collapse;
+}
+
+.liste tr th {
+	border: 1px solid black;
+	cursor: default;
+}
+
+.liste tr td {
+	border-left: 1px solid black;
+	cursor: default;
+}
+
+.liste .number {
+	text-align: right;
+	white-space: nowrap;
+}
+
+.tableGraphe{
+	font-size: 12px;
+	}
+
+/* Couleurs de fonds */
+.liste .enteteGrille {
+	background-color: #436497;
+}
+
+.corpsGrille {
+	background-color: white;
+}
+
+.niveau2 {
+	background-color: #99CCCC;
+}
+
+.rouge {
+	color: red;
+	font-weight: bold;
+	}
+	
+.orange {
+	color: orange;
+	font-weight: bold;
+	}
+	
+.bleu {
+	color: blue;
+	font-weight: bold;
+	}
+	
+.vert {
+	color: green;
+	font-weight: bold;
+	}
+
+/* Police */
+.nomDomaine{
+	text-decoration:underline;
+	}
+
+#centre .surbrillance {
+	color: #0C3471;
+	font-weight: bold;
+}
+	
+.police09{
+	font-size:0.9em;
+	}
+	
+.italic{
+	font-style: italic;
+	}
+
+.souligne{
+text-decoration:underline;
+	}
+
+.paddingUP th{
+	padding:10px;
+	}
+
+.icone a:hover {
+	background-color: #99CCCC;
+}
+
+/* CSS Tableau Impr */
+.tab_impr{
+	width:100%;
+	border-collapse: collapse;
+	margin: 10px 0px;
+}
+
+.noMarge{
+	width:100%;
+	margin: 10px 0px;
+}
+
+
+.tab_impr td, .tab_impr th {
+	border: 1px solid black;
+}
+
+.cadreObs{
+	width:100%;
+	height: 300px;
+	border: 1px solid black;
+	}
+	
+/*CSS DU MENU */
+.titre_menu {
+	color: #c7d3e0;
+	font-weight: bold;
+}
+
+.titre_menu .sous_menu {
+	padding: 5px;
+}
+
+.sous_partie {
+	font-size: 0.8em;
+	/*text-align: center;*/
+	display: list-item;
+	margin: 0px;
+	padding: 2px;
+	color: white;
+	font-weight: normal;
+}
+
+.sous_partie a {
+	color: #c7d3e0;
+	text-decoration: none;
+}
+
+.sous_partie a {
+	margin: -4px;
+}
+
+.sous_partie a:hover {
+	color: grey;
+}
+
+/* CSS divers*/
+/*
+.imageCentre {
+	position:fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -280px;
+	margin-left: -400px; 
+	cursor: pointer;
+	}*/
+
+.detailCompetences {
+	position:fixed;
+	width: 800px;
+	height: 500px;
+	top:10%;
+	left:25%;
+	background-color:white; 
+	cursor: pointer;
+	}
+	
+.divOpaque{
+position:fixed;
+top:0%;
+left:0%;
+width:100%;
+height:100%;
+background-color:black;
+opacity:0.8;
+}
+
+.imgAttente{
+position:fixed;
+top: 20%;
+left: 50%;
+}
+/* fin structure generale */
+/* ------------------------------------------------------------------------------ */
+/* polices */
+/* ------------------------------------------------------------------------------ */
+html {
+	font-size: 100%; /* Évite un bug d'IE 6-7. (1) */
+	background-color: white;
+	/*width:1024px;
+	height:768px;*/
+}
+
+/* Formulaires */
+form,fieldset {
+	margin: 0;
+	padding: 0;
+	border: none;
+	background-color: white;
+}
+
+input,button,select {
+	vertical-align: middle; /* Solution pb. d'alignement. */
+}
+
+body {
+	color: black;
+	font-family: Arial, Verdana, sans-serif;
+	margin: 0 0 1em 0;
+	font-weight: normal;
+	line-height: 1.4; /* À adapter au design. (4) */
+	font-size: 0.9em;
+	background-color: #99CCCC;
+	width: 90%;
+	margin: 1% 5% 1% 5%;
+	/*height:1024px;
+	width:1280px;*/
+}
+
+/* Titres */
+h1,h2,h3,h4,h5,h6 {
+	margin: 1em 0 .5em 0; /* Rapproche le titre du texte. (5) */
+	line-height: 1.2;
+	font-weight: bold; /* Valeur par défaut. (6) */
+	font-style: normal;
+	text-align: center;
+}
+
+h1 {
+	font-size: 1.6em;
+	color: #0c3471;
+}
+
+h2 {
+	font-size: 1.35em;
+	margin: 0 0 0.5em 0;
+	color: #436497;
+}
+
+h3 {
+	font-size: 1.2em;
+	color: #436497;
+}
+
+h2 titredevant { /* utilise pour l'entete */
+	font-weight: normal;
+	position: relative;
+	/* on positionne le conteneur pour placer ensuite le SPAN */
+	/*margin: 0px auto auto 150px;*/
+	top: 24px;
+	font-size: 1.8em;
+	color: gray;
+	text-align: center;
+}
+
+h2 titrederriere {
+	font-weight: normal;
+	/* on superpose le SPAN sur le titre */
+	position: absolute;
+	/*margin: 9px auto auto 150px;*/
+	color: gold;
+	text-align: center;
+	/* on décale le SPAN */
+	top: -3px;
+	left: -2px; -
+	margin: 9px auto auto -50px;
+}
+
+.petit {
+	font-size: 0.8em;
+}
+
+input[type="submit"],input[type="file"],input[type="button"] {
+	font-family: Arial, Verdana, Helvetica;
+	font-size: 11px;
+	color: #788eb0;
+	font-weight: bold;
+	background-color: #436497;
+	width: 180px;
+}
+
+#map-canvas { 
+height: 50%
+}
+
