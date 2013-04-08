@@ -1,8 +1,8 @@
 <?php
 /**
  * ------------------------------------------------------------------------
- * @Name : ClasseData.inc.php
- * @Desc : Classe ClasseData
+ * @Name : StationServiceData.inc.php
+ * @Desc : Classe StationServiceData
  * @Autor : Thom
  * @Date : 29/03/2012 : création
  * @Version : V1.0;
@@ -10,10 +10,8 @@
  **/
 require_once 'AccesBase.inc.php';
 
-//---------------------------------------------------------------------------
-// Classe UserData
-//---------------------------------------------------------------------------
-class ClasseData {
+
+class StationServiceData {
 	static function getClasse($id,$annee) {
 		$requete='select id, instituteur'
 		. ' from classe '
