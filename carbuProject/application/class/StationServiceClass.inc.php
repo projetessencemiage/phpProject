@@ -10,14 +10,15 @@
  **/
 require_once 'StationServiceData.inc.php';
 
-//---------------------------------------------------------------------------
-// Classe Eleve
-//---------------------------------------------------------------------------
 class StationService {
-	private $adresse;
 	private $id;
+	private $adresse;
+	private $ville;
+	private $CP;
+	private $region;
+	private $phone;
 	private $enseigne;
-	
+	private $ListePrix;
 
 	function __construct($adr, $_id, $_enseigne) {
 		$this->adresse  = $adr;
@@ -31,5 +32,19 @@ class StationService {
 	public function getEnseigne(){
 		return $this->enseigne;
 	}
-	
+	public function getVille(){
+		return $this->ville;
+	}
+	public function getCP(){
+		return $this->CP;
+	}
+	public function getRegion(){
+		return $this->region;
+	}
+	public function getPhone(){
+		return $this->phone;
+	}
+	public function getID(){
+		return $this->id;
+	}	
 }

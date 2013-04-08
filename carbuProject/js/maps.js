@@ -60,6 +60,7 @@ window.onload=function(){
 		});
 		}
 	
+	
 	//Creation d'un MARKER sur la map
 	function createMarker(map, my_position, markerInfos) {
 	var myMarkerImage = new google.maps.MarkerImage('./images/station.jpg');
@@ -69,6 +70,18 @@ window.onload=function(){
 				icon: myMarkerImage,
 				title: markerInfos[1]
 			});
-	}
+	//Ajout Fenetre 
+	var myWindowOptions = {
+			content:
+			'<h6>' + markerInfos[1] + '</h6>'+
+			'<p><a href="http://www.cinemasgaumontpathe.com/cinemas/cinema-pathe-lyon-bellecour/" title="Site officiel">Visiter le site officiel</a></p>'
+		};
+		 
+		// Création de la fenêtre
+	var myInfoWindow = new google.maps.InfoWindow(myWindowOptions);
+	google.maps.event.addListener(myMarker, 'click', function() {
+	myInfoWindow.open(myMap,myMarker);
+	});
+	}		
 	
 	}
