@@ -74,7 +74,7 @@ window.onload=function(){
 	var myWindowOptions = {
 			content:
 			'<h6>' + markerInfos[1] + '</h6>'+
-			'<p><a href="http://www.cinemasgaumontpathe.com/cinemas/cinema-pathe-lyon-bellecour/" title="Site officiel">Visiter le site officiel</a></p>'
+			'<p></p>'
 		};
 		 
 		// Création de la fenêtre
