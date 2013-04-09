@@ -245,6 +245,10 @@ input[type=submit], input[type=reset] {
  cursor:pointer;
  }
 
+div#formGoogleMaps {
+	float:right;
+}
+
 body {
 	color: black;
 	font-family: Arial, Verdana, sans-serif;

@@ -1,8 +1,8 @@
 <h1>Qui est le moins cher ?</h1>
 <iframe src="carteStations.php" name="frame" frameborder=yes width="600" height="400"></iframe>
-<div>
-<form action="toto.php" method="post" >
 
+<div  id="formGoogleMaps">
+<form action="toto.php" method="post" >
 <fieldset>
  <legend> A propos des CSS : </legend>
    <p>Savez-vous ce que veut dire CSS ? : </p>
