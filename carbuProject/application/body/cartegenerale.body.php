@@ -2,7 +2,7 @@
 <iframe src="carteStations.php" name="frame" frameborder=yes width="600" height="400"></iframe>
 
 <div  id="formGoogleMaps">
-<form action="toto.php" method="post" >
+<form action="CarteGenerale.php" method="post" >
 <fieldset>
  <legend> Se situer : </legend>
   <label for="newAdresse">Adresse / Ville :</label>
