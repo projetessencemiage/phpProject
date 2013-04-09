@@ -15,7 +15,7 @@ require_once 'application/inc/declarations.inc.php';
 	echo '<li class="titre_menu">Sous Menu 1';
 	echo '<ul class="sous_menu">';
 	echo '	<li class="sous_partie"><a href="CarteGenerale.php" title="Page 1 ">Page 1 </a></li>';
-	echo '	<li class="sous_partie"><a href="AdminUsers.php" title="Page 2 ">Page 2 </a></li>';
+	echo '	<li class="sous_partie"><a href="ListeStations.php" title="Page 2 ">Liste des stations </a></li>';
 	echo '	<li class="sous_partie"><a href="AdminUsers.php" title="Page 3 ">Page 3 </a></li>';
 	echo '</ul></li>';
 

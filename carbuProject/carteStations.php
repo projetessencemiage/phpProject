@@ -29,7 +29,7 @@
   	
   	
   	$ip = "147.210.179.67";//$_SERVER["REMOTE_ADDR"];
- 	//$geoplugin = new geoPlugin();
+ 	$geoplugin = new geoPlugin();
   	//$geoplugin->locate($ip);
   //	$lat = $geoplugin->latitude;
  // 	$long = $geoplugin->longitude;
