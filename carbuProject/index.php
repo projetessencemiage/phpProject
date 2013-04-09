@@ -12,5 +12,5 @@ if (!(isset($_SESSION["SessionEnCours"]))) {
 $body = 'index.body.php';
 echo Structure::getHeader();
 echo Structure::getBody($body);
-
+//TEST
 ?>
