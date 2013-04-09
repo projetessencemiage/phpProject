@@ -1,7 +1,7 @@
-window.onload=function(){
+window.onload=function(){	
 	//Recuperation des données
-	var latSite = document.getElementById('latSite').value;
-	var longSite = document.getElementById('longSite').value;
+	var latSite = geoplugin_latitude();
+	var longSite = geoplugin_longitude();
 	var infoStations = document.getElementById('Stations').value;
 	
 	//Declaration variables

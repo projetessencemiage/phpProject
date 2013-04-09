@@ -150,91 +150,11 @@ a img {
 	font-size: 12px;
 	}
 
-/* Couleurs de fonds */
-.liste .enteteGrille {
-	background-color: #436497;
-}
-
-.corpsGrille {
-	background-color: white;
-}
-
-.niveau2 {
-	background-color: #99CCCC;
-}
-
-.rouge {
-	color: red;
-	font-weight: bold;
-	}
-	
-.orange {
-	color: orange;
-	font-weight: bold;
-	}
-	
-.bleu {
-	color: blue;
-	font-weight: bold;
-	}
-	
-.vert {
-	color: green;
-	font-weight: bold;
-	}
-
-/* Police */
-.nomDomaine{
-	text-decoration:underline;
-	}
-
-#centre .surbrillance {
-	color: #0C3471;
-	font-weight: bold;
-}
-	
-.police09{
-	font-size:0.9em;
-	}
-	
-.italic{
-	font-style: italic;
-	}
-
-.souligne{
-text-decoration:underline;
-	}
-
-.paddingUP th{
-	padding:10px;
-	}
 
 .icone a:hover {
 	background-color: #99CCCC;
 }
 
-/* CSS Tableau Impr */
-.tab_impr{
-	width:100%;
-	border-collapse: collapse;
-	margin: 10px 0px;
-}
-
-.noMarge{
-	width:100%;
-	margin: 10px 0px;
-}
-
-
-.tab_impr td, .tab_impr th {
-	border: 1px solid black;
-}
-
-.cadreObs{
-	width:100%;
-	height: 300px;
-	border: 1px solid black;
-	}
 	
 /*CSS DU MENU */
 .titre_menu {
@@ -269,46 +189,7 @@ text-decoration:underline;
 	color: grey;
 }
 
-/* CSS divers*/
-/*
-.imageCentre {
-	position:fixed;
-	top: 50%;
-	left: 50%;
-	margin-top: -280px;
-	margin-left: -400px; 
-	cursor: pointer;
-	}*/
 
-.detailCompetences {
-	position:fixed;
-	width: 800px;
-	height: 500px;
-	top:10%;
-	left:25%;
-	background-color:white; 
-	cursor: pointer;
-	}
-	
-.divOpaque{
-position:fixed;
-top:0%;
-left:0%;
-width:100%;
-height:100%;
-background-color:black;
-opacity:0.8;
-}
-
-.imgAttente{
-position:fixed;
-top: 20%;
-left: 50%;
-}
-/* fin structure generale */
-/* ------------------------------------------------------------------------------ */
-/* polices */
-/* ------------------------------------------------------------------------------ */
 html {
 	font-size: 100%; /* Évite un bug d'IE 6-7. (1) */
 	background-color: white;
@@ -317,16 +198,52 @@ html {
 }
 
 /* Formulaires */
-form,fieldset {
-	margin: 0;
-	padding: 0;
-	border: none;
-	background-color: white;
-}
-
-input,button,select {
-	vertical-align: middle; /* Solution pb. d'alignement. */
-}
+#center form {
+ background-color:#FAFAFA;
+ padding:10px;
+ width:280px;
+ }
+fieldset {
+ padding:0 20px 20px 20px;
+ margin-bottom:10px;
+ border:1px solid #DF3F3F;
+ }
+legend {
+ color:#DF3F3F;
+ font-weight:bold
+ }
+label {
+ margin-top:10px;
+ display:block;
+ }
+label.inline {
+ display:inline;
+ margin-right:50px;
+ }
+input, textarea, select, option {
+ background-color:#FFF3F3;
+ }
+input, textarea, select {
+ padding:3px;
+ border:1px solid #F5C5C5;
+ border-radius:5px;
+ width:200px;
+ box-shadow:1px 1px 2px #C0C0C0 inset;
+ }
+select {
+ margin-top:10px;
+ }
+input[type=radio] {
+ background-color:transparent;
+ border:none;
+ width:10px;
+ }
+input[type=submit], input[type=reset] {
+ width:100px;
+ margin-left:5px;
+ box-shadow:1px 1px 1px #D83F3D;
+ cursor:pointer;
+ }
 
 body {
 	color: black;
@@ -391,18 +308,7 @@ h2 titrederriere {
 	margin: 9px auto auto -50px;
 }
 
-.petit {
-	font-size: 0.8em;
-}
 
-input[type="submit"],input[type="file"],input[type="button"] {
-	font-family: Arial, Verdana, Helvetica;
-	font-size: 11px;
-	color: #788eb0;
-	font-weight: bold;
-	background-color: #436497;
-	width: 180px;
-}
 
 #map-canvas { 
 height: 50%

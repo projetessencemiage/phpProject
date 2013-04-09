@@ -11,6 +11,7 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCUByYr5--YM9yGNvIZQJbbq9htgLwm9U&sensor=false">
     </script>
 	<script  type="text/javascript" src="./js/maps.js"></script>
+	<script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
   </head>
   <body>
   	
@@ -24,23 +25,8 @@
   	$listeStations->addStation(new StationService("48 avenue Bougnard 33600 Pessac", "5", "Esso"));
   	$listeStations->addStation(new StationService("49 Rue Robespierre 33400 Talence", "3", "Total"));
   	$listeStations->addStation(new StationService("10 allee de l'eglise 40280 Benquet", "1", "Leclerc"));
-  	$listeStations->addStation(new StationService("Leclerc 33400 Talence", "1", "Leclerc"));
-  	echo 'Informations - '.$listeStations->getInformationsStations();
+  	$listeStations->addStation(new StationService("Leclerc 33400 Talence", "1", "Leclerc"));  	
   	
-  	
-  	$ip = "147.210.179.67";//$_SERVER["REMOTE_ADDR"];
- 	$geoplugin = new geoPlugin();
-  	//$geoplugin->locate($ip);
-  //	$lat = $geoplugin->latitude;
- // 	$long = $geoplugin->longitude;
-  	if ($lat == null || $long == null) {
-  		$lat = "44.808665";
-  		$long = "-0.583284";
-  	}
-  	
-  	echo 'L\'adresse est située à '.$geoplugin->city;
-  	echo '<input type="hidden" id="latSite" value="'.$lat.'"  />'; 
-  	echo '<input type="hidden" id="longSite" value="'.$long.'"  />';
   	echo '<input type="hidden" id="Stations" value="'.$listeStations->getInformationsStations().'"  />';
   ?>
     <div id="map-canvas"/>
