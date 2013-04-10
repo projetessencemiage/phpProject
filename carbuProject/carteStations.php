@@ -19,16 +19,19 @@
   	require_once 'application/inc/declarations.inc.php';
   	require_once('ListeStationServiceClass.inc.php');
   	
+  	if ($_GET["newAdresse"]) {
+  		echo '<input type="hidden" id="newAdresse" value="'.$_GET["newAdresse"].'"  />';
+  	}
   	$listeStations = new ListeStationService();
   	
   	$listeStations->addStation(new StationService("Rue pierre de COubertin St Medard en Jalles", "2", "Esso"));
   	$listeStations->addStation(new StationService("48 avenue Bougnard 33600 Pessac", "5", "Esso"));
   	$listeStations->addStation(new StationService("49 Rue Robespierre 33400 Talence", "3", "Total"));
   	$listeStations->addStation(new StationService("10 allee de l'eglise 40280 Benquet", "1", "Leclerc"));
-  	$listeStations->addStation(new StationService("Leclerc 33400 Talence", "1", "Leclerc"));
-  	$listeStations->addStation(new StationService("19 Rue Pacaris 33400 Talence", "1", "Leclerc Talence"));
+  	$listeStations->addStation(new StationService("Leclerc 33400 Talence", "1", "Leclerc"));  	
   	
   	echo '<input type="hidden" id="Stations" value="'.$listeStations->getInformationsStations().'"  />';
+  	
   ?>
     <div id="map-canvas"/>
   </body>

@@ -1,5 +1,5 @@
+<script  type="text/javascript" src="./js/CarteGenerale.js"></script>
 <?php
-//COMMENT TGOU
 require_once 'application/inc/declarations.inc.php';
 $body = 'cartegenerale.body.php';
 echo Structure::getHeader();

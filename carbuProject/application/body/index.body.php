@@ -1,12 +1,25 @@
-<h1>Menu principal</h1>
 
-<table>
-	<tr>
-		<td><IMG SRC="./images/maps.jpg" ALT="Voir carte" TITLE="Voir carte"></td>
-		<td>2</td>
-	</tr>
-	<tr>
-		<td>3</td>
-		<td>4</td>
-	</tr>
-</table>
+<h2>Accueil</h2>
+<div class="row-fluid">
+	<div class="span4">
+		<h5>Qui est le moins cher ?</h5>
+		<a href="CarteGenerale.php" title="Qui est le moins cher ? "> <img
+			SRC="./images/carte.png" ALT="Voir carte" TITLE="Voir carte">
+		</a>
+		</p>
+	</div>
+	<div class="span4">
+		<h5>Liste des stations</h5>
+		<a href="ListeStations.php" title="Liste des stations "> <img
+			SRC="./images/stations.png" ALT="Liste des stations"
+			TITLE="Liste des stations">
+		</a>
+	</div>
+	<div class="span4">
+		<h5>Statistiques</h5>
+		<a href="ListeStations.php" title="Liste des stations "> <img
+			SRC="./images/stats.png" ALT="Liste des stations"
+			TITLE="Liste des stations">
+		</a>
+	</div>
+</div>
