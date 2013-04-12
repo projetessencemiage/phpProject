@@ -6,6 +6,7 @@ window.onload=function(){
 	var myLatLng = new google.maps.LatLng(geoplugin_latitude(), geoplugin_longitude());
 	var var_adresse = 'Adresse';
 	var var_enseigne = 'Enseigne';
+	var var_icone = 'Icone';
 
 	//Recuperation des données
 	var infoStations = document.getElementById('Stations').value;
@@ -55,15 +56,29 @@ window.onload=function(){
 	//Ajouter une station à la liste des stations
 	//Station avec toutes ces infos.
 	function addStation(stationToAdd) {
+		//Split des infos
 		var splitInfos = stationToAdd.split("--");
 		var station =  new Array();
+		var arrayPrice = new Array();
 		var j = 0;
+		//Parcours de chaque données
 		for (j = 0 ; j < splitInfos.length-1 ; j++) {
 			var keyValue = splitInfos[j].split('@@@');
-			var key = keyValue[0].substring(keyValue[0].indexOf('Key:')+4);
-			var value = keyValue[1].substring(keyValue[1].indexOf('Value:')+6);
-			station[key] = value;
+			//Si Données relative au prix
+			if (keyValue[0].startsWith("PriceKey")) {
+				var key = keyValue[0].substring(keyValue[0].indexOf('PriceKey:')+9);
+				var value = keyValue[1].substring(keyValue[1].indexOf('Value:')+6);
+				arrayPrice[key] = value;
+			} else {
+				//Else autre donnée
+				var key = keyValue[0].substring(keyValue[0].indexOf('Key:')+4);
+				var value = keyValue[1].substring(keyValue[1].indexOf('Value:')+6);
+				station[key] = value;
+			}
 		}
+		//Ajout Liste des Prix
+		station['ArrayPrice'] = arrayPrice;
+		//Retourne une liste TypeInfo/Données + Une Liste de prix de la station
 		return station;
 	}
 
@@ -81,13 +96,18 @@ window.onload=function(){
 
 	//Creation d'un MARKER sur la map
 	function createMarker(map, my_position, markerInfos) {
-		var myMarkerImage = new google.maps.MarkerImage('./images/station.jpg');
+		var myMarkerImage = new google.maps.MarkerImage('./images/' + markerInfos[var_icone]);
 		var myMarker = new google.maps.Marker({
 			position: my_position,
 			map: map,
 			icon: myMarkerImage,
 			title: markerInfos[var_enseigne]
 		});
+		
+		var affichePriceList = "";
+		for (var key in markerInfos['ArrayPrice']) {
+			affichePriceList +=  '<br />' + key + ' - ' + markerInfos['ArrayPrice'][key] + ' €';
+		}
 		//Ajout Fenetre 
 		var myWindowOptions = {
 				content:
@@ -99,8 +119,7 @@ window.onload=function(){
 					+ ' </address>'
 					+ ' </p>'
 					+ '<p>Price: '
-					+  'Diesel - ' + markerInfos['diesel']
-					+  '<br />SP95-E10 - ' + markerInfos['SP95-E10']
+					+ affichePriceList
 					+ '</p>'
 		};
 

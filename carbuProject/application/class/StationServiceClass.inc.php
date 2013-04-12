@@ -19,11 +19,13 @@ class StationService {
 	private $phone;
 	private $enseigne;
 	private $ListePrix;
+	private $icone;
 
-	function __construct($adr, $_id, $_enseigne) {
+	function __construct($adr, $_id, $_enseigne, $_icone) {
 		$this->adresse  = $adr;
 		$this->id = $_id;
 		$this->enseigne = $_enseigne;
+		$this->icone = $_icone;
 	}
 	
 	public function getAdresse(){
@@ -54,4 +56,12 @@ class StationService {
 		$priceList['gpl'] = 1.523;
 		return $priceList;
 	}
+	
+	public function getIcone() {
+		return $this->icone;
+	}
+	public function setIcone($newIcone) {
+		$this->icone = $newIcone;
+	}
+	
 }

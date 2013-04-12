@@ -31,8 +31,9 @@ class ListeStationService {
 		foreach ($this->listeStations as $key => $value) {				
 			$infos .= 'Key:Adresse@@@Value:'.$value->getAdresse()."--";
 			$infos .= 'Key:Enseigne@@@Value:'.$value->getEnseigne()."--";
+			$infos .= 'Key:Icone@@@Value:'.$value->getIcone()."--";
 			foreach ($value->getListePrix() as $typeCarbu => $price) {	
-				$infos .= 'Key:'.$typeCarbu.'@@@Value:'.$price."--";
+				$infos .= 'PriceKey:'.$typeCarbu.'@@@Value:'.$price."--";
 			}
 			
 			$infos .= '|';

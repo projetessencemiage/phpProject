@@ -1,4 +1,3 @@
-
 <h2>Accueil</h2>
 <div class="row-fluid">
 	<div class="span4">
