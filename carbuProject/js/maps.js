@@ -1,13 +1,15 @@
-window.onload=function(){	
+window.onload=function(){		
 	//Declaration variables
 	var markerToWork;
 	var myGeocoder = new google.maps.Geocoder();
 	var myMap;
 	var myLatLng = new google.maps.LatLng(geoplugin_latitude(), geoplugin_longitude());
-	
+	var var_adresse = 'Adresse';
+	var var_enseigne = 'Enseigne';
+
 	//Recuperation des données
 	var infoStations = document.getElementById('Stations').value;
-	
+
 	//Construction de la Liste de Stations avec infos
 	var splitInfoStations = infoStations.split('|');
 	var listeStations = new Array();
@@ -24,21 +26,21 @@ window.onload=function(){
 			addMarker(markerToWork);
 		}
 	}
-	
+
 
 	if (document.getElementById('newAdresse')) {
 		myGeocoder.geocode( { 'address': document.getElementById('newAdresse').value}, function(results, status) {
-		      if (status == google.maps.GeocoderStatus.OK) {
-		    	  createMap(results[0].geometry.location);
-		      } else {
-		        alert("Geocode was not successful for the following reason: " + status);
-		      }
-		    });
+			if (status == google.maps.GeocoderStatus.OK) {
+				createMap(results[0].geometry.location);
+			} else {
+				alert("Geocode was not successful for the following reason: " + status);
+			}
+		});
 	} else {
 		createMap(myLatLng);	
 	}
-	
-		
+
+
 	function createMap(LatLngMap) {
 		//Options de la MAP
 		var mapOptions = {
@@ -51,21 +53,23 @@ window.onload=function(){
 	}
 
 	//Ajouter une station à la liste des stations
+	//Station avec toutes ces infos.
 	function addStation(stationToAdd) {
 		var splitInfos = stationToAdd.split("--");
 		var station =  new Array();
 		var j = 0;
-		if (splitInfos.length >= 2) {
-			for (j = 0 ; j < splitInfos.length-1 ; j++) {
-				station[j] = splitInfos[j];
-			}
+		for (j = 0 ; j < splitInfos.length-1 ; j++) {
+			var keyValue = splitInfos[j].split('@@@');
+			var key = keyValue[0].substring(keyValue[0].indexOf('Key:')+4);
+			var value = keyValue[1].substring(keyValue[1].indexOf('Value:')+6);
+			station[key] = value;
 		}
 		return station;
 	}
 
 	//Ajouter un Marker à la MAP
 	function addMarker(stationToMark) {
-		var adresse = stationToMark[0];	
+		var adresse = stationToMark[var_adresse];	
 		myGeocoder.geocode( { 'address': adresse}, function(results, status) {		
 			// Si la recher à fonctionné
 			if( status == google.maps.GeocoderStatus.OK ) { 
@@ -82,18 +86,22 @@ window.onload=function(){
 			position: my_position,
 			map: map,
 			icon: myMarkerImage,
-			title: markerInfos[1]
+			title: markerInfos[var_enseigne]
 		});
 		//Ajout Fenetre 
 		var myWindowOptions = {
 				content:
 					'<p>'
 					+ '<address>'
-					+ ' <strong>' +  markerInfos[1] + '</strong><br>'
-					+  markerInfos[0] + '<br>'
+					+ ' <strong>' +  markerInfos[var_enseigne] + '</strong><br>'
+					+  markerInfos[var_adresse] + '<br>'
 					+ ' <abbr title="Phone">P:</abbr> (123) 456-7890'
 					+ ' </address>'
 					+ ' </p>'
+					+ '<p>Price: '
+					+  'Diesel - ' + markerInfos['diesel']
+					+  '<br />SP95-E10 - ' + markerInfos['SP95-E10']
+					+ '</p>'
 		};
 
 		// Création de la fenêtre

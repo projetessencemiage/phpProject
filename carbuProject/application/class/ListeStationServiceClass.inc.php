@@ -29,8 +29,12 @@ class ListeStationService {
 	public function getInformationsStations() {
 		$infos = "";
 		foreach ($this->listeStations as $key => $value) {				
-			$infos .= $value->getAdresse()."--";
-			$infos .= $value->getEnseigne()."--";
+			$infos .= 'Key:Adresse@@@Value:'.$value->getAdresse()."--";
+			$infos .= 'Key:Enseigne@@@Value:'.$value->getEnseigne()."--";
+			foreach ($value->getListePrix() as $typeCarbu => $price) {	
+				$infos .= 'Key:'.$typeCarbu.'@@@Value:'.$price."--";
+			}
+			
 			$infos .= '|';
 		}
 		return $infos;

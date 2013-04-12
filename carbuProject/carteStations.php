@@ -29,8 +29,11 @@
   	$listeStations->addStation(new StationService("49 Rue Robespierre 33400 Talence", "3", "Total"));
   	$listeStations->addStation(new StationService("10 allee de l'eglise 40280 Benquet", "1", "Leclerc"));
   	$listeStations->addStation(new StationService("Leclerc 33400 Talence", "1", "Leclerc"));  	
-  	
+  	//$soap->__doRequest($request, $location, $action, $version);
+  	//$soap = new SoapClient("http://www.objis.com/formation-java/IMG/xml/stockquote.xml?wsdl");
   	echo '<input type="hidden" id="Stations" value="'.$listeStations->getInformationsStations().'"  />';
+  	
+  	
   	
   ?>
     <div id="map-canvas"/>

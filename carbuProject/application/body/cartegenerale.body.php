@@ -16,8 +16,7 @@
 				<legend>Paramètres</legend>
 				<label for="carburantType">Choix du carburant : </label> 
 				<select	name="carburantType" id="carburantType">
-					<option value="0">(Tous)</option>
-					<option value="1">Gazoil</option>
+					<option value="1">Diesel</option>
 					<option value="2">SP-95</option>
 					<option value="3">GPL</option>
 				</select>

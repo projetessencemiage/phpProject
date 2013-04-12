@@ -46,5 +46,12 @@ class StationService {
 	}
 	public function getID(){
 		return $this->id;
-	}	
+	}
+	public function getListePrix() {
+		$priceList = array();
+		$priceList['SP95-E10'] = 1.055;
+		$priceList['diesel'] = 2.755;
+		$priceList['gpl'] = 1.523;
+		return $priceList;
+	}
 }
