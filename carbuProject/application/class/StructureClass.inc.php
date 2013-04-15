@@ -21,7 +21,7 @@ class Structure {
 		<html lang="en">
 		<head>
 		<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1" />
-		<title>Template &middot; Bootstrap</title>
+		<title>Carbu project</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">
@@ -29,6 +29,10 @@ class Structure {
 		<!-- Le styles -->
 		<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 		<link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+		
+		<!-- Script -->
+		<script  type="text/javascript" src="js/Formulaires.js"></script>
+		<script  type="text/javascript" src="js/utile.js"></script>
 
 		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<!--[if lt IE 9]>
@@ -49,12 +53,11 @@ class Structure {
 	 * Constructeur du corps de la page
 	 * -------------------------------------------------------------------------
 	 **/
-	static function getBody($body, $bodyParam='', $action='', $formParam='') {
+	static function getBody($body, $bodyParam='', $action='') {
 		echo '<body'. $bodyParam . '>
-		<form name="forme"';
-		//if ($action>'') echo ' action="'.$action.'"';
+		<form name="formGeneral"';
+		echo 'id = "formGeneral"';
 		echo ' action="'.$action.'"';
-		echo ' enctype="'.$formParam.'"';
 		echo ' method="post">
 		
 		<div class="container">	

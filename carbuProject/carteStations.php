@@ -22,14 +22,11 @@
   	if (array_key_exists("newAdresse",$_GET)) {
   		echo '<input type="hidden" id="newAdresse" value="'.$_GET["newAdresse"].'"  />';
   	}
-  	$listeStations = new ListeStationService();
-  	$listeStations->addStation(new StationService("Rue pierre de Coubertin St Medard en Jalles", "2", "Esso", "iconeStation.png"));
-  	$listeStations->addStation(new StationService("48 avenue Bougnard 33600 Pessac", "5", "Esso",  "iconeStation.png"));
-  	$listeStations->addStation(new StationService("49 Rue Robespierre 33400 Talence", "3", "Total",  "station.jpg"));
-  	$listeStations->addStation(new StationService("Intermarché 33400 Talence", "8", "Intermarché",  "iconeStation.png"));
-  	$listeStations->addStation(new StationService("Leclerc 33400 Talence", "1", "Leclerc", "iconeStation.png"));  	
-  	
-  	echo '<input type="hidden" id="Stations" value="'.$listeStations->getInformationsStations().'"  />';  	
+  	if (array_key_exists("infoStations",$_GET)) {
+  		echo '<input type="hidden" id="Stations" value="'.$_GET["infoStations"].'"  />'; 
+  	} else {
+  		echo '<input type="hidden" id="Stations" value=""  />';
+  	}
   	
   ?>
     <div id="map-canvas"/>

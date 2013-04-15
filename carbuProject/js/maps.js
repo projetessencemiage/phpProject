@@ -4,6 +4,7 @@ window.onload=function(){
 	var myGeocoder = new google.maps.Geocoder();
 	var myMap;
 	var myLatLng = new google.maps.LatLng(geoplugin_latitude(), geoplugin_longitude());
+	var bounds = new google.maps.LatLngBounds();
 	var var_adresse = 'Adresse';
 	var var_enseigne = 'Enseigne';
 	var var_icone = 'Icone';
@@ -38,15 +39,14 @@ window.onload=function(){
 			}
 		});
 	} else {
-		createMap(myLatLng);	
+		createMap(myLatLng);
 	}
-
+	map.fitBounds(bounds);
 
 	function createMap(LatLngMap) {
 		//Options de la MAP
 		var mapOptions = {
-				center: LatLngMap,
-				zoom: 12,
+				//center: LatLngMap,
 				mapTypeId: google.maps.MapTypeId.ROADMAP
 		};
 		myMap = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -103,7 +103,7 @@ window.onload=function(){
 			icon: myMarkerImage,
 			title: markerInfos[var_enseigne]
 		});
-		
+		bounds.extend(myMarker);
 		var affichePriceList = "";
 		for (var key in markerInfos['ArrayPrice']) {
 			affichePriceList +=  '<br />' + key + ' - ' + markerInfos['ArrayPrice'][key] + ' €';
