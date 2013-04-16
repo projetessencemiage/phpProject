@@ -5,29 +5,33 @@ $critere = "";
 $listeStation = new ListeStationService();
 //Recherche de la liste à afficher sur la map
 if (array_key_exists('actionForm', $_POST)) {
-	echo "ACTION - ".$_POST['actionForm'].'</br>';
 	if ($_POST['actionForm'] == "searchVille") {
 		$ville = $_POST["searchVille"];
 		$dpt = $_POST["searchVilleDpt"];
 		$listeStation->getStationsByVille($ville, $dpt);
-		$critere = "Recherche par ";
+		$critere = 'Recherche par ville - '.$ville. '('.$dpt.')';
 	} else if ($_POST['actionForm'] == "searchDpt") {
 		$dpt = $_POST["searchDpt"];
 		$listeStation->getStationsByDpt($dpt);
+		$critere = 'Recherche par département - '.$dpt;
 	} else if ($_POST['actionForm'] == "searchCP") {
 		$cp = $_POST["searchCP"];
 		$listeStation->getStationsByCP($cp);
+		$critere = 'Recherche par code postal - '.$cp;
 	} else if ($_POST['actionForm'] == "searchAdresse") {
 		$adr = $_POST["searchAdresse"];
 		$rayon = $_POST["rayon"];
 		$listeStation->getStationsByAdresse($adr, $rayon);
+		$critere = 'Recherche par adresse - '.$adr.' avec un rayon de '.$rayon.' km';
 	} else if ($_POST['actionForm'] == "searchArroundMe") {
 		$rayonArround = $_POST["rayonAroundMe"];
 		$listeStation->getStationsArroundMe($rayonArround);
+		$critere = 'Recherche around me - Rayon: '.$rayonArround.' km';
 	}
 
 } else {
 	$listeStation->getStationsArroundMe('10');
+	$critere = 'Recherche par default around me - Rayon 10 km';
 }
 $infoStations = $listeStation->getInformationsStations();
 //Affichage du message d'entete
@@ -41,7 +45,9 @@ if ($nbStation > 0 ) {
 }
 echo '
 <div class="alert '.$class.'">
+<button type="button" class="close" data-dismiss="alert">&times;</button>
 <strong>'.$alert.' - </strong>'.$nbStation.' stations trouvées avec vos critères de recherches
+<br/> '.$critere.'
 </div>';
 
 ?>

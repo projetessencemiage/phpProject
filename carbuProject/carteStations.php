@@ -11,6 +11,7 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCUByYr5--YM9yGNvIZQJbbq9htgLwm9U&sensor=false">
     </script>
 	<script  type="text/javascript" src="./js/maps.js"></script>
+	<script  type="text/javascript" src="./js/utile.js"></script>
 	<script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
   </head>
   <body>

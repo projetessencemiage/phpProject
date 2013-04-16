@@ -27,7 +27,6 @@ class ListeStationService {
 	}
 
 	public function getStationsByVille($ville, $dpt) {
-		echo 'Ville -'.$ville. ' - Dpt - '.$dpt;
 		$listeStations = array();
 		$this->addStation(new StationService("Rue pierre de Coubertin St Medard en Jalles", "2", "Esso", "iconeStation.png"));
 		$this->addStation(new StationService("48 avenue Bougnard 33600 Pessac", "5", "Esso",  "iconeStation.png"));
@@ -38,7 +37,6 @@ class ListeStationService {
 		$this->addStation(new StationService("75000 Paris 1er", "1", "Leclerc", "iconeStation.png"));
 	}
 	public function getStationsByDpt($dpt) {
-		echo 'Dpt - '.$dpt;
 		$listeStations = array();
 		$this->addStation(new StationService("Rue pierre de Coubertin St Medard en Jalles", "2", "Esso", "iconeStation_verte_etoile.png"));
 		$this->addStation(new StationService("48 avenue Bougnard 33600 Pessac", "5", "Esso",  "iconeStation_verte.png"));
@@ -47,7 +45,6 @@ class ListeStationService {
 		$this->addStation(new StationService("Leclerc 33400 Talence", "1", "Leclerc", "iconeStation_verte.png"));
 	}
 	public function getStationsByCP($cp) {
-		echo 'cp - '.$cp;
 		$listeStations = array();
 		$this->addStation(new StationService("Rue pierre de Coubertin St Medard en Jalles", "2", "Esso", "iconeStation_rouge_etoile.png"));
 		$this->addStation(new StationService("48 avenue Bougnard 33600 Pessac", "5", "Esso",  "iconeStation_rouge.png"));
@@ -56,7 +53,6 @@ class ListeStationService {
 		$this->addStation(new StationService("Leclerc 33400 Talence", "1", "Leclerc", "iconeStation_rouge.png"));
 	}
 	public function getStationsByAdresse($adr, $rayon) {
-		echo 'Adr - '.$adr.' - Rayon - '.$rayon;
 		$listeStations = array();
 		$this->addStation(new StationService("Rue pierre de Coubertin St Medard en Jalles", "2", "Esso", "iconeStation_orange_etoile.png"));
 		$this->addStation(new StationService("48 avenue Bougnard 33600 Pessac", "5", "Esso",  "iconeStation_orange.png"));
@@ -66,7 +62,6 @@ class ListeStationService {
 	}
 	
 	public function getStationsArroundMe($rayon) {
-		echo 'ArroundMe - Rayon - '.$rayon;
 		$listeStations = array();
 		$this->addStation(new StationService("Rue pierre de Coubertin St Medard en Jalles", "2", "Esso", "iconeStation_orange_etoile.png"));
 		$this->addStation(new StationService("48 avenue Bougnard 33600 Pessac", "5", "Esso",  "iconeStation_orange.png"));
