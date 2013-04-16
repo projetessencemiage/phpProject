@@ -35,6 +35,13 @@ class StationService {
 		$this->longitude = $_longitude;
 		$this->icone = $_icone;
 	}
+	
+	function __construct($adr, $_id, $_enseigne, $_icone) {
+		$this->adresse  = $adr;
+		$this->id = $_id;
+		$this->enseigne = $_enseigne;
+		$this->icone = $_icone;
+	}
 
 	public function getAdresse(){
 		return $this->adresse;
