@@ -34,6 +34,8 @@ class ListeStationService {
 		$this->addStation(new StationService("49 Rue Robespierre 33400 Talence", "3", "Total",  "iconeStation.png"));
 		$this->addStation(new StationService("Intermarché 33400 Talence", "8", "Intermarché",  "iconeStation.png"));
 		$this->addStation(new StationService("Leclerc 33400 Talence", "1", "Leclerc", "iconeStation.png"));
+		$this->addStation(new StationService("10 allée de l'église 40280 Benquet", "1", "Leclerc", "iconeStation.png"));
+		$this->addStation(new StationService("75000 Paris 1er", "1", "Leclerc", "iconeStation.png"));
 	}
 	public function getStationsByDpt($dpt) {
 		echo 'Dpt - '.$dpt;
@@ -55,6 +57,16 @@ class ListeStationService {
 	}
 	public function getStationsByAdresse($adr, $rayon) {
 		echo 'Adr - '.$adr.' - Rayon - '.$rayon;
+		$listeStations = array();
+		$this->addStation(new StationService("Rue pierre de Coubertin St Medard en Jalles", "2", "Esso", "iconeStation_orange_etoile.png"));
+		$this->addStation(new StationService("48 avenue Bougnard 33600 Pessac", "5", "Esso",  "iconeStation_orange.png"));
+		$this->addStation(new StationService("49 Rue Robespierre 33400 Talence", "3", "Total",  "iconeStation_orange.png"));
+		$this->addStation(new StationService("Intermarché 33400 Talence", "8", "Intermarché",  "iconeStation_orange.png"));
+		$this->addStation(new StationService("Leclerc 33400 Talence", "1", "Leclerc", "iconeStation_orange.png"));
+	}
+	
+	public function getStationsArroundMe($rayon) {
+		echo 'ArroundMe - Rayon - '.$rayon;
 		$listeStations = array();
 		$this->addStation(new StationService("Rue pierre de Coubertin St Medard en Jalles", "2", "Esso", "iconeStation_orange_etoile.png"));
 		$this->addStation(new StationService("48 avenue Bougnard 33600 Pessac", "5", "Esso",  "iconeStation_orange.png"));

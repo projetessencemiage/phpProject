@@ -64,7 +64,7 @@
 			</fieldset>
 			<p>
 				<input type="submit" value="Around me"
-					onClick="return validerForm()" class="btn" />
+					onClick="return validerFormArroundMe()" class="btn btn-success" />
 			</p>
 		</div>
 	</div>

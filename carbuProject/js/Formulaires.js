@@ -14,6 +14,11 @@ function deleteInput(inputName) {
 	}
 }
 
+function validerFormArroundMe() {
+	document.getElementById('formGeneral').action = "CarteGenerale.php";
+	document.getElementById('actionForm').value = 'searchArroundMe';
+	return true;
+}
 function validerFormSearchListStation(goTo) {
 	document.getElementById('formGeneral').action = goTo;
 	var checkInput = false;
