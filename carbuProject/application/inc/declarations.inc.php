@@ -31,6 +31,6 @@ define ('NL',"\r\n");
 define ('ROLE_SUPADM',0); //Role super-administrateur
 define ('ROLE_ADM', 1); //Role administrateur
 define ('ROLE_PROF', 2); //Role controleur de gestion
-define ('URL_WCF', "http://192.168.0.1:8084/AffichagePrix.svc?wsdl"); //URL webService WCF
+define ('URL_WCF', "http://projetm2miage.no-ip.biz:8084"); //URL webService WCF
 
 
