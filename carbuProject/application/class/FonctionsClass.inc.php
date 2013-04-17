@@ -96,9 +96,9 @@ class Fonctions {
 
 	/*
 	 * Formate la date de la format "dd/mm/yyyy" ou "dd-mm-yyyy" à la format "yyyy-mm-dd"
-	 * @param $date: la date à formater
-	 * @return $newDate: la date formatée
-	 */
+	* @param $date: la date à formater
+	* @return $newDate: la date formatée
+	*/
 	static function formaterDateMysql($date){
 		$day = substr($date,0,2);
 		$month = substr($date,3,2);
@@ -110,9 +110,9 @@ class Fonctions {
 
 	/*
 	 * Formate la date de la format "yyyy-mm-dd" à la format "dd/mm/yyyy"
-	 * @param $date: la date à formater
-	 * @return $newDate: la date formatée
-	 */
+	* @param $date: la date à formater
+	* @return $newDate: la date formatée
+	*/
 	static function formaterDateFromMysql($date){
 		$day = substr($date,8,2);
 		$month = substr($date,5,2);
@@ -124,9 +124,9 @@ class Fonctions {
 
 	/*
 	 * Formate la date de la format "yyyy/mm/dd"
-	 * @param $date: la date à formater
-	 * @return $newDate: la date formatée
-	 */
+	* @param $date: la date à formater
+	* @return $newDate: la date formatée
+	*/
 	static function formaterDateEnMysql($date){
 		$day = substr($date,8 ,2);
 		$month = substr($date,5,2);
@@ -154,7 +154,7 @@ class Fonctions {
 	//---------------------------------------------------------------------------
 	static function isIpInterne() {
 		if ((substr($_SERVER["REMOTE_ADDR"],0,9)=='192.168.1' || $_SERVER["REMOTE_ADDR"]=='127.0.0.1')
-		|| (isset($_SESSION['pseudo']) and $_SESSION['pseudo']=='webmaster' and $_SESSION["password"]>'')) {
+				|| (isset($_SESSION['pseudo']) and $_SESSION['pseudo']=='webmaster' and $_SESSION["password"]>'')) {
 			if (isset($_SESSION['pseudo']) and $_SESSION['pseudo']=='webmaster') {
 				$entete = "From: " . EMAIL_WEBMASTER . NL
 				. "MIME-Version: 1.0".NL
@@ -306,45 +306,26 @@ class Fonctions {
 	//------------------------------------------------------------------------------
 	static function echoBooleanOuiNon($bool) {
 		if ($bool ===true ||
-		    $bool == 1 ||
-		    strtolower($bool) === 'oui' ||
-		    strtolower($bool) === 'yes' ||
-		    strtolower($bool) === 'y' ||
-		    strtolower($bool) === 'o' ||
-		    strtolower($bool) === 'true' ||
-		    strtolower($bool) === 'vrai'){
+				$bool == 1 ||
+				strtolower($bool) === 'oui' ||
+				strtolower($bool) === 'yes' ||
+				strtolower($bool) === 'y' ||
+				strtolower($bool) === 'o' ||
+				strtolower($bool) === 'true' ||
+				strtolower($bool) === 'vrai'){
 			echo 'Oui';
 		}else{
 			echo 'Non';
 		}
 	}
-	
-	/*
-	 * Export de la grille dans un fichier CSV
-	 * @param $nomFichier : nom du fichier à exporter
-	 */
-	public static function exporterGrilleCSV($nomFichier, $grille) {
-		try {
-			$fp = fopen(PATH_IMPORT.$nomFichier, 'w+');
-			foreach ($grille as $line) {
-				for ($i=0;$i<count($line);$i++) {
-					$line[$i] = '=("'.$line[$i].'")';
-				}
-				fputs($fp, implode(';',$line).NL);
-			}
-			fclose($fp);
-		} catch (MyException $e) {
-			throw new MyException($e->getError('Fonctions.exporterGrilleCSV'));
-			return false;
-		}
-	}
-	
+
+
 	/*
 	 * Controle lacces direct à une page
-	 * @param $role : role minimum necessaire
-	 * @param $body
-	 * @param $action
-	 */
+	* @param $role : role minimum necessaire
+	* @param $body
+	* @param $action
+	*/
 	public static function controlerAcces($role, $body, $action) {
 		$retour = array();
 		if (isset ($_SESSION['Role'])) {
@@ -364,23 +345,6 @@ class Fonctions {
 		}
 		return $retour;
 	}
-	
-	/**
-	 * permet de comparer entre deux dates
-	 * @param $date1
-	 * @param $date2
-	 */
-	public static function isGreaterThan($date1, $date2, $egalite = false) {
-		$date1 = str_replace('-', '', $date1);
-		$date2 = str_replace('-', '', $date2);
-		if ($egalite) {
-			if ($date1 >= $date2) return true;
-			else return false;
-		} else {
-			if ($date1 > $date2) return true;
-			else return false;
-		}
-	}
 
 	/**
 	 * Retourne NULL si valeur vide sinon retourne la valeur saisie
@@ -393,9 +357,37 @@ class Fonctions {
 			return $value;
 		}
 	}
+
+	public static function getCoordFromAdresse($adresse) {
+		$adresse = urlencode($adresse);
+		$url = 'http://maps.googleapis.com/maps/api/geocode/xml?address='.$adresse.'&sensor=false';
+		$page = file_get_contents($url);
+		// Parse le résultat XML
+		$xml_result = new SimpleXMLElement($page);
+		// Vérifie que la requête a réussi
+		if ($xml_result->status != 'OK') return array();
+		// Charge les adresses
+		$adresses = array();
+		$adresses['lat'] = $xml_result->result->geometry->location->lat; 
+		$adresses['lng'] = $xml_result->result->geometry->location->lng;
+		return $adresses;
+	}
 	
-	public static function anneeScolaire($annee){
-		return ($annee-1).' / '.($annee);
+	public static function getCoordByIp() {
+		$ip = $_SERVER['REMOTE_ADDR'];
+		$url = 'http://www.geoplugin.net/php.gp?ip='.$ip;
+		echo $url;
+		$array = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$ip));
+		$adresses = array();
+		if ($array['geoplugin_latitude'] != '404') {
+			$adresses['lat'] = $array['geoplugin_latitude'];
+			$adresses['lng'] = $array['geoplugin_longitude'];
+		} else {
+			//Coord de Bdx si rien trouvé
+			$adresses['lat'] = '43.83626';
+			$adresses['lng'] = '-0.501308';
+		}
+		return $adresses;
 	}
 }
 ?>

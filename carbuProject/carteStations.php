@@ -25,8 +25,9 @@
   	}
   	if (array_key_exists("infoStations",$_GET)) {
   		echo '<input type="hidden" id="Stations" value="'.$_GET["infoStations"].'"  />'; 
-  	} else {
-  		echo '<input type="hidden" id="Stations" value=""  />';
+  	}
+  	if (array_key_exists("carbuType",$_GET)) {
+  		echo '<input type="hidden" id="carbuType" value="'.$_GET["carbuType"].'"  />';
   	}
   	
   ?>

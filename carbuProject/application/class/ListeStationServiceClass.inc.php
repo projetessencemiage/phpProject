@@ -10,12 +10,17 @@
  **/
 //require_once 'StationServiceData.inc.php';
 require_once 'StationServiceClass.inc.php';
+;require_once 'ListePrixClass.inc.php';
+;require_once 'PrixClass.inc.php';
 
 class ListeStationService {
 	private $listeStations;
+	private $soapClient;
 
 	function __construct() {
-		$listeStations = array();
+		$this->soapClient =  new SoapClient(URL_WCF."/AffichagePrix.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
+		$this->listeStations = array();
+		
 	}
 
 	public function getStations(){
@@ -27,52 +32,102 @@ class ListeStationService {
 	}
 
 	public function getStationsByVille($ville, $dpt) {
-		$listeStations = array();
-		$this->addStation(new StationService("Rue pierre de Coubertin St Medard en Jalles", "2", "Esso", "iconeStation.png"));
-		$this->addStation(new StationService("48 avenue Bougnard 33600 Pessac", "5", "Esso",  "iconeStation.png"));
-		$this->addStation(new StationService("49 Rue Robespierre 33400 Talence", "3", "Total",  "iconeStation.png"));
-		$this->addStation(new StationService("Intermarché 33400 Talence", "8", "Intermarché",  "iconeStation.png"));
-		$this->addStation(new StationService("Leclerc 33400 Talence", "1", "Leclerc", "iconeStation.png"));
-		$this->addStation(new StationService("10 allée de l'église 40280 Benquet", "1", "Leclerc", "iconeStation.png"));
-		$this->addStation(new StationService("75000 Paris 1er", "1", "Leclerc", "iconeStation.png"));
+		$listeStationByVille = $this->enforce_array($this->soapClient->GetPrixVille(array("ville" => $ville, "departement" => $dpt))->GetPrixVilleResult);
+		$this->arrayToListOfStations($listeStationByVille);
 	}
 	public function getStationsByDpt($dpt) {
-		$listeStations = array();
-		$this->addStation(new StationService("Rue pierre de Coubertin St Medard en Jalles", "2", "Esso", "iconeStation_verte_etoile.png"));
-		$this->addStation(new StationService("48 avenue Bougnard 33600 Pessac", "5", "Esso",  "iconeStation_verte.png"));
-		$this->addStation(new StationService("49 Rue Robespierre 33400 Talence", "3", "Total",  "iconeStation_verte.png"));
-		$this->addStation(new StationService("Intermarché 33400 Talence", "8", "Intermarché",  "iconeStation_verte.png"));
-		$this->addStation(new StationService("Leclerc 33400 Talence", "1", "Leclerc", "iconeStation_verte.png"));
+		
+		$listeStationByDpt = $this->enforce_array($this->soapClient->GetPrixDepartement(array("departement" => $dpt))->GetPrixDepartementResult);
+		$this->arrayToListOfStations($listeStationByDpt);
 	}
 	public function getStationsByCP($cp) {
-		$listeStations = array();
-		$this->addStation(new StationService("Rue pierre de Coubertin St Medard en Jalles", "2", "Esso", "iconeStation_rouge_etoile.png"));
-		$this->addStation(new StationService("48 avenue Bougnard 33600 Pessac", "5", "Esso",  "iconeStation_rouge.png"));
-		$this->addStation(new StationService("49 Rue Robespierre 33400 Talence", "3", "Total",  "iconeStation_rouge.png"));
-		$this->addStation(new StationService("Intermarché 33400 Talence", "8", "Intermarché",  "iconeStation_rouge.png"));
-		$this->addStation(new StationService("Leclerc 33400 Talence", "1", "Leclerc", "iconeStation_rouge.png"));
+		$listeStationByCP = $this->enforce_array($this->soapClient->GetPrixCodePostal(array("codePostal" => $cp))->GetPrixCodePostalResult);
+		$this->arrayToListOfStations($listeStationByCP);	
 	}
 	public function getStationsByAdresse($adr, $rayon) {
-		$listeStations = array();
-		$this->addStation(new StationService("Rue pierre de Coubertin St Medard en Jalles", "2", "Esso", "iconeStation_orange_etoile.png"));
-		$this->addStation(new StationService("48 avenue Bougnard 33600 Pessac", "5", "Esso",  "iconeStation_orange.png"));
-		$this->addStation(new StationService("49 Rue Robespierre 33400 Talence", "3", "Total",  "iconeStation_orange.png"));
-		$this->addStation(new StationService("Intermarché 33400 Talence", "8", "Intermarché",  "iconeStation_orange.png"));
-		$this->addStation(new StationService("Leclerc 33400 Talence", "1", "Leclerc", "iconeStation_orange.png"));
+		$longitude = '';
+		$lattitude = '';
+		$listeStationByPosition = $this->enforce_array($this->soapClient->GetPrixPosition(array("distance" => $rayon, "latitude" => $lattitude, "longitude" => $longitude))->GetPrixPositionResult);
+		$this->arrayToListOfStations($listeStationByPosition);
+	}
+	public function arrayToListOfStations($array){
+		
+		$this->listeStations = array();
+		var_dump($array );
+		var_dump("   ///////////////////   ");
+		foreach ($array["Station"] as $station){
+		var_dump($station['enseigne']);
+			$address = $station['address'];
+			$city = $station['city'];
+			$cp = $station['code_postal'];
+			$enseigne = $station['enseigne']['enseigne_name'];
+			$lattitude = $station['lattitude'];
+			$longitude = $station['longitude'];
+			$id_station = $station["id_station"];
+			$tel = $station['tel'];
+			
+			$price_list = new ListePrix();
+			
+			foreach ($station['price_list']["Prix"] as $price){
+					
+				$carburant = $price["carburant_type"]["type_nom"];
+				$date_update = $price["dateMiseAjour"];
+				$value = $price["price"];
+				
+				$price_list->addPrix(new Prix($carburant, $value, $date_update));
+			}
+			
+			$station = new StationService($address, $id_station, $enseigne, $city, $cp, $tel, $price_list, $lattitude, $longitude, '');
+		$this->addStation($station);
+		}
+		
+		var_dump($this->getInformationsStations());
+	}
+	
+	public function arrayToListOfStationsDistance($array){
+	
+		$this->listeStations = array();
+		var_dump($array);
+	
+		foreach ($array["StationAndDistance"][0] as $station){
+	
+			$address = $station['address'];
+			$city = $station['city'];
+			$cp = $station['code_postal'];
+			$enseigne = $station['enseigne']['enseigne_name'];
+			$lattitude = $station['lattitude'];
+			$longitude = $station['longitude'];
+			$id_station = $station["id_station"];
+			$tel = $station['tel'];
+				
+			$price_list = new ListePrix();
+				
+			foreach ($station['price_list']["Prix"] as $price){
+					
+				$carburant = $price["carburant_type"]["type_nom"];
+				$date_update = $price["dateMiseAjour"];
+				$value = $price["price"];
+	
+				$price_list->addPrix(new Prix($carburant, $value, $date_update));
+			}
+				
+			$station = new StationService($address, $id_station, $enseigne, $city, $cp, $tel, $price_list, $lattitude, $longitude, '');
+			$this->addStation($station);
+		}
 	}
 	
 	public function getStationsArroundMe($rayon) {
-		$listeStations = array();
-		$this->addStation(new StationService("Rue pierre de Coubertin St Medard en Jalles", "2", "Esso", "iconeStation_orange_etoile.png"));
-		$this->addStation(new StationService("48 avenue Bougnard 33600 Pessac", "5", "Esso",  "iconeStation_orange.png"));
-		$this->addStation(new StationService("49 Rue Robespierre 33400 Talence", "3", "Total",  "iconeStation_orange.png"));
-		$this->addStation(new StationService("Intermarché 33400 Talence", "8", "Intermarché",  "iconeStation_orange.png"));
-		$this->addStation(new StationService("Leclerc 33400 Talence", "1", "Leclerc", "iconeStation_orange.png"));
+		$longitude = '';
+		$latitude = '';
+		$listeStationByMyPosition = $this->enforce_array($this->soapClient->GetPrixPosition(array("distance" => $rayon, "latitude" => $latitude, "longitude" => $longitude))->GetPrixPositionResult);
+		$this->arrayToListOfStations($listeStationByMyPosition);
+		return $listeStationByMyPosition;
+		
 	}
 	public function getInformationsStations() {
 		$infos = "";
 		foreach ($this->listeStations as $key => $value) {
-			$infos .= 'Key:Adresse@@@Value:'.$value->getAdresse()."--";
+			$infos .= 'Key:Adresse@@@Value:'.$value->getAdresse()." ".$value->getCP()." ".$value->getVille()."--";
 			$infos .= 'Key:Enseigne@@@Value:'.$value->getEnseigne()."--";
 			$infos .= 'Key:Icone@@@Value:'.$value->getIcone()."--";
 			foreach ($value->getListePrix() as $typeCarbu => $price) {
@@ -82,6 +137,32 @@ class ListeStationService {
 			$infos .= '|';
 		}
 		return $infos;
+	}
+	function enforce_array($obj) {
+		$array = (array)$obj;
+		if(empty($array)) {
+			$array = '';
+		}
+		else {
+			foreach($array as $key=>$value) {
+				if(!is_scalar($value)) {
+					if(is_a($value,'SimpleXMLElement')) {
+						$tmp = memcache_objects_to_array($value);
+						if(!is_array($tmp)) {
+							$tmp = ''.$value;
+						}
+						$array[$key] = $tmp;
+					}
+					else {
+						$array[$key] = $this->enforce_array($value);
+					}
+				}
+				else {
+					$array[$key] = $value;
+				}
+			}
+		}
+		return $array;
 	}
 
 }

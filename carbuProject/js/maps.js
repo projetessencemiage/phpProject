@@ -6,21 +6,25 @@ window.onload=function(){
 	var var_adresse = 'Adresse';
 	var var_enseigne = 'Enseigne';
 	var var_icone = 'Icone';
+	var var_listPrice = "ArrayPrice"
 
 	//Recuperation des données
 	var infoStations = document.getElementById('Stations').value;
+	var keyCarbu = document.getElementById('carbuType').value;
+	if (infoStations == "") {
+		var mapOptions = {
+				center: myLatLng,
+				Zoom: 12, 
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+	} else {
+		//Options de la MAP
+		var mapOptions = {mapTypeId: google.maps.MapTypeId.ROADMAP};
+	}
 
-	//Options de la MAP
-	var mapOptions = {
-			//		center: LatLngMap,
-			//			Zoom: 12, 
-			mapTypeId: google.maps.MapTypeId.ROADMAP
-	};
 	var myMap = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-	
+
 	var listeStation = getListeStations();
-	
-	
 	parseListToMarkers(listeStation);
 
 	//Parcours de la liste de stations pour en faire des Markers
@@ -49,13 +53,13 @@ window.onload=function(){
 			position: my_position,
 			map: map,
 			icon: myMarkerImage,
-			title: markerInfos[var_enseigne]
+			title: markerInfos[var_listPrice][keyCarbu] + '€'
 		});
 		bounds.extend(my_position);
 		myMap.fitBounds(bounds);
 		var affichePriceList = "";
-		for (var key in markerInfos['ArrayPrice']) {
-			affichePriceList +=  '<br />' + key + ' - ' + markerInfos['ArrayPrice'][key] + ' €';
+		for (var key in markerInfos[var_listPrice]) {
+			affichePriceList +=  '<br /><strong>' + key + '</strong> - ' + markerInfos[var_listPrice][key] + ' €';
 		}
 		//Ajout Fenetre 
 		var myWindowOptions = {
@@ -90,7 +94,7 @@ window.onload=function(){
 		}
 		return listeStations;
 	}
-	
+
 	//Ajouter une station à la liste des stations
 	//Station avec toutes ces infos.
 	function addStation(stationToAdd) {
@@ -115,7 +119,7 @@ window.onload=function(){
 			}
 		}
 		//Ajout Liste des Prix
-		station['ArrayPrice'] = arrayPrice;
+		station[var_listPrice] = arrayPrice;
 		//Retourne une liste TypeInfo/Données + Une Liste de prix de la station
 		return station;
 	}

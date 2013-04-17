@@ -26,6 +26,7 @@ if (array_key_exists('actionForm', $_POST)) {
 	} else if ($_POST['actionForm'] == "searchArroundMe") {
 		$rayonArround = $_POST["rayonAroundMe"];
 		$listeStation->getStationsArroundMe($rayonArround);
+		Fonctions::getCoordByIp();
 		$critere = 'Recherche around me - Rayon: '.$rayonArround.' km';
 	}
 	$carbuType = $_POST["carburantType"];
