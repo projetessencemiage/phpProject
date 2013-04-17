@@ -1,14 +1,17 @@
+<?php 
+require_once('ListeCarburantClass.inc.php');
+require_once('FonctionsClass.inc.php');
+$listeCarbu = new ListeCarburant();
+$listeC = $listeCarbu->getListCarburant();
+
+?>
 <h2>Trouver une station</h2>
 
 <div class="row-fluid">
 	<div class="span12">
 		<fieldset>
 			<legend>Type of Carburant*</legend>
-			<select name="carburantType" id="carburantType">
-				<option value="1">Diesel</option>
-				<option value="2">SP-95</option>
-				<option value="3">GPL</option>
-			</select>
+			<?php Fonctions::echoList('carburantType', $listeC); ?>
 		</fieldset>
 
 		<legend onclick="afficherDiv('divLocalisation')"> Search by
