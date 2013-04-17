@@ -10,8 +10,8 @@
  **/
 //require_once 'StationServiceData.inc.php';
 require_once 'StationServiceClass.inc.php';
-;require_once 'ListePrixClass.inc.php';
-;require_once 'PrixClass.inc.php';
+require_once 'ListePrixClass.inc.php';
+require_once 'PrixClass.inc.php';
 
 class ListeStationService {
 	private $listeStations;
@@ -32,48 +32,58 @@ class ListeStationService {
 	}
 
 	public function getStationsByVille($ville, $dpt) {
-		$listeStationByVille = $this->enforce_array($this->soapClient->GetPrixVille(array("ville" => $ville, "departement" => $dpt))->GetPrixVilleResult);
-		$this->arrayToListOfStations($listeStationByVille);
+		$this->soapClient->GetPrixVille(array("ville" => $ville, "departement" => $dpt));
+		$result = $this->soapClient->__getLastResponse();
+		$dom = new DomDocument();
+		$dom->loadXML($result);
+ 		$this->arrayToListOfStations($dom);	
 	}
 	public function getStationsByDpt($dpt) {
 		
-		$listeStationByDpt = $this->enforce_array($this->soapClient->GetPrixDepartement(array("departement" => $dpt))->GetPrixDepartementResult);
-		$this->arrayToListOfStations($listeStationByDpt);
+		$this->soapClient->GetPrixDepartement(array("departement" => $dpt));
+		$result = $this->soapClient->__getLastResponse();
+		$dom = new DomDocument();
+		$dom->loadXML($result);
+ 		$this->arrayToListOfStations($dom);	
 	}
 	public function getStationsByCP($cp) {
-		$listeStationByCP = $this->enforce_array($this->soapClient->GetPrixCodePostal(array("codePostal" => $cp))->GetPrixCodePostalResult);
-		$this->arrayToListOfStations($listeStationByCP);	
+		
+		$this->soapClient->GetPrixCodePostal(array("codePostal" => $cp));
+		$result = $this->soapClient->__getLastResponse();
+		$dom = new DomDocument();
+		$dom->loadXML($result);
+ 		$this->arrayToListOfStations($dom);	
 	}
 	public function getStationsByAdresse($adr, $rayon) {
 		$longitude = '';
 		$lattitude = '';
-		$listeStationByPosition = $this->enforce_array($this->soapClient->GetPrixPosition(array("distance" => $rayon, "latitude" => $lattitude, "longitude" => $longitude))->GetPrixPositionResult);
-		$this->arrayToListOfStations($listeStationByPosition);
+		//$listeStationByPosition = $this->enforce_array($this->soapClient->GetPrixPosition(array("distance" => $rayon, "latitude" => $lattitude, "longitude" => $longitude))->GetPrixPositionResult);
+// 		/$this->arrayToListOfStations($listeStationByPosition);
 	}
-	public function arrayToListOfStations($array){
+	public function arrayToListOfStations($dom){
 		
 		$this->listeStations = array();
-		var_dump($array );
-		var_dump("   ///////////////////   ");
-		foreach ($array["Station"] as $station){
-		var_dump($station['enseigne']);
-			$address = $station['address'];
-			$city = $station['city'];
-			$cp = $station['code_postal'];
-			$enseigne = $station['enseigne']['enseigne_name'];
-			$lattitude = $station['lattitude'];
-			$longitude = $station['longitude'];
-			$id_station = $station["id_station"];
-			$tel = $station['tel'];
+
+			$array = $dom->getElementsByTagName('Station');
+		foreach ($array as $station){
+				$address = $station->getElementsByTagName("address")->item(0)->nodeValue;
+				$city = $station->getElementsByTagName("city")->item(0)->nodeValue;
+				$cp = $station->getElementsByTagName("code_postal")->item(0)->nodeValue;
+				$lattitude = $station->getElementsByTagName("lattitude")->item(0)->nodeValue;
+				$longitude = $station->getElementsByTagName("longitude")->item(0)->nodeValue;
+				$id_station = $station->getElementsByTagName("id_station")->item(0)->nodeValue;
+				$tel = $station->getElementsByTagName("tel")->item(0)->nodeValue;
+			
+			$enseigne = $station->getElementsByTagName("enseigne_name")->item(0)->nodeValue;
 			
 			$price_list = new ListePrix();
 			
-			foreach ($station['price_list']["Prix"] as $price){
-					
-				$carburant = $price["carburant_type"]["type_nom"];
-				$date_update = $price["dateMiseAjour"];
-				$value = $price["price"];
-				
+ 			foreach ($station->getElementsByTagName('prix') as $price){
+ 				
+ 					$carburant = $station->item(0)->item(1)->nodeValue;
+ 					$date_update = $station->item(1)->item(0)->nodeValue;
+ 					$value = $station->item(1)->item(1)->nodeValue;
+ 						
 				$price_list->addPrix(new Prix($carburant, $value, $date_update));
 			}
 			
@@ -81,47 +91,50 @@ class ListeStationService {
 		$this->addStation($station);
 		}
 		
-		var_dump($this->getInformationsStations());
 	}
 	
-	public function arrayToListOfStationsDistance($array){
-	
+	public function arrayToListOfStationsDistance($dom){
+		
 		$this->listeStations = array();
-		var_dump($array);
-	
-		foreach ($array["StationAndDistance"][0] as $station){
-	
-			$address = $station['address'];
-			$city = $station['city'];
-			$cp = $station['code_postal'];
-			$enseigne = $station['enseigne']['enseigne_name'];
-			$lattitude = $station['lattitude'];
-			$longitude = $station['longitude'];
-			$id_station = $station["id_station"];
-			$tel = $station['tel'];
+		$racine = $dom->documentElement;
+		
+		$array = $dom->getElementsByTagName('Station');
+		foreach ($array as $station){
+			$address = $station->getElementsByTagName("address")->item(0)->nodeValue;
+			$city = $station->getElementsByTagName("city")->item(0)->nodeValue;
+			$cp = $station->getElementsByTagName("code_postal")->item(0)->nodeValue;
+			$lattitude = $station->getElementsByTagName("lattitude")->item(0)->nodeValue;
+			$longitude = $station->getElementsByTagName("longitude")->item(0)->nodeValue;
+			$id_station = $station->getElementsByTagName("id_station")->item(0)->nodeValue;
+			$tel = $station->getElementsByTagName("tel")->item(0)->nodeValue;
+				
+			$enseigne = $station->getElementsByTagName("enseigne_name")->item(0)->nodeValue;
 				
 			$price_list = new ListePrix();
 				
-			foreach ($station['price_list']["Prix"] as $price){
+			foreach ($station->getElementsByTagName('prix') as $price){
 					
-				$carburant = $price["carburant_type"]["type_nom"];
-				$date_update = $price["dateMiseAjour"];
-				$value = $price["price"];
-	
+				$carburant = $station->item(0)->item(1)->nodeValue;
+				$date_update = $station->item(1)->item(0)->nodeValue;
+				$value = $station->item(1)->item(1)->nodeValue;
+					
 				$price_list->addPrix(new Prix($carburant, $value, $date_update));
 			}
 				
 			$station = new StationService($address, $id_station, $enseigne, $city, $cp, $tel, $price_list, $lattitude, $longitude, '');
 			$this->addStation($station);
 		}
+		
 	}
 	
 	public function getStationsArroundMe($rayon) {
 		$longitude = '';
 		$latitude = '';
-		$listeStationByMyPosition = $this->enforce_array($this->soapClient->GetPrixPosition(array("distance" => $rayon, "latitude" => $latitude, "longitude" => $longitude))->GetPrixPositionResult);
-		$this->arrayToListOfStations($listeStationByMyPosition);
-		return $listeStationByMyPosition;
+		$this->soapClient->GetPrixPosition(array("distance" => $rayon, "latitude" => $latitude, "longitude" => $longitude));
+		$result = $this->soapClient->__getLastResponse();
+		$dom = new DomDocument();
+		$dom->loadXML($result);
+ 		$this->arrayToListOfStations($dom);
 		
 	}
 	public function getInformationsStations() {
@@ -138,31 +151,31 @@ class ListeStationService {
 		}
 		return $infos;
 	}
-	function enforce_array($obj) {
-		$array = (array)$obj;
-		if(empty($array)) {
-			$array = '';
-		}
-		else {
-			foreach($array as $key=>$value) {
-				if(!is_scalar($value)) {
-					if(is_a($value,'SimpleXMLElement')) {
-						$tmp = memcache_objects_to_array($value);
-						if(!is_array($tmp)) {
-							$tmp = ''.$value;
-						}
-						$array[$key] = $tmp;
-					}
-					else {
-						$array[$key] = $this->enforce_array($value);
-					}
-				}
-				else {
-					$array[$key] = $value;
-				}
-			}
-		}
-		return $array;
-	}
+// 	function enforce_array($obj) {
+// 		$array = (array)$obj;
+// 		if(empty($array)) {
+// 			$array = '';
+// 		}
+// 		else {
+// 			foreach($array as $key=>$value) {
+// 				if(!is_scalar($value)) {
+// 					if(is_a($value,'SimpleXMLElement')) {
+// 						$tmp = memcache_objects_to_array($value);
+// 						if(!is_array($tmp)) {
+// 							$tmp = ''.$value;
+// 						}
+// 						$array[$key] = $tmp;
+// 					}
+// 					else {
+// 						$array[$key] = $this->enforce_array($value);
+// 					}
+// 				}
+// 				else {
+// 					$array[$key] = $value;
+// 				}
+// 			}
+// 		}
+// 		return $array;
+// 	}
 
 }
