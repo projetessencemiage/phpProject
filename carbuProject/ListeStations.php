@@ -29,32 +29,32 @@ catch(Exception $e) {
 
 
 
-function enforce_array($obj) {
-	$array = (array)$obj;
-	if(empty($array)) {
-		$array = '';
-	}
-	else {
-		foreach($array as $key=>$value) {
-			if(!is_scalar($value)) {
-				if(is_a($value,'SimpleXMLElement')) {
-					$tmp = memcache_objects_to_array($value);
-					if(!is_array($tmp)) {
-						$tmp = ''.$value;
-					}
-					$array[$key] = $tmp;
-				}
-				else {
-					$array[$key] = enforce_array($value);
-				}
-			}
-			else {
-				$array[$key] = $value;
-			}
-		}
-	}
-	return $array;
-}
+// function enforce_array($obj) {
+// 	$array = (array)$obj;
+// 	if(empty($array)) {
+// 		$array = '';
+// 	}
+// 	else {
+// 		foreach($array as $key=>$value) {
+// 			if(!is_scalar($value)) {
+// 				if(is_a($value,'SimpleXMLElement')) {
+// 					$tmp = memcache_objects_to_array($value);
+// 					if(!is_array($tmp)) {
+// 						$tmp = ''.$value;
+// 					}
+// 					$array[$key] = $tmp;
+// 				}
+// 				else {
+// 					$array[$key] = enforce_array($value);
+// 				}
+// 			}
+// 			else {
+// 				$array[$key] = $value;
+// 			}
+// 		}
+// 	}
+// 	return $array;
+// }
 
 
 echo Structure::getHeader();
