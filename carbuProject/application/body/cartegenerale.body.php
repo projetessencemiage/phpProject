@@ -35,7 +35,7 @@ if (array_key_exists('actionForm', $_POST)) {
 	$carbuType = "diesel";
 }
 //Recuperation des infos des Stations pour affichage dans la MAP
-$infoStations = $listeStation->getInformationsStations();
+$infoStations = urldecode($listeStation->getInformationsStations());
 
 //Gestion de la liste déroulante
 require_once('ListeCarburantClass.inc.php');

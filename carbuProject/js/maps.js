@@ -21,12 +21,10 @@ window.onload=function(){
 		//Options de la MAP
 		var mapOptions = {mapTypeId: google.maps.MapTypeId.ROADMAP};
 	}
-
+	
 	var myMap = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
 	var listeStation = getListeStations();
 	parseListToMarkers(listeStation);
-
 	//Parcours de la liste de stations pour en faire des Markers
 	function parseListToMarkers(listeStations) {
 		var iteStation;
