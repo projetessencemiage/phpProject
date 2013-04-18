@@ -1,4 +1,4 @@
-window.onload=function(){		
+adelewindow.onload=function(){		
 	//Declaration variables
 	var myGeocoder = new google.maps.Geocoder();
 	var myLatLng = new google.maps.LatLng(geoplugin_latitude(), geoplugin_longitude());
