@@ -370,6 +370,7 @@ class Fonctions {
 		$adresses = array();
 		$adresses['lat'] = $xml_result->result->geometry->location->lat; 
 		$adresses['lng'] = $xml_result->result->geometry->location->lng;
+		
 		return $adresses;
 	}
 	

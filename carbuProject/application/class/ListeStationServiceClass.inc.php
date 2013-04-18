@@ -50,15 +50,24 @@ class ListeStationService {
 		
 		$this->soapClient->GetPrixCodePostal(array("codePostal" => $cp));
 		$result = $this->soapClient->__getLastResponse();
+		echo $result;
 		$dom = new DomDocument();
 		$dom->loadXML($result);
  		$this->arrayToListOfStations($dom);	
 	}
 	public function getStationsByAdresse($adr, $rayon) {
-		$longitude = '';
-		$lattitude = '';
-		//$listeStationByPosition = $this->enforce_array($this->soapClient->GetPrixPosition(array("distance" => $rayon, "latitude" => $lattitude, "longitude" => $longitude))->GetPrixPositionResult);
-// 		/$this->arrayToListOfStations($listeStationByPosition);
+		
+		$array_position = Fonctions::getCoordFromAdresse($adr);
+		$longitude = $array_position['lng'];
+		$latitude =  $array_position['lat'];
+		
+		$this->soapClient->GetPrixPosition(array("distance" => $rayon, "latitude" => $latitude, "longitude" => $longitude));
+		$result = $this->soapClient->__getLastResponse();
+		echo $result;
+		$dom = new DomDocument();
+		$dom->loadXML($result);
+		$this->arrayToListOfStationsDistance($dom);
+		
 	}
 	public function arrayToListOfStations($dom){
 		
@@ -87,7 +96,7 @@ class ListeStationService {
 				$price_list->addPrix(new Prix($carburant, $value, $date_update));
 			}
 			
-			$station = new StationService($address, $id_station, $enseigne, $city, $cp, $tel, $price_list, $lattitude, $longitude, '');
+			$station = new StationService($address, $id_station, $enseigne, $city, $cp, $tel, $price_list, $lattitude, $longitude, '', null);
 		$this->addStation($station);
 		}
 		
@@ -96,23 +105,28 @@ class ListeStationService {
 	public function arrayToListOfStationsDistance($dom){
 		
 		$this->listeStations = array();
-		$racine = $dom->documentElement;
 		
-		$array = $dom->getElementsByTagName('Station');
+		$array = $dom->getElementsByTagName('stationanddistance');
+		
 		foreach ($array as $station){
-			$address = $station->getElementsByTagName("address")->item(0)->nodeValue;
-			$city = $station->getElementsByTagName("city")->item(0)->nodeValue;
-			$cp = $station->getElementsByTagName("code_postal")->item(0)->nodeValue;
-			$lattitude = $station->getElementsByTagName("lattitude")->item(0)->nodeValue;
-			$longitude = $station->getElementsByTagName("longitude")->item(0)->nodeValue;
-			$id_station = $station->getElementsByTagName("id_station")->item(0)->nodeValue;
-			$tel = $station->getElementsByTagName("tel")->item(0)->nodeValue;
+			
+			$distance = $station->item(0)->nodeValue;
+			vardump(" //////////// ");
+			var_dump($distance);
+			
+			$address = $station->item(1)->getElementsByTagName("address")->item(0)->nodeValue;
+			$city = $station->item(1)->getElementsByTagName("city")->item(0)->nodeValue;
+			$cp = $station->item(1)->getElementsByTagName("code_postal")->item(0)->nodeValue;
+			$lattitude = $station->item(1)->getElementsByTagName("lattitude")->item(0)->nodeValue;
+			$longitude = $station->item(1)->getElementsByTagName("longitude")->item(0)->nodeValue;
+			$id_station = $station->item(1)->getElementsByTagName("id_station")->item(0)->nodeValue;
+			$tel = $station->item(1)->getElementsByTagName("tel")->item(0)->nodeValue;
 				
-			$enseigne = $station->getElementsByTagName("enseigne_name")->item(0)->nodeValue;
+			$enseigne = $station->item(1)->getElementsByTagName("enseigne_name")->item(0)->nodeValue;
 				
 			$price_list = new ListePrix();
 				
-			foreach ($station->getElementsByTagName('prix') as $price){
+			foreach ($station->item(1)->getElementsByTagName('prix') as $price){
 					
 				$carburant = $station->item(0)->item(1)->nodeValue;
 				$date_update = $station->item(1)->item(0)->nodeValue;
@@ -121,20 +135,22 @@ class ListeStationService {
 				$price_list->addPrix(new Prix($carburant, $value, $date_update));
 			}
 				
-			$station = new StationService($address, $id_station, $enseigne, $city, $cp, $tel, $price_list, $lattitude, $longitude, '');
+			$station = new StationService($address, $id_station, $enseigne, $city, $cp, $tel, $price_list, $lattitude, $longitude, '', $distance);
 			$this->addStation($station);
 		}
 		
 	}
 	
 	public function getStationsArroundMe($rayon) {
-		$longitude = '';
-		$latitude = '';
+		$array_position = Fonctions::getCoordByIp();
+		$longitude = $array_position['lng'];
+		$latitude =  $array_position['lat'];
+		
 		$this->soapClient->GetPrixPosition(array("distance" => $rayon, "latitude" => $latitude, "longitude" => $longitude));
 		$result = $this->soapClient->__getLastResponse();
 		$dom = new DomDocument();
 		$dom->loadXML($result);
- 		$this->arrayToListOfStations($dom);
+		$this->arrayToListOfStationsDistance($dom);
 		
 	}
 	public function getInformationsStations() {
