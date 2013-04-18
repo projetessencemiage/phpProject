@@ -35,8 +35,7 @@ if (array_key_exists('actionForm', $_POST)) {
 	$carbuType = "diesel";
 }
 //Recuperation des infos des Stations pour affichage dans la MAP
-$infoStations = urldecode($listeStation->getInformationsStations());
-
+$infoStations = $listeStation->getInformationsStations();
 //Gestion de la liste déroulante
 require_once('ListeCarburantClass.inc.php');
 require_once('FonctionsClass.inc.php');
@@ -65,13 +64,17 @@ echo '
 <br/><strong id="titleCarbuType">'.$carbuType.'</strong>
 </div>';
 
+
+	echo '<input type="hidden" id="Stations" value="'.$infoStations.'"  />';
+	echo '<input type="hidden" id="carbuType" value="'.$carbuType.'"  />';
 ?>
 <h2>Qui est le moins cher ?</h2>
 <div class="row-fluid">
 	<div class="span6">
-		<iframe
-			src="carteStations.php?infoStations=<?php echo $infoStations?>&&carbuType=<?php echo $carbuType?>"
-			name="frame" frameborder=yes width="500" height="400"></iframe>
+		<!-- <iframe
+			src="carteStations.php?infoStations=<?php echo $infoStations?>&carbuType=<?php echo $carbuType?>"
+			name="frame" frameborder=yes width="500" height="400"></iframe>-->
+			 <div id="map-canvas"></div>
 	</div>
 	<div class="span6">
 		<fieldset>

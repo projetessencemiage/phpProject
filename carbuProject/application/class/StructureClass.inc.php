@@ -28,12 +28,13 @@ class Structure {
 
 		<!-- Le styles -->
 		<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
 		<link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-		
+				
 		<!-- Script -->
-		<script  type="text/javascript" src="js/Formulaires.js"></script>
 		<script  type="text/javascript" src="js/utile.js"></script>
-
+		<script  type="text/javascript" src="js/Formulaires.js"></script>
+		
 		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<!--[if lt IE 9]>
 		<script src="bootstrap/js/html5shiv.js"></script>
@@ -44,8 +45,7 @@ class Structure {
 		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="bootstrap/ico/apple-touch-icon-114-precomposed.png">
 		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="bootstrap/ico/apple-touch-icon-72-precomposed.png">
 		<link rel="apple-touch-icon-precomposed" href="bootstrap/ico/apple-touch-icon-57-precomposed.png">
-		<link rel="shortcut icon" href="bootstrap/ico/favicon.png">
-		</head>'. NL;
+		<link rel="shortcut icon" href="bootstrap/ico/favicon.png">';
 		flush();
 	}
 	/**
@@ -53,10 +53,12 @@ class Structure {
 	 * Constructeur du corps de la page
 	 * -------------------------------------------------------------------------
 	 **/
-	static function getBody($body, $bodyParam='', $action='') {
+	static function getBody($body, $bodyParam='', $action='', $script = '') {
+		echo $script;
+		echo '</head>'.NL;
 		echo '<body'. $bodyParam . '>
 		<form name="formGeneral"';
-		echo 'id = "formGeneral"';
+		echo ' id="formGeneral"';
 		echo ' action="'.$action.'"';
 		echo ' method="post">
 		

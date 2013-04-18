@@ -141,6 +141,8 @@ class ListeStationService {
 		$infos = "";
 		foreach ($this->listeStations as $key => $value) {
 			$infos .= 'Key:Adresse@@@Value:'.$value->getAdresse()." ".$value->getCP()." ".$value->getVille()."--";
+			$infos .= 'Key:Lat@@@Value:'.$value->getlattitude()."--";
+			$infos .= 'Key:Lng@@@Value:'.$value->getlongitude()."--";
 			$infos .= 'Key:Enseigne@@@Value:'.$value->getEnseigne()."--";
 			$infos .= 'Key:Icone@@@Value:'.$value->getIcone()."--";
 			foreach ($value->getListePrix() as $typeCarbu => $price) {
