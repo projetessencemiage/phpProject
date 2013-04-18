@@ -34,8 +34,8 @@ class StationService {
 		$this->ListePrix = $_ListePrix;
 		$this->lattitude = $_lattitude;
 		$this->longitude = $_longitude;
-		$this->icone = $_icone;
 		$this->distance = $_distance;
+		$this->icone = 'iconeStation_rouge.png';
 	}
 	
 // 	function __construct($adr, $_id, $_enseigne, $_icone) {
