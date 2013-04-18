@@ -16,20 +16,13 @@
   </head>
   <body>
   	
-  	<?php 
-  	require_once 'application/inc/declarations.inc.php';
-  	require_once('ListeStationServiceClass.inc.php');
-  	
-  	if (array_key_exists("newAdresse",$_GET)) {
-  		echo '<input type="hidden" id="newAdresse" value="'.$_GET["newAdresse"].'"  />';
-  	}
+  	<?php
   	if (array_key_exists("infoStations",$_GET)) {
   		echo '<input type="hidden" id="Stations" value="'.$_GET["infoStations"].'"  />'; 
   	}
   	if (array_key_exists("carbuType",$_GET)) {
   		echo '<input type="hidden" id="carbuType" value="'.$_GET["carbuType"].'"  />';
   	}
-  	
   ?>
     <div id="map-canvas"/>
   </body>

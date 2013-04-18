@@ -6,7 +6,9 @@ window.onload=function(){
 	var var_adresse = 'Adresse';
 	var var_enseigne = 'Enseigne';
 	var var_icone = 'Icone';
-	var var_listPrice = "ArrayPrice"
+	var var_listPrice = "ArrayPrice";
+	var var_lat = "Lat";
+	var var_lng = "Lng";
 
 	//Recuperation des données
 	var infoStations = document.getElementById('Stations').value;
@@ -21,7 +23,7 @@ window.onload=function(){
 		//Options de la MAP
 		var mapOptions = {mapTypeId: google.maps.MapTypeId.ROADMAP};
 	}
-	
+
 	var myMap = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 	var listeStation = getListeStations();
 	parseListToMarkers(listeStation);
@@ -29,7 +31,7 @@ window.onload=function(){
 	function parseListToMarkers(listeStations) {
 		var iteStation;
 		for (iteStation = 0 ; iteStation < listeStations.length ; iteStation++) {
-			addMarker(listeStations[iteStation]);
+			createMarker(listeStations[iteStation]);
 		}
 	}
 
@@ -39,17 +41,18 @@ window.onload=function(){
 		myGeocoder.geocode( { 'address': adresse}, function(results, status) {		
 			// Si la recherche à fonctionné
 			if( status == google.maps.GeocoderStatus.OK ) { 
-				createMarker(myMap, results[0].geometry.location, stationToMark);
+				createMarker(stationToMark);
 			} // Fin si status OK		
 		});
 	}
 
 	//Creation d'un MARKER sur la map
-	function createMarker(map, my_position, markerInfos) {
+	function createMarker(markerInfos) {
 		var myMarkerImage = new google.maps.MarkerImage('./images/' + markerInfos[var_icone]);
+		var my_position = new google.maps.LatLng(markerInfos[var_lat], markerInfos[var_lng]);
 		var myMarker = new google.maps.Marker({
 			position: my_position,
-			map: map,
+			map: myMap,
 			icon: myMarkerImage,
 			title: markerInfos[var_listPrice][keyCarbu] + '€'
 		});
