@@ -62,7 +62,6 @@ class ListeStationService {
 		
 		$this->soapClient->GetPrixPosition(array("distance" => $rayon, "latitude" => $latitude, "longitude" => $longitude));
 		$result = $this->soapClient->__getLastResponse();
-		echo $result;
 		$dom = new DomDocument();
 		$dom->loadXML($result);
 		$this->arrayToListOfStationsDistance($dom);
@@ -86,11 +85,10 @@ class ListeStationService {
 			
 			$price_list = new ListePrix();
 			
- 			foreach ($station->getElementsByTagName('prix') as $price){
- 					$carburant = $station->item(0)->item(1)->nodeValue;
- 					$date_update = $station->item(1)->item(0)->nodeValue;
- 					$value = $station->item(1)->item(1)->nodeValue;
- 						
+		foreach ($station->getElementsByTagName('Prix') as $price){
+				$carburant = $price->childNodes->item(0)->childNodes->item(1)->nodeValue;
+				$date_update = $price->childNodes->item(1)->nodeValue;
+				$value = $price->childNodes->item(3)->nodeValue;
 				$price_list->addPrix(new Prix($carburant, $value, $date_update));
 			}
 			
@@ -104,32 +102,29 @@ class ListeStationService {
 		
 		$this->listeStations = array();
 		
-		$array = $dom->getElementsByTagName('stationanddistance');
+		$array = $dom->getElementsByTagName('StationAndDistance');
 		
 		foreach ($array as $station){
 			
-			$distance = $station->item(0)->nodeValue;
-			vardump(" //////////// ");
-			var_dump($distance);
+			$distance = $station->childNodes->item(0)->nodeValue;
 			
-			$address = $station->item(1)->getElementsByTagName("address")->item(0)->nodeValue;
-			$city = $station->item(1)->getElementsByTagName("city")->item(0)->nodeValue;
-			$cp = $station->item(1)->getElementsByTagName("code_postal")->item(0)->nodeValue;
-			$lattitude = $station->item(1)->getElementsByTagName("lattitude")->item(0)->nodeValue;
-			$longitude = $station->item(1)->getElementsByTagName("longitude")->item(0)->nodeValue;
-			$id_station = $station->item(1)->getElementsByTagName("id_station")->item(0)->nodeValue;
-			$tel = $station->item(1)->getElementsByTagName("tel")->item(0)->nodeValue;
+			$address = $station->childNodes->item(1)->getElementsByTagName("address")->item(0)->nodeValue;
+			$city = $station->childNodes->item(1)->getElementsByTagName("city")->item(0)->nodeValue;
+			$cp = $station->childNodes->item(1)->getElementsByTagName("code_postal")->item(0)->nodeValue;
+			$lattitude = $station->childNodes->item(1)->getElementsByTagName("lattitude")->item(0)->nodeValue;
+			$longitude = $station->childNodes->item(1)->getElementsByTagName("longitude")->item(0)->nodeValue;
+			$id_station = $station->childNodes->item(1)->getElementsByTagName("id_station")->item(0)->nodeValue;
+			$tel = $station->childNodes->item(1)->getElementsByTagName("tel")->item(0)->nodeValue;
 				
-			$enseigne = $station->item(1)->getElementsByTagName("enseigne_name")->item(0)->nodeValue;
+			
+			$enseigne = $station->childNodes->item(1)->getElementsByTagName("enseigne_name")->item(0)->nodeValue;
 				
 			$price_list = new ListePrix();
+			foreach ($station->childNodes->item(1)->getElementsByTagName('Prix') as $price){
+				$carburant = $price->childNodes->item(0)->childNodes->item(1)->nodeValue;
+				$date_update = $price->childNodes->item(1)->nodeValue;
+				$value = $price->childNodes->item(3)->nodeValue;
 				
-			foreach ($station->item(1)->getElementsByTagName('prix') as $price){
-					
-				$carburant = $station->item(0)->item(1)->nodeValue;
-				$date_update = $station->item(1)->item(0)->nodeValue;
-				$value = $station->item(1)->item(1)->nodeValue;
-					
 				$price_list->addPrix(new Prix($carburant, $value, $date_update));
 			}
 				
