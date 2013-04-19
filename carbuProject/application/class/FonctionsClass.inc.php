@@ -389,5 +389,9 @@ class Fonctions {
 		}
 		return $adresses;
 	}
+	
+	public static function inputHidden($name, $value) {
+		echo '<input type="hidden" name="'.$name.'" id="'.$name.'" value="'.$value.'"/>';
+	}
 }
 ?>

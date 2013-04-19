@@ -13,7 +13,6 @@ window.onload=function(){
 	//Recuperation des données
 	var infoStations = document.getElementById('Stations').value;
 	var keyCarbu = document.getElementById('carbuType').value;
-	alert(keyCarbu);
 	if (infoStations == "") {
 		var mapOptions = {
 				center: myLatLng,

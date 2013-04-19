@@ -87,7 +87,6 @@ class ListeStationService {
 			$price_list = new ListePrix();
 			
  			foreach ($station->getElementsByTagName('prix') as $price){
- 				
  					$carburant = $station->item(0)->item(1)->nodeValue;
  					$date_update = $station->item(1)->item(0)->nodeValue;
  					$value = $station->item(1)->item(1)->nodeValue;

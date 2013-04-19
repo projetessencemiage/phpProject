@@ -35,15 +35,9 @@ class StationService {
 		$this->lattitude = $_lattitude;
 		$this->longitude = $_longitude;
 		$this->distance = $_distance;
-		$this->icone = 'iconeStation_rouge.png';
+		$this->icone = 'iconeStation_verte.png';
 	}
 	
-// 	function __construct($adr, $_id, $_enseigne, $_icone) {
-// 		$this->adresse  = $adr;
-// 		$this->id = $_id;
-// 		$this->enseigne = $_enseigne;
-// 		$this->icone = $_icone;
-// 	}
 
 	public function getAdresse(){
 		return $this->adresse;
@@ -71,9 +65,10 @@ class StationService {
 	}
 	public function getListePrix() {
 		$priceList = array();
+		$this->ListePrix->getListTypetoPrix();
 		$priceList['SP95-E10'] = 1.055;
 		$priceList['diesel'] = 2.755;
-		$priceList['gpl'] = 1.523;
+		$priceList['GPL'] = 1.523;
 		return $priceList;
 	}
 

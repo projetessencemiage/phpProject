@@ -13,7 +13,7 @@ class ListePrix {
 	private $listPrix;
 
 	function __construct() {
-		$listPrix = array();
+		$this->listPrix = array();
 	}
 	
 	public function getPrix(){
@@ -22,6 +22,13 @@ class ListePrix {
 	
 	public function addPrix($prix) {
 		$this->listPrix[] = $prix;
+	}
+	
+	public function getListTypetoPrix() {
+		print_r($this->listPrix);
+		//foreach ($this->listPrix as $key => $prix) {
+			//echo $prix->getcarburant();
+		//}
 	}
 	
 }
