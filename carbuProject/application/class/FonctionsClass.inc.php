@@ -377,7 +377,6 @@ class Fonctions {
 	public static function getCoordByIp() {
 		$ip = $_SERVER['REMOTE_ADDR'];
 		$url = 'http://www.geoplugin.net/php.gp?ip='.$ip;
-		echo $url;
 		$array = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$ip));
 		$adresses = array();
 		if ($array['geoplugin_latitude'] != '404') {

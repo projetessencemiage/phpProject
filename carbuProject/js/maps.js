@@ -1,4 +1,4 @@
-adelewindow.onload=function(){		
+window.onload=function(){		
 	//Declaration variables
 	var myGeocoder = new google.maps.Geocoder();
 	var myLatLng = new google.maps.LatLng(geoplugin_latitude(), geoplugin_longitude());
@@ -13,6 +13,7 @@ adelewindow.onload=function(){
 	//Recuperation des données
 	var infoStations = document.getElementById('Stations').value;
 	var keyCarbu = document.getElementById('carbuType').value;
+	alert(keyCarbu);
 	if (infoStations == "") {
 		var mapOptions = {
 				center: myLatLng,
@@ -23,7 +24,6 @@ adelewindow.onload=function(){
 		//Options de la MAP
 		var mapOptions = {mapTypeId: google.maps.MapTypeId.ROADMAP};
 	}
-
 	var myMap = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 	var listeStation = getListeStations();
 	parseListToMarkers(listeStation);

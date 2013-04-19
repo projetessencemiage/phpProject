@@ -15,7 +15,7 @@ class Structure {
 	 * Constructeur du header de la page
 	 * -------------------------------------------------------------------------
 	 **/
-	static function getHeader($finEntete=true) {
+	static function getHeader($finEntete='') {
 		echo  '
 		<!DOCTYPE html>
 		<html lang="en">
@@ -25,11 +25,12 @@ class Structure {
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 
 		<!-- Le styles -->
 		<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
-		<link href="css/style.css" rel="stylesheet">
 		<link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
 				
 		<!-- Script -->
 		<script  type="text/javascript" src="js/utile.js"></script>
@@ -46,6 +47,8 @@ class Structure {
 		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="bootstrap/ico/apple-touch-icon-72-precomposed.png">
 		<link rel="apple-touch-icon-precomposed" href="bootstrap/ico/apple-touch-icon-57-precomposed.png">
 		<link rel="shortcut icon" href="bootstrap/ico/favicon.png">';
+		echo $finEntete;
+		echo '</head>'.NL;
 		flush();
 	}
 	/**
@@ -53,9 +56,7 @@ class Structure {
 	 * Constructeur du corps de la page
 	 * -------------------------------------------------------------------------
 	 **/
-	static function getBody($body, $bodyParam='', $action='', $script = '') {
-		echo $script;
-		echo '</head>'.NL;
+	static function getBody($body, $bodyParam='', $action='') {
 		echo '<body'. $bodyParam . '>
 		<form name="formGeneral"';
 		echo ' id="formGeneral"';

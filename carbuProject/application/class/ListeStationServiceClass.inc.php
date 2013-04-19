@@ -50,7 +50,6 @@ class ListeStationService {
 		
 		$this->soapClient->GetPrixCodePostal(array("codePostal" => $cp));
 		$result = $this->soapClient->__getLastResponse();
-		echo $result;
 		$dom = new DomDocument();
 		$dom->loadXML($result);
  		$this->arrayToListOfStations($dom);	

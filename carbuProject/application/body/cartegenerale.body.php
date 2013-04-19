@@ -68,15 +68,9 @@ echo '
 	echo '<input type="hidden" id="Stations" value="'.$infoStations.'"  />';
 	echo '<input type="hidden" id="carbuType" value="'.$carbuType.'"  />';
 ?>
-<h2>Qui est le moins cher ?</h2>
+<h3>Qui est le moins cher ?</h3>
 <div class="row-fluid">
-	<div class="span6">
-		<!-- <iframe
-			src="carteStations.php?infoStations=<?php echo $infoStations?>&carbuType=<?php echo $carbuType?>"
-			name="frame" frameborder=yes width="500" height="400"></iframe>-->
-			 <div id="map-canvas"></div>
-	</div>
-	<div class="span6">
+	<div class="span4">
 		<fieldset>
 			 <label class="select">
 			 Carburant &nbsp;
@@ -84,5 +78,12 @@ echo '
 			</label>			
 		</fieldset>
 	</div>
+	<div class="span8">
+		<!-- <iframe
+			src="carteStations.php?infoStations=<?php echo $infoStations?>&carbuType=<?php echo $carbuType?>"
+			name="frame" frameborder=yes width="500" height="400"></iframe>-->	 
+	<div id="map-canvas"/>
+	</div>
 </div>
 <input type="hidden" name="infoStations" id="infoStations" value="<?php echo $infoStations?>"/>
+
