@@ -2,13 +2,13 @@
 
 class Prix{
 	private $carburant;
-	private $station;
+	private $prix;
 	private $datemaj;
 	
-	function __construct($_carburant, $_station, $_datemaj){
+	function __construct($_carburant, $_prix, $_datemaj){
 
 		$this->carburant = $_carburant;
-		$this->station = $_station;
+		$this->prix = $_prix;
 		$this->datemaj = $_datemaj;
 	}
 	
@@ -16,8 +16,8 @@ class Prix{
 	public function getcarburant(){
 		return $this->carburant;
 	}
-	public function getstation(){
-		return $this->station;
+	public function getPrix(){
+		return $this->prix;
 	}
 	public function getdatemaj(){
 		return $this->datemaj;

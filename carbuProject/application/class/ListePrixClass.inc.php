@@ -25,10 +25,11 @@ class ListePrix {
 	}
 	
 	public function getListTypetoPrix() {
-		print_r($this->listPrix);
-		//foreach ($this->listPrix as $key => $prix) {
-			//echo $prix->getcarburant();
-		//}
+		$arrayPrice = array();
+		foreach ($this->listPrix as $key => $prix) {
+			$arrayPrice[$prix->getcarburant()] = $prix->getPrix();
+			echo $prix->getPrix().' - ';
+		}
 	}
 	
 }
