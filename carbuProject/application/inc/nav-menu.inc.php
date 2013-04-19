@@ -12,6 +12,7 @@ echo '
 							<li><a href="CarteGenerale.php" title="Qui est le moins cher ? ">Qui est le moins cher ?</a></li>
 							<li><a href="ListeStations.php" title="Liste des stations ">Liste des stations</a></li>
 							<li><a href="Formulaires.php" title="Formulaire">Trouver une station</a></li>
+							<li><a href="carteStations.php" title="Formulaire">Test</a></li>
 						</ul>
 					</div>
 				</div>
