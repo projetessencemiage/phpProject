@@ -1,7 +1,6 @@
 window.onload=function(){		
 	//Declaration variables
 	var myGeocoder = new google.maps.Geocoder();
-	var myLatLng = new google.maps.LatLng(geoplugin_latitude(), geoplugin_longitude());
 	var bounds = new google.maps.LatLngBounds();
 	var var_adresse = 'Adresse';
 	var var_enseigne = 'Enseigne';
@@ -9,9 +8,21 @@ window.onload=function(){
 	var var_listPrice = "ArrayPrice";
 	var var_lat = "Lat";
 	var var_lng = "Lng";
+	var var_phone = "Phone";
 
-	//Recuperation des donn�es
+	//Recuperation des données
 	var infoStations = document.getElementById('Stations').value;
+	//Par default, GeoCentrage
+	var myLatLng = new google.maps.LatLng(geoplugin_latitude(), geoplugin_longitude());
+	//Centrage de la carte si Recherche par adresse sans résultat
+	if (document.getElementById('CoordCarte')) {
+		var split = document.getElementById('CoordCarte').value;
+		var lat = split.split('-')[0];
+		var lng = split.split('-')[1];
+		if (lat != "") {
+			var myLatLng = new google.maps.LatLng(lat, lng);
+		}
+	}
 	var keyCarbu = document.getElementById('carbuType').value;
 	if (infoStations == "") {
 		var mapOptions = {
@@ -52,7 +63,7 @@ window.onload=function(){
 		if (markerInfos[var_listPrice][keyCarbu] == null) {
 			var titlePrice = "Non disponible";
 		} else {
-			var titlePrice = markerInfos[var_listPrice][keyCarbu] + ' €';
+			var titlePrice = markerInfos[var_listPrice][keyCarbu]['Prix'] + ' €';
 		}
 		var myMarker = new google.maps.Marker({
 			position: my_position,
@@ -64,7 +75,7 @@ window.onload=function(){
 		myMap.fitBounds(bounds);
 		var affichePriceList = "";
 		for (var key in markerInfos[var_listPrice]) {
-			affichePriceList +=  '<br /><strong>' + key + '</strong> - ' + markerInfos[var_listPrice][key] + ' €';
+			affichePriceList +=  '<br /><strong>' + key + '</strong> - ' + markerInfos[var_listPrice][key]['Prix'] + ' € (' + markerInfos[var_listPrice][key]['Maj'] + ')';
 		}
 		if (affichePriceList == "") {
 			affichePriceList = "Prix non disponible";
@@ -76,7 +87,7 @@ window.onload=function(){
 					+ '<address>'
 					+ ' <strong>' +  markerInfos[var_enseigne] + '</strong><br>'
 					+  markerInfos[var_adresse] + '<br>'
-					+ ' <abbr title="Phone">P:</abbr> (123) 456-7890'
+					+ ' <abbr title="Phone">Tel: </abbr>' + markerInfos[var_phone]
 					+ ' </address>'
 					+ ' </p>'
 					+ '<p>Price: '
@@ -118,7 +129,10 @@ window.onload=function(){
 			if (keyValue[0].startsWith("PriceKey")) {
 				var key = keyValue[0].substring(keyValue[0].indexOf('PriceKey:')+9);
 				var value = keyValue[1].substring(keyValue[1].indexOf('Value:')+6);
-				arrayPrice[key] = value;
+				var maj = keyValue[2].substring(keyValue[1].indexOf('Maj:')+4);
+				arrayPrice[key] = new Array();
+				arrayPrice[key]['Prix'] = value;
+				arrayPrice[key]['Maj'] = maj;
 			} else {
 				//Else autre donn�e
 				var key = keyValue[0].substring(keyValue[0].indexOf('Key:')+4);

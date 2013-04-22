@@ -4,7 +4,7 @@
  * @Name : ListeStationServiceClass.inc.php
  * @Desc : Classe ListeStationService
  * @Author : Thom
- * @Date : 07/04/2013 : création
+ * @Date : 07/04/2013 : crï¿½ation
  * @Version : V1.0;
  * ------------------------------------------------------------------------
  **/
@@ -54,11 +54,15 @@ class ListeStationService {
 		$dom->loadXML($result);
  		$this->arrayToListOfStations($dom, $carbuType);	
 	}
+<<<<<<< HEAD
 	public function getStationsByAdresse($adr, $rayon, $carbuType) {
 		
+=======
+	public function getStationsByAdresse($adr, $rayon) {
+>>>>>>> branch 'master' of https://github.com/projetessencemiage/phpProject.git
 		$array_position = Fonctions::getCoordFromAdresse($adr);
-		$longitude = $array_position['lng'];
 		$latitude =  $array_position['lat'];
+<<<<<<< HEAD
 		
 		$this->soapClient->GetPrixPosition(array("distance" => $rayon, "latitude" => $latitude, "longitude" => $longitude));
 		$result = $this->soapClient->__getLastResponse();
@@ -66,6 +70,17 @@ class ListeStationService {
 		$dom->loadXML($result);
 		$this->arrayToListOfStationsDistance($dom, $carbuType);
 		
+=======
+		$longitude = $array_position['lng'];
+		if ($latitude != null) {
+			$this->soapClient->GetPrixPosition(array("distance" => $rayon, "longitude" => $longitude, "latitude" => $latitude));
+			$result = $this->soapClient->__getLastResponse();
+			$dom = new DomDocument();
+			$dom->loadXML($result);
+			$this->arrayToListOfStationsDistance($dom);
+			return $array_position;
+		}
+>>>>>>> branch 'master' of https://github.com/projetessencemiage/phpProject.git
 	}
 	public function arrayToListOfStations($dom, $carbuType){
 		
@@ -187,8 +202,9 @@ class ListeStationService {
 			$infos .= 'Key:Lng@@@Value:'.$value->getlongitude()."--";
 			$infos .= 'Key:Enseigne@@@Value:'.$value->getEnseigne()."--";
 			$infos .= 'Key:Icone@@@Value:'.$value->getIcone()."--";
-			foreach ($value->getListePrix() as $typeCarbu => $price) {
-				$infos .= 'PriceKey:'.$typeCarbu.'@@@Value:'.$price."--";
+			$infos .= 'Key:Phone@@@Value:'.$value->getPhone()."--";
+			foreach ($value->getListePrix() as $typeCarbu => $array) {
+				$infos .= 'PriceKey:'.$typeCarbu.'@@@Value:'.$array['Prix'].'@@@Maj:'.$array['DateMaj'].'--';
 			}
 				
 			$infos .= '|';
