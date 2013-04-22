@@ -65,11 +65,7 @@ class StationService {
 	}
 	public function getListePrix() {
 		$priceList = array();
-		$this->ListePrix->getListTypetoPrix();
-		$priceList['SP95-E10'] = 1.055;
-		$priceList['diesel'] = 2.755;
-		$priceList['GPL'] = 1.523;
-		return $priceList;
+		return $this->ListePrix->getListTypetoPrix();
 	}
 
 	public function getIcone() {

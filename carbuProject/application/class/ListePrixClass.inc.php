@@ -28,8 +28,8 @@ class ListePrix {
 		$arrayPrice = array();
 		foreach ($this->listPrix as $key => $prix) {
 			$arrayPrice[$prix->getcarburant()] = $prix->getPrix();
-			echo $prix->getPrix().' - ';
 		}
+		return $arrayPrice;
 	}
 	
 }

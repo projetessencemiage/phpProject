@@ -49,17 +49,25 @@ window.onload=function(){
 	function createMarker(markerInfos) {
 		var myMarkerImage = new google.maps.MarkerImage('./images/' + markerInfos[var_icone]);
 		var my_position = new google.maps.LatLng(markerInfos[var_lat], markerInfos[var_lng]);
+		if (markerInfos[var_listPrice][keyCarbu] == null) {
+			var titlePrice = "Non disponible";
+		} else {
+			var titlePrice = markerInfos[var_listPrice][keyCarbu] + '€';
+		}
 		var myMarker = new google.maps.Marker({
 			position: my_position,
 			map: myMap,
 			icon: myMarkerImage,
-			title: markerInfos[var_listPrice][keyCarbu] + '€'
+			title: titlePrice
 		});
 		bounds.extend(my_position);
 		myMap.fitBounds(bounds);
 		var affichePriceList = "";
 		for (var key in markerInfos[var_listPrice]) {
 			affichePriceList +=  '<br /><strong>' + key + '</strong> - ' + markerInfos[var_listPrice][key] + ' €';
+		}
+		if (affichePriceList == "") {
+			affichePriceList = "Prix non disponible";
 		}
 		//Ajout Fenetre 
 		var myWindowOptions = {
