@@ -54,23 +54,14 @@ class ListeStationService {
 		$dom->loadXML($result);
  		$this->arrayToListOfStations($dom, $carbuType);	
 	}
-<<<<<<< HEAD
 	public function getStationsByAdresse($adr, $rayon, $carbuType) {
-		
-=======
-	public function getStationsByAdresse($adr, $rayon) {
->>>>>>> branch 'master' of https://github.com/projetessencemiage/phpProject.git
-		$array_position = Fonctions::getCoordFromAdresse($adr);
-		$latitude =  $array_position['lat'];
-<<<<<<< HEAD
-		
+				
 		$this->soapClient->GetPrixPosition(array("distance" => $rayon, "latitude" => $latitude, "longitude" => $longitude));
 		$result = $this->soapClient->__getLastResponse();
 		$dom = new DomDocument();
 		$dom->loadXML($result);
 		$this->arrayToListOfStationsDistance($dom, $carbuType);
 		
-=======
 		$longitude = $array_position['lng'];
 		if ($latitude != null) {
 			$this->soapClient->GetPrixPosition(array("distance" => $rayon, "longitude" => $longitude, "latitude" => $latitude));
@@ -80,7 +71,6 @@ class ListeStationService {
 			$this->arrayToListOfStationsDistance($dom);
 			return $array_position;
 		}
->>>>>>> branch 'master' of https://github.com/projetessencemiage/phpProject.git
 	}
 	public function arrayToListOfStations($dom, $carbuType){
 		
