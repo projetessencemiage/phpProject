@@ -35,7 +35,8 @@ if (array_key_exists('actionForm', $_POST)) {
 		Fonctions::inputHidden('searchAdresse', $_POST['searchAdresse']);
 		$adr = $_POST["searchAdresse"];
 		$rayon = $_POST["rayon"];
-		$listeStation->getStationsByAdresse($adr, $rayon, $carbuType);
+		$coords = $listeStation->getStationsByAdresse($adr, $rayon, $carbuType);
+		Fonctions::inputHidden('CoordCarte', $coords['lat'].'-'.$coords['lng']);
 		$critere = 'Recherche par adresse - '.$adr.' avec un rayon de '.$rayon.' km';
 	} else if ($_POST['actionForm'] == "searchArroundMe") {
 		Fonctions::inputHidden('rayonAroundMe', $_POST['rayonAroundMe']);

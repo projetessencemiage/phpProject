@@ -4,7 +4,7 @@
  * @Name : FonctionsClass.inc.php
  * @Desc : Classe Fonctions
  * @Author : Atos
- * @Date : 29/03/2012 : création
+ * @Date : 29/03/2012 : crï¿½ation
  * @Task : commun (utilisable partout)
  * @Version : V1.0;
  * ------------------------------------------------------------------------
@@ -12,9 +12,9 @@
 
 class Fonctions {
 	//---------------------------------------------------------------------------
-	// Retourne une date formatée suivant le modèle demandé
-	// En entrée : $datetime de type date ou string
-	//             $modèle
+	// Retourne une date formatï¿½e suivant le modï¿½le demandï¿½
+	// En entrï¿½e : $datetime de type date ou string
+	//             $modï¿½le
 	//---------------------------------------------------------------------------
 	static function format($datetime, $modele) {
 		$newDateTime = '';
@@ -50,13 +50,13 @@ class Fonctions {
 						break;
 				}
 			}
-			// formattage suivant le modèle passé en paramètre
+			// formattage suivant le modï¿½le passï¿½ en paramï¿½tre
 			switch ($modele) {
-				case 'dd/mm/yyyy à hh' :
-					$newDateTime = $day . '/' . $month . '/' . $year . ' à ' . $hour . 'h';
+				case 'dd/mm/yyyy ï¿½ hh' :
+					$newDateTime = $day . '/' . $month . '/' . $year . ' ï¿½ ' . $hour . 'h';
 					break;
 				case 'dd/mm/yyyy hh:mn' :
-					$newDateTime = $day . '/' . $month . '/' . $year . ' à ' . $hour . 'h' . $min;
+					$newDateTime = $day . '/' . $month . '/' . $year . ' ï¿½ ' . $hour . 'h' . $min;
 					break;
 				case 'yyyy/dd/mm hh:mn' :
 					$newDateTime = $year . '/' . $day . '/' . $month . ' ' . $hour . ':' . $min;
@@ -95,9 +95,9 @@ class Fonctions {
 	}
 
 	/*
-	 * Formate la date de la format "dd/mm/yyyy" ou "dd-mm-yyyy" à la format "yyyy-mm-dd"
-	* @param $date: la date à formater
-	* @return $newDate: la date formatée
+	 * Formate la date de la format "dd/mm/yyyy" ou "dd-mm-yyyy" ï¿½ la format "yyyy-mm-dd"
+	* @param $date: la date ï¿½ formater
+	* @return $newDate: la date formatï¿½e
 	*/
 	static function formaterDateMysql($date){
 		$day = substr($date,0,2);
@@ -109,9 +109,9 @@ class Fonctions {
 	}
 
 	/*
-	 * Formate la date de la format "yyyy-mm-dd" à la format "dd/mm/yyyy"
-	* @param $date: la date à formater
-	* @return $newDate: la date formatée
+	 * Formate la date de la format "yyyy-mm-dd" ï¿½ la format "dd/mm/yyyy"
+	* @param $date: la date ï¿½ formater
+	* @return $newDate: la date formatï¿½e
 	*/
 	static function formaterDateFromMysql($date){
 		$day = substr($date,8,2);
@@ -124,8 +124,8 @@ class Fonctions {
 
 	/*
 	 * Formate la date de la format "yyyy/mm/dd"
-	* @param $date: la date à formater
-	* @return $newDate: la date formatée
+	* @param $date: la date ï¿½ formater
+	* @return $newDate: la date formatï¿½e
 	*/
 	static function formaterDateEnMysql($date){
 		$day = substr($date,8 ,2);
@@ -159,9 +159,9 @@ class Fonctions {
 				$entete = "From: " . EMAIL_WEBMASTER . NL
 				. "MIME-Version: 1.0".NL
 				. 'Content-type: text/html; charset= iso-8859-1'.NL;
-				$titre  = 'lucilda.fr : connexion sécurisée';
+				$titre  = 'lucilda.fr : connexion sï¿½curisï¿½e';
 				$email  = EMAIL_WEBMASTER;
-				$message = 'Une connexion sécurisé est en cours sur '.$_SERVER['PHP_SELF'];
+				$message = 'Une connexion sï¿½curisï¿½ est en cours sur '.$_SERVER['PHP_SELF'];
 				@mail($email,$titre,$message,$entete);
 			}
 			return true;
@@ -186,7 +186,7 @@ class Fonctions {
 	}
 
 	//---------------------------------------------------------------------------
-	// Renvoi le libellé du jour dont le no est passé en paramètre
+	// Renvoi le libellï¿½ du jour dont le no est passï¿½ en paramï¿½tre
 	//---------------------------------------------------------------------------
 	static function getJourSemaine($noJour) {
 		switch ($noJour) {
@@ -203,12 +203,12 @@ class Fonctions {
 	}
 
 	//---------------------------------------------------------------------------
-	// Renvoi le libellé du mois dont le no est passé en paramètre
+	// Renvoi le libellï¿½ du mois dont le no est passï¿½ en paramï¿½tre
 	//---------------------------------------------------------------------------
 	static function getMois($noMois) {
 		switch ($noMois) {
 			case 1: return 'Janvier';
-			case 2: return 'Février';
+			case 2: return 'Fï¿½vrier';
 			case 3: return 'Mars';
 			case 4: return 'Avril';
 			case 5: return 'Mai';
@@ -218,13 +218,13 @@ class Fonctions {
 			case 9: return 'Septembre';
 			case 10: return 'Octobre';
 			case 11: return 'Novembre';
-			case 12: return 'Décembre';
+			case 12: return 'Dï¿½cembre';
 			default: return '';
 		}
 	}
 
 	//------------------------------------------------------------------------------
-	// récupère les erreurs soulevées mais non capturées
+	// rï¿½cupï¿½re les erreurs soulevï¿½es mais non capturï¿½es
 	// http://guillaume-affringue.developpez.com/exceptions-et-PHP5/?page=4
 	//------------------------------------------------------------------------------
 
@@ -255,7 +255,7 @@ class Fonctions {
 					break;
 			}
 		} else {
-			// gestion désactivée
+			// gestion dï¿½sactivï¿½e
 		}
 	}
 	//------------------------------------------------------------------------------
@@ -321,7 +321,7 @@ class Fonctions {
 
 
 	/*
-	 * Controle lacces direct à une page
+	 * Controle lacces direct ï¿½ une page
 	* @param $role : role minimum necessaire
 	* @param $body
 	* @param $action
@@ -333,7 +333,7 @@ class Fonctions {
 				$retour["body"]   = $body;
 				$retour["action"] = $action;
 			} else {
-				$_SESSION["message"] = 'Vous n\'avez pas le droit d\'accès à cette page!';
+				$_SESSION["message"] = 'Vous n\'avez pas le droit d\'accï¿½s ï¿½ cette page!';
 				$_SESSION["pageRetour"]  = 'ctrlAuth.php';
 				$_SESSION["erreurAcces"] = 'true';
 				$retour["body"]   = 'erreur.body.php';
@@ -362,15 +362,14 @@ class Fonctions {
 		$adresse = urlencode($adresse);
 		$url = 'http://maps.googleapis.com/maps/api/geocode/xml?address='.$adresse.'&sensor=false';
 		$page = file_get_contents($url);
-		// Parse le résultat XML
+		// Parse le rï¿½sultat XML
 		$xml_result = new SimpleXMLElement($page);
-		// Vérifie que la requête a réussi
+		// Vï¿½rifie que la requï¿½te a rï¿½ussi
 		if ($xml_result->status != 'OK') return array();
 		// Charge les adresses
 		$adresses = array();
 		$adresses['lat'] = $xml_result->result->geometry->location->lat; 
 		$adresses['lng'] = $xml_result->result->geometry->location->lng;
-		
 		return $adresses;
 	}
 	
@@ -379,11 +378,11 @@ class Fonctions {
 		$url = 'http://www.geoplugin.net/php.gp?ip='.$ip;
 		$array = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$ip));
 		$adresses = array();
-		if ($array['geoplugin_latitude'] != '404') {
+		if ($array['geoplugin_status'] != '404') {
 			$adresses['lat'] = $array['geoplugin_latitude'];
 			$adresses['lng'] = $array['geoplugin_longitude'];
 		} else {
-			//Coord de Bdx si rien trouvé
+			//Coord de Bdx si rien trouvÃ©
 			$adresses['lat'] = '43.83626';
 			$adresses['lng'] = '-0.501308';
 		}
