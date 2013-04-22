@@ -92,6 +92,7 @@ echo '
 				<?php Fonctions::echoList('carburantType', $listeC, $defaultCarbu, true, false, 'changeCarbu()'); ?> 
 			</label>			
 		</fieldset>
+		<div id="divStation" style="display:none"></div>
 	</div>
 	<div class="span8">	 
 		<div id="map-canvas"/>

@@ -2,6 +2,8 @@ window.onload=function(){
 	//Declaration variables
 	var myGeocoder = new google.maps.Geocoder();
 	var bounds = new google.maps.LatLngBounds();
+	var oldInfoBulle= null;
+	var oldMarker = null;
 	var var_adresse = 'Adresse';
 	var var_enseigne = 'Enseigne';
 	var var_icone = 'Icone';
@@ -80,25 +82,37 @@ window.onload=function(){
 		if (affichePriceList == "") {
 			affichePriceList = "Prix non disponible";
 		}
+		var infoBulles = '<p>'
+			+ '<address>'
+			+ ' <strong>' +  markerInfos[var_enseigne] + '</strong><br>'
+			+  markerInfos[var_adresse] + '<br>'
+			+ ' <abbr title="Phone">Tel: </abbr>' + markerInfos[var_phone]
+			+ ' </address>'
+			+ ' </p>'
+			+ '<p>Price: '
+			+ affichePriceList
+			+ '</p>'
+			
 		//Ajout Fenetre 
 		var myWindowOptions = {
-				content:
-					'<p>'
-					+ '<address>'
-					+ ' <strong>' +  markerInfos[var_enseigne] + '</strong><br>'
-					+  markerInfos[var_adresse] + '<br>'
-					+ ' <abbr title="Phone">Tel: </abbr>' + markerInfos[var_phone]
-					+ ' </address>'
-					+ ' </p>'
-					+ '<p>Price: '
-					+ affichePriceList
-					+ '</p>'
+				content: infoBulles
 		};
 
-		// Cr�ation de la fen�tre
+		// Création de la fenêtre
 		var myInfoWindow = new google.maps.InfoWindow(myWindowOptions);
 		google.maps.event.addListener(myMarker, 'click', function() {
-			myInfoWindow.open(myMap,myMarker);
+			addDivStation(markerInfos);
+			if (oldInfoBulle != null) {
+				oldInfoBulle.close(myMap, oldMarker);
+				
+			}
+			if (oldInfoBulle != myInfoWindow) {
+				myInfoWindow.open(myMap,myMarker);
+				oldInfoBulle = myInfoWindow;
+				oldMarker = myMarker;
+			} else {
+				oldInfoBulle = null;
+			}
 		});
 	}
 
@@ -144,5 +158,36 @@ window.onload=function(){
 		station[var_listPrice] = arrayPrice;
 		//Retourne une liste TypeInfo/Donn�es + Une Liste de prix de la station
 		return station;
+	}
+	
+	function addDivStation(marker) {
+		var divStation = '<p>'
+			+ '<address>'
+			+ ' <strong>' +  marker[var_enseigne] + '</strong><br>'
+			+  marker[var_adresse] + '<br>'
+			+ ' <abbr title="Phone">Tel: </abbr>' + marker[var_phone]
+			+ ' </address>'
+			+ ' </p>'
+			+ '<p>Price: '
+			+ 	affichePriceList(marker[var_listPrice])
+			+ '</p>'
+			+ '<p onclick="addFormToAddPrice()"><i class="icon-plus-sign"></i> Add price </p>'
+			+ '<div id="addPriceForm" style="display:none">'
+			+ '<input type="text" name="newPrice" id="newPrice" placeholder="New price"/><i class="icon-ok"></i>'
+			+ '</div>';
+		document.getElementById('divStation').style.display = 'block';
+		document.getElementById('divStation').innerHTML = divStation;
+	}
+	
+	function affichePriceList(listPrice) {
+		var affichePriceList = "";
+		for (var key in listPrice) {
+			affichePriceList +=  '<br /><strong>' + key + '</strong> - ' + listPrice[key]['Prix'] + ' € (' + listPrice[key]['Maj'] + ')';
+			affichePriceList += ' <i class="icon-edit"></i>'
+		}
+		if (affichePriceList == "") {
+			affichePriceList = "Prix non disponible";
+		}
+		return affichePriceList;
 	}
 }
