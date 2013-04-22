@@ -28,7 +28,7 @@ $listeC = $listeCarbu->getListCarburant();
 					
 					&nbsp; OR &nbsp;<input
 					type="text" name="searchDpt" id="searchDpt"
-					placeholder="Recherche par département"
+					placeholder="Recherche par dÃ©partement"
 					onChange="deleteInput('searchDpt')" /> &nbsp; OR &nbsp; <input
 					type="text" name="searchCP" id="searchCP"
 					placeholder="Recherche par code postal"
