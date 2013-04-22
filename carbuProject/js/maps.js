@@ -1,7 +1,6 @@
 window.onload=function(){		
 	//Declaration variables
 	var myGeocoder = new google.maps.Geocoder();
-	var myLatLng = new google.maps.LatLng(geoplugin_latitude(), geoplugin_longitude());
 	var bounds = new google.maps.LatLngBounds();
 	var var_adresse = 'Adresse';
 	var var_enseigne = 'Enseigne';
@@ -9,9 +8,21 @@ window.onload=function(){
 	var var_listPrice = "ArrayPrice";
 	var var_lat = "Lat";
 	var var_lng = "Lng";
+	var var_phone = "Phone";
 
-	//Recuperation des données
+	//Recuperation des donnÃ©es
 	var infoStations = document.getElementById('Stations').value;
+	//Par default, GeoCentrage
+	var myLatLng = new google.maps.LatLng(geoplugin_latitude(), geoplugin_longitude());
+	//Centrage de la carte si Recherche par adresse sans rÃ©sultat
+	if (document.getElementById('CoordCarte')) {
+		var split = document.getElementById('CoordCarte').value;
+		var lat = split.split('-')[0];
+		var lng = split.split('-')[1];
+		if (lat != "") {
+			var myLatLng = new google.maps.LatLng(lat, lng);
+		}
+	}
 	var keyCarbu = document.getElementById('carbuType').value;
 	if (infoStations == "") {
 		var mapOptions = {
@@ -34,11 +45,11 @@ window.onload=function(){
 		}
 	}
 
-	//Ajouter un Marker à la MAP
+	//Ajouter un Marker ï¿½ la MAP
 	function addMarker(stationToMark) {
 		var adresse = stationToMark[var_adresse];	
 		myGeocoder.geocode( { 'address': adresse}, function(results, status) {		
-			// Si la recherche à fonctionné
+			// Si la recherche Ã  fonctionnÃ©
 			if( status == google.maps.GeocoderStatus.OK ) { 
 				createMarker(stationToMark);
 			} // Fin si status OK		
@@ -52,7 +63,7 @@ window.onload=function(){
 		if (markerInfos[var_listPrice][keyCarbu] == null) {
 			var titlePrice = "Non disponible";
 		} else {
-			var titlePrice = markerInfos[var_listPrice][keyCarbu] + '€';
+			var titlePrice = markerInfos[var_listPrice][keyCarbu]['Prix'] + ' â‚¬';
 		}
 		var myMarker = new google.maps.Marker({
 			position: my_position,
@@ -64,7 +75,7 @@ window.onload=function(){
 		myMap.fitBounds(bounds);
 		var affichePriceList = "";
 		for (var key in markerInfos[var_listPrice]) {
-			affichePriceList +=  '<br /><strong>' + key + '</strong> - ' + markerInfos[var_listPrice][key] + ' €';
+			affichePriceList +=  '<br /><strong>' + key + '</strong> - ' + markerInfos[var_listPrice][key]['Prix'] + ' â‚¬ (' + markerInfos[var_listPrice][key]['Maj'] + ')';
 		}
 		if (affichePriceList == "") {
 			affichePriceList = "Prix non disponible";
@@ -76,7 +87,7 @@ window.onload=function(){
 					+ '<address>'
 					+ ' <strong>' +  markerInfos[var_enseigne] + '</strong><br>'
 					+  markerInfos[var_adresse] + '<br>'
-					+ ' <abbr title="Phone">P:</abbr> (123) 456-7890'
+					+ ' <abbr title="Phone">Tel: </abbr>' + markerInfos[var_phone]
 					+ ' </address>'
 					+ ' </p>'
 					+ '<p>Price: '
@@ -84,7 +95,7 @@ window.onload=function(){
 					+ '</p>'
 		};
 
-		// Création de la fenêtre
+		// Crï¿½ation de la fenï¿½tre
 		var myInfoWindow = new google.maps.InfoWindow(myWindowOptions);
 		google.maps.event.addListener(myMarker, 'click', function() {
 			myInfoWindow.open(myMap,myMarker);
@@ -103,7 +114,7 @@ window.onload=function(){
 		return listeStations;
 	}
 
-	//Ajouter une station à la liste des stations
+	//Ajouter une station ï¿½ la liste des stations
 	//Station avec toutes ces infos.
 	function addStation(stationToAdd) {
 		//Split des infos
@@ -111,16 +122,19 @@ window.onload=function(){
 		var station =  new Array();
 		var arrayPrice = new Array();
 		var j = 0;
-		//Parcours de chaque données
+		//Parcours de chaque donnï¿½es
 		for (j = 0 ; j < splitInfos.length-1 ; j++) {
 			var keyValue = splitInfos[j].split('@@@');
-			//Si Données relative au prix
+			//Si Donnï¿½es relative au prix
 			if (keyValue[0].startsWith("PriceKey")) {
 				var key = keyValue[0].substring(keyValue[0].indexOf('PriceKey:')+9);
 				var value = keyValue[1].substring(keyValue[1].indexOf('Value:')+6);
-				arrayPrice[key] = value;
+				var maj = keyValue[2].substring(keyValue[1].indexOf('Maj:')+4);
+				arrayPrice[key] = new Array();
+				arrayPrice[key]['Prix'] = value;
+				arrayPrice[key]['Maj'] = maj;
 			} else {
-				//Else autre donnée
+				//Else autre donnï¿½e
 				var key = keyValue[0].substring(keyValue[0].indexOf('Key:')+4);
 				var value = keyValue[1].substring(keyValue[1].indexOf('Value:')+6);
 				station[key] = value;
@@ -128,7 +142,7 @@ window.onload=function(){
 		}
 		//Ajout Liste des Prix
 		station[var_listPrice] = arrayPrice;
-		//Retourne une liste TypeInfo/Données + Une Liste de prix de la station
+		//Retourne une liste TypeInfo/Donnï¿½es + Une Liste de prix de la station
 		return station;
 	}
 }

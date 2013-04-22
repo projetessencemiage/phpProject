@@ -4,7 +4,7 @@
  * @Name : ListePrixClass.inc.php
  * @Desc : Classe StationService
  * @Author : CGI
- * @Date : 12/04/2013 : création
+ * @Date : 12/04/2013 : crï¿½ation
  * @Version : V1.0;
  * ------------------------------------------------------------------------
  **/
@@ -27,7 +27,10 @@ class ListePrix {
 	public function getListTypetoPrix() {
 		$arrayPrice = array();
 		foreach ($this->listPrix as $key => $prix) {
-			$arrayPrice[$prix->getcarburant()] = $prix->getPrix();
+			$array = array();
+			$array['Prix'] = $prix->getPrix();
+			$array['DateMaj'] = $prix->getdatemaj();
+			$arrayPrice[$prix->getcarburant()] = $array;
 		}
 		return $arrayPrice;
 	}

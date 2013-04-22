@@ -29,7 +29,7 @@ function validerFormSearchListStation(goTo) {
 			alert('Veuillez renseigner la ville');
 			isValid = false;
 		} else if (dpt == '' || !isNumber(dpt) || dpt.length != 2) {
-			alert('Veuillez renseigner le département');
+			alert('Veuillez renseigner le dÃ©partement');
 			isValid = false;
 		} else {
 			document.getElementById('actionForm').value = 'searchVille';
@@ -42,7 +42,7 @@ function validerFormSearchListStation(goTo) {
 			document.getElementById('actionForm').value = 'searchDpt';
 		} else {
 			isValid = false;
-			alert("Département doit être un champ numérique de 2 caractères");
+			alert("DÃ©partement doit Ãªtre un champ numÃ©rique de deux caractÃ¨res");
 		}
 		checkInput = true;
 	}
@@ -52,7 +52,7 @@ function validerFormSearchListStation(goTo) {
 			document.getElementById('actionForm').value = 'searchCP';
 		} else {
 			isValid = false;
-			alert("Code postal doit être un champ numérique de 5 caractères");
+			alert("Code postal doit Ãªtre un champ numÃ©rique de 5 caractÃ¨res");
 		}
 		checkInput = true;
 	}
