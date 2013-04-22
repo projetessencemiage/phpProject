@@ -4,7 +4,7 @@
  * @Name : StructureClass.inc.php
  * @Desc : Classe Structure
  * @Author : Atos
- * @Date : 29/03/2012 : création
+ * @Date : 29/03/2012 : crï¿½ation
  * @Task : commun
  * @Version : V1.0;
  * ------------------------------------------------------------------------
@@ -31,10 +31,16 @@ class Structure {
 		<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 		<link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/jq.css" type="text/css" media="print, projection, screen" />
+		<link rel="stylesheet" href="css/themes/blue/style.css" type="text/css" media="print, projection, screen" />
 				
 		<!-- Script -->
 		<script  type="text/javascript" src="js/utile.js"></script>
 		<script  type="text/javascript" src="js/Formulaires.js"></script>
+		<script type="text/javascript" src="js/jquery-latest.js"></script>
+		<script type="text/javascript" src="js/jquery.tablesorter.js"></script>
+		<script type="text/javascript" src="js/chili/chili-1.8b.js"></script>
+		<script type="text/javascript" src="js/docs.js"></script>
 		
 		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<!--[if lt IE 9]>
