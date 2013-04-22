@@ -35,7 +35,7 @@ class StationService {
 		$this->lattitude = $_lattitude;
 		$this->longitude = $_longitude;
 		$this->distance = $_distance;
-		$this->icone = 'iconeStation_verte.png';
+		$this->icone = $_icone;
 	}
 	
 
