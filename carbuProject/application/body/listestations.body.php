@@ -6,10 +6,6 @@
 		$("#options").tablesorter({sortList: [[0,0]], headers: { 3:{sorter: false}, 4:{sorter: false}}});
 	});	
 </script>
-
-<div style="width: 728px; margin: 10px auto;"> 
-<script type="text/javascript" src="http://ad-cdn.technoratimedia.com/00/49/79/uat_17949.js?ad_size=728x90"></script>
-</div>
 	
 <?php 
 require_once 'ListeStationServiceClass.inc.php';
