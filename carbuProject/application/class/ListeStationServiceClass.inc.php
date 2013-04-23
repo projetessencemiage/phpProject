@@ -193,6 +193,7 @@ class ListeStationService {
 			$infos .= 'Key:Enseigne@@@Value:'.$value->getEnseigne()."--";
 			$infos .= 'Key:Icone@@@Value:'.$value->getIcone()."--";
 			$infos .= 'Key:Phone@@@Value:'.$value->getPhone()."--";
+			$infos .= 'Key:ID@@@Value:'.$value->getID()."--";
 			foreach ($value->getListePrix() as $typeCarbu => $array) {
 				$infos .= 'PriceKey:'.$typeCarbu.'@@@Value:'.$array['Prix'].'@@@Maj:'.$array['DateMaj'].'--';
 			}

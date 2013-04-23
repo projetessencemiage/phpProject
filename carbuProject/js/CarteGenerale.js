@@ -14,3 +14,11 @@ function addFormToAddPrice() {
 	}
 	
 }
+
+function addPrice() {
+	var prix = document.getElementById('newPrice').value;
+	var stationID = document.getElementById('stationToChange').value;
+	var carbuID = document.getElementById('addPriceCarbuType').value;
+	
+	alert(prix + ' - ' + stationID + ' - ' + carbuID);
+}

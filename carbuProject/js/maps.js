@@ -11,6 +11,7 @@ window.onload=function(){
 	var var_lat = "Lat";
 	var var_lng = "Lng";
 	var var_phone = "Phone";
+	var var_id = "ID";
 
 	//Recuperation des données
 	var infoStations = document.getElementById('Stations').value;
@@ -171,12 +172,9 @@ window.onload=function(){
 			+ '<p>Price: '
 			+ 	affichePriceList(marker[var_listPrice])
 			+ '</p>'
-			+ '<p onclick="addFormToAddPrice()"><i class="icon-plus-sign"></i> Add price </p>'
-			+ '<div id="addPriceForm" style="display:none">'
-			+ '<input type="text" name="newPrice" id="newPrice" placeholder="New price"/><i class="icon-ok"></i>'
-			+ '</div>';
 		document.getElementById('divStation').style.display = 'block';
-		document.getElementById('divStation').innerHTML = divStation;
+		document.getElementById('divInfoStation').innerHTML = divStation;
+		document.getElementById('stationToChange').value = marker[var_id];
 	}
 	
 	function affichePriceList(listPrice) {
