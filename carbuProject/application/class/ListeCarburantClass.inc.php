@@ -25,9 +25,9 @@ class ListeCarburant {
 				foreach ($array as $key => $value) {
 					$array  = (array)$value;
 					if (array_key_exists("Key", $array) && array_key_exists("Value", $array)) {
-						if ($type = '') {
+						if ($type == '') {
 							$this->listeCarburant[$array['Value']] = $array['Value'];
-						} else if ($type = 'id') {
+						} else if ($type == 'id') {
 							$this->listeCarburant[$array['Key']] = $array['Value'];
 						}
 						
