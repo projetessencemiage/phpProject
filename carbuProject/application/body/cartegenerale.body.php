@@ -33,6 +33,7 @@ if (array_key_exists('actionForm', $_POST)) {
 		$critere = 'Recherche par code postal - '.$cp;
 	} else if ($_POST['actionForm'] == "searchAdresse") {
 		Fonctions::inputHidden('searchAdresse', $_POST['searchAdresse']);
+		Fonctions::inputHidden('rayon', $_POST['rayon']);
 		$adr = $_POST["searchAdresse"];
 		$rayon = $_POST["rayon"];
 		$coords = $listeStation->getStationsByAdresse($adr, $rayon, $carbuType);
@@ -56,6 +57,7 @@ require_once('ListeCarburantClass.inc.php');
 require_once('FonctionsClass.inc.php');
 $listeCarbu = new ListeCarburant();
 $listeC = $listeCarbu->getListCarburant();
+$listeCarbuById = $listeCarbu->getListCarburant('id');
 $defaultCarbu = 'diesel';
 if (array_key_exists('carburantType', $_POST)) {
 	$defaultCarbu = $_POST["carburantType"];
@@ -80,23 +82,37 @@ echo '
 </div>';
 
 
-	echo '<input type="hidden" id="Stations" value="'.$infoStations.'"  />';
-	echo '<input type="hidden" id="carbuType" value="'.$carbuType.'"  />';
+echo '<input type="hidden" id="Stations" value="'.$infoStations.'"  />';
+echo '<input type="hidden" id="carbuType" value="'.$carbuType.'"  />';
 ?>
 <h3>Qui est le moins cher ?</h3>
 <div class="row-fluid">
 	<div class="span4">
 		<fieldset>
-			 <label class="select">
-			 Carburant &nbsp;
-				<?php Fonctions::echoList('carburantType', $listeC, $defaultCarbu, true, false, 'changeCarbu()'); ?> 
-			</label>			
+			<label class="select"> Carburant &nbsp; <?php Fonctions::echoList('carburantType', $listeC, $defaultCarbu, true, false, 'changeCarbu()'); ?>
+			</label>
 		</fieldset>
+		<div id="divStation" style="display: none">
+			<div id="divInfoStation"></div>
+			<div id="divAddPriceStation">
+				<p onclick="addFormToAddPrice()">
+					<i class="icon-plus-sign"></i> Add price
+				</p>
+				<div id="addPriceForm" style="display: none">
+					<label class="select"> Add type &nbsp; <?php Fonctions::echoList('addPriceCarbuType', $listeCarbuById, $defaultCarbu); ?>
+					<input type="text" name="newPrice" id="newPrice" class="input-mini" placeholder="Price" />
+					<i class="icon-ok" onClick="addPrice()"></i>
+					<input type="hidden" id="stationToChange" name="stationToChange" value=""/> 
+				</div>
+			</div>
+		</div>
 	</div>
-	<div class="span8">	 
-		<div id="map-canvas"/>
+	<div class="span8">
+		<div id="map-canvas" />
 	</div>
 </div>
-<input type="hidden" name="infoStations" id="infoStations" value="<?php echo $infoStations?>"/>
+<input
+	type="hidden" name="infoStations" id="infoStations"
+	value="<?php echo $infoStations?>" />
 
 
