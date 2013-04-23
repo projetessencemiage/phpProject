@@ -20,5 +20,8 @@ function addPrice() {
 	var stationID = document.getElementById('stationToChange').value;
 	var carbuID = document.getElementById('addPriceCarbuType').value;
 	
-	alert(prix + ' - ' + stationID + ' - ' + carbuID);
+	if (!isNumber(prix) || prix == "") {
+		alert("Le champ prix doit être numérique");
+	}
+
 }

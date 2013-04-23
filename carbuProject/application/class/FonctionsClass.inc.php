@@ -360,7 +360,7 @@ class Fonctions {
 
 	public static function getCoordFromAdresse($adresse) {
 		$adresse = urlencode($adresse);
-		$url = 'http://maps.googleapis.com/maps/api/geocode/xml?address='.$adresse.'&sensor=false';
+		$url = 'http://maps.googleapis.com/maps/api/geocode/xml?address='.$adresse.'&sensor=false';	
 		$page = file_get_contents($url);
 		// Parse le r�sultat XML
 		$xml_result = new SimpleXMLElement($page);
@@ -383,8 +383,8 @@ class Fonctions {
 			$adresses['lng'] = $array['geoplugin_longitude'];
 		} else {
 			//Coord de Bdx si rien trouvé
-			$adresses['lat'] = '43.83626';
-			$adresses['lng'] = '-0.501308';
+			$adresses['lat'] = '44.854409';
+			$adresses['lng'] = '-0.578957';
 		}
 		return $adresses;
 	}

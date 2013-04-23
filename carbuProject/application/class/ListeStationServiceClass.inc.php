@@ -56,9 +56,9 @@ class ListeStationService {
 	}
 	public function getStationsByAdresse($adr, $rayon, $carbuType) {
 		$array_position = Fonctions::getCoordFromAdresse($adr);
-		$latitude = $array_position['lat'];
-		$longitude = $array_position['lng'];
-		if ($latitude != null) {
+		if (count($array_position) > 1) {
+			$latitude = $array_position['lat'];
+			$longitude = $array_position['lng'];
 			$this->soapClient->GetPrixPosition(array("distance" => $rayon, "longitude" => $longitude, "latitude" => $latitude));
 			$result = $this->soapClient->__getLastResponse();
 			$dom = new DomDocument();
@@ -67,6 +67,18 @@ class ListeStationService {
 			return $array_position;
 		}
 	}
+	
+	public function getStationsArroundMe($rayon,$carbuType) {
+		$array_position = Fonctions::getCoordByIp();
+		$longitude = $array_position['lng'];
+		$latitude =  $array_position['lat'];
+		$this->soapClient->GetPrixPosition(array("distance" => $rayon, "longitude" => $longitude, "latitude" => $latitude));
+		$result = $this->soapClient->__getLastResponse();
+		$dom = new DomDocument();
+		$dom->loadXML($result);
+		$this->arrayToListOfStationsDistance($dom,$carbuType);
+	}
+	
 	public function arrayToListOfStations($dom, $carbuType){
 		
 		$this->listeStations = array();
@@ -217,17 +229,6 @@ class ListeStationService {
 		}
 	}
 	
-	public function getStationsArroundMe($rayon,$carbuType) {
-		$array_position = Fonctions::getCoordByIp();
-		$longitude = $array_position['lng'];
-		$latitude =  $array_position['lat'];
-		$this->soapClient->GetPrixPosition(array("distance" => $rayon, "longitude" => $longitude, "latitude" => $latitude));
-		$result = $this->soapClient->__getLastResponse();
-		$dom = new DomDocument();
-		$dom->loadXML($result);
-		$this->arrayToListOfStationsDistance($dom,$carbuType);
-		
-	}
 	public function getInformationsStations() {
 		$infos = "";
 		foreach ($this->listeStations as $key => $value) {
