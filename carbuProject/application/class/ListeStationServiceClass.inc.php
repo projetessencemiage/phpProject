@@ -115,6 +115,9 @@ class ListeStationService {
 				}
 				$price_list->addPrix(new Prix($carburant, $value, $date_update));
 			}
+			if(sizeof($price_list->getListTypetoPrix()) == 0){
+			$img = 'iconeStation_sans_prix.png';
+			}
 			$station = new StationService($address, $id_station, $enseigne, $city, $cp, $tel, $price_list, $lattitude, $longitude, $img,'');
 			if($isBest){
 				if(! is_null($station_min)){
@@ -172,7 +175,7 @@ class ListeStationService {
 		
 	}
 	
-	public function getStationsArroundMe($rayon) {
+	public function getStationsArroundMe($rayon,$carbuType) {
 		$array_position = Fonctions::getCoordByIp();
 		$longitude = $array_position['lng'];
 		$latitude =  $array_position['lat'];
@@ -181,7 +184,7 @@ class ListeStationService {
 		$result = $this->soapClient->__getLastResponse();
 		$dom = new DomDocument();
 		$dom->loadXML($result);
-		$this->arrayToListOfStationsDistance($dom);
+		$this->arrayToListOfStationsDistance($dom,$carbuType);
 		
 	}
 	public function getInformationsStations() {
