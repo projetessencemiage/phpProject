@@ -18,6 +18,7 @@ class ListeCarburant {
 
 	function getListCarburant($type = '') {
 		$clientSoap = new SoapClient("http://projetm2miage.no-ip.biz:8084/RecuperationOutilsDonnees.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
+		$this->listeCarburant = array();
 		try {
 			$return = $clientSoap->getIdAndTypeEssence(array());
 			$array = (array)$return;

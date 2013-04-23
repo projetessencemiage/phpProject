@@ -99,7 +99,8 @@ echo '<input type="hidden" id="carbuType" value="'.$carbuType.'"  />';
 					<i class="icon-plus-sign"></i> Add price
 				</p>
 				<div id="addPriceForm" style="display: none">
-					<label class="select"> Add type &nbsp; <?php Fonctions::echoList('addPriceCarbuType', $listeCarbuById, $defaultCarbu); ?>
+					<label class="select"> Add type &nbsp; <?php Fonctions::echoList('addPriceCarbuType', $listeCarbuById); ?>
+					</label>
 					<input type="text" name="newPrice" id="newPrice" class="input-mini" placeholder="Price" />
 					<i class="icon-ok" onClick="addPrice()"></i>
 					<input type="hidden" id="stationToChange" name="stationToChange" value=""/> 
