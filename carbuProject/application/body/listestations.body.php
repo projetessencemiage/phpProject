@@ -51,6 +51,7 @@ if (array_key_exists('actionForm', $_POST)) {
 
 //Recuperation des infos des Stations pour affichage dans le tableau
 $infoStations = $listeStation->getInformationsStations();
+
 //Gestion de la liste deroulante
 require_once('ListeCarburantClass.inc.php');
 require_once('FonctionsClass.inc.php');
@@ -136,5 +137,7 @@ echo "</tbody>";
 echo "</table>";
 Fonctions::inputHidden('stationFromList', '');
 Fonctions::inputHidden('actionForm', '');
-
+$serializeStation = serialize($stations);
+$stationEncode = urlencode($serializeStation);
+Fonctions::inputHidden('listeStation', $stationEncode);
 ?>
