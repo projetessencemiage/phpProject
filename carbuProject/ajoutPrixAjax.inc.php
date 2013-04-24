@@ -6,7 +6,7 @@ $prixToUpdate = $_POST['prix'];
 $stationID = $_POST['stationID'];
 $carbuID = $_POST['carbuID'];
 
-$prix = new Prix('','','');
+$prix = new Prix('' ,'' ,'' ,'');
 $prix->ajoutPrix($prixToUpdate, $stationID, $carbuID);
 echo 'OK|';
 
