@@ -76,13 +76,7 @@ window.onload=function(){
 		});
 		bounds.extend(my_position);
 		myMap.fitBounds(bounds);
-		var affichePriceList = "";
-		for (var key in markerInfos[var_listPrice]) {
-			affichePriceList +=  '<br /><strong>' + key + '</strong> - ' + markerInfos[var_listPrice][key]['Prix'] + ' € (' + markerInfos[var_listPrice][key]['Maj'] + ')';
-		}
-		if (affichePriceList == "") {
-			affichePriceList = "Prix non disponible";
-		}
+		
 		var infoBulles = '<p>'
 			+ '<address>'
 			+ ' <strong>' +  markerInfos[var_enseigne] + '</strong><br>'
@@ -91,7 +85,7 @@ window.onload=function(){
 			+ ' </address>'
 			+ ' </p>'
 			+ '<p>Price: '
-			+ affichePriceList
+			+  affichePriceList(markerInfos[var_listPrice])
 			+ '</p>'
 			
 		//Ajout Fenetre 
@@ -144,7 +138,7 @@ window.onload=function(){
 			if (keyValue[0].startsWith("PriceKey")) {
 				var key = keyValue[0].substring(keyValue[0].indexOf('PriceKey:')+9);
 				var value = keyValue[1].substring(keyValue[1].indexOf('Value:')+6);
-				var maj = keyValue[2].substring(keyValue[1].indexOf('Maj:')+4);
+				var maj = keyValue[2].substring(keyValue[2].indexOf('Maj:')+4);
 				arrayPrice[key] = new Array();
 				arrayPrice[key]['Prix'] = value;
 				arrayPrice[key]['Maj'] = maj;
@@ -180,11 +174,23 @@ window.onload=function(){
 	function affichePriceList(listPrice) {
 		var affichePriceList = "";
 		for (var key in listPrice) {
-			affichePriceList +=  '<br /><strong>' + key + '</strong> - ' + listPrice[key]['Prix'] + ' € (' + listPrice[key]['Maj'] + ')';
+			var redClass = "";
+			if (keyCarbu == key) {
+				redClass = "class='redClass'";
+			}
+			var nbJour = nbJourToString(listPrice[key]['Maj']);
+			affichePriceList +=  '<br /><strong ' + redClass + '>' + key + '</strong> - ' + listPrice[key]['Prix'] + ' € <span class="majPrix">' + nbJour + '</span>';
 		}
 		if (affichePriceList == "") {
 			affichePriceList = "Prix non disponible";
 		}
 		return affichePriceList;
+	}
+	
+	function nbJourToString(nbJour) {
+		if (nbJour == 0) return "MàJ Aujourd'hui";
+		if (nbJour == 1) return "MàJ Hier";
+		else return 'MàJ il y a ' + nbJour + 'j';
+		
 	}
 }

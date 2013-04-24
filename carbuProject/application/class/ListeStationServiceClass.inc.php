@@ -243,7 +243,7 @@ class ListeStationService {
 			$infos .= 'Key:Phone@@@Value:'.$value->getPhone()."--";
 			$infos .= 'Key:ID@@@Value:'.$value->getID()."--";
 			foreach ($value->getListePrix() as $typeCarbu => $array) {
-				$infos .= 'PriceKey:'.$typeCarbu.'@@@Value:'.$array['Prix'].'@@@Maj:'.$array['DateMaj'].'--';
+				$infos .= 'PriceKey:'.$typeCarbu.'@@@Value:'.$array['Prix'].'@@@Maj:'.$array['NbJMaj'].'--';
 			}
 				
 			$infos .= '|';
