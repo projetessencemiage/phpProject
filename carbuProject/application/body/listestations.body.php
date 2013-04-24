@@ -6,10 +6,6 @@
 		$("#options").tablesorter({sortList: [[0,0]], headers: { 3:{sorter: false}, 4:{sorter: false}}});
 	});	
 </script>
-
-<div style="width: 728px; margin: 10px auto;"> 
-<script type="text/javascript" src="http://ad-cdn.technoratimedia.com/00/49/79/uat_17949.js?ad_size=728x90"></script>
-</div>
 	
 <?php 
 require_once 'ListeStationServiceClass.inc.php';
@@ -94,8 +90,17 @@ echo '
 	echo '<input type="hidden" id="Stations" value="'.$infoStations.'"  />';
 	echo '<input type="hidden" id="carbuType" value="'.$carbuType.'"  />';
 
-$stations = $listeStation->getStations();
-//echo 'nombre des stations en Gironde: '.count($stations).NL.' --- ';
+?>
+	<div class="row-fluid">
+	<div class="span4">
+	<fieldset>
+				<label class="select"> Carburant &nbsp; <?php Fonctions::echoList('carburantType', $listeC, $defaultCarbu, true, false, 'changeCarbu()'); ?>
+				</label>
+	</fieldset>
+	</div>
+	</div>
+<?php	
+	$stations = $listeStation->getStations();
 
 echo "<table id=\"tablesorter-demo\" class=\"tablesorter\" border=\"0\" cellpadding=\"0\" cellspacing=\"1\">
 	<thead>

@@ -102,6 +102,7 @@ class ListeStationService {
 				$carburant = $price->childNodes->item(0)->childNodes->item(1)->nodeValue;
 				$date_update = $price->childNodes->item(1)->nodeValue;
 				$value = $price->childNodes->item(3)->nodeValue;
+				$diff = null;
 				if ($carburant == $carbuType){
 					$date_price = DateTime::CreateFromFormat("d/m/Y H:i:s",$date_update);
 					$date_actual = new DateTime();
@@ -121,7 +122,7 @@ class ListeStationService {
 					$prix_min = $value;
 					}
 				}
-				$price_list->addPrix(new Prix($carburant, $value, $date_update));
+				$price_list->addPrix(new Prix($carburant, $value, $date_update, $diff));
 			}
 			if(sizeof($price_list->getListTypetoPrix()) == 0){
 			$img = 'iconeStation_sans_prix.png';
@@ -179,6 +180,7 @@ class ListeStationService {
 				$carburant = $price->childNodes->item(0)->childNodes->item(1)->nodeValue;
 				$date_update = $price->childNodes->item(1)->nodeValue;
 				$value = $price->childNodes->item(3)->nodeValue;
+				$diff = null;
 				if ($carburant == $carbuType){
 					$date_price = DateTime::CreateFromFormat("d/m/Y H:i:s",$date_update);
 					$date_actual = new DateTime();
@@ -198,7 +200,7 @@ class ListeStationService {
 						$prix_min = $value;
 					}
 				}
-				$price_list->addPrix(new Prix($carburant, $value, $date_update));
+				$price_list->addPrix(new Prix($carburant, $value, $date_update, $diff));
 			}
 			
 			if(sizeof($price_list->getListTypetoPrix()) == 0){
