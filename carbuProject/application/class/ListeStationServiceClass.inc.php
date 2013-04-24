@@ -84,7 +84,8 @@ class ListeStationService {
 		$this->listeStations = array();
 			$array = $dom->getElementsByTagName('Station');
 			$station_min=null;
-			$prix_min = 1000;
+			$prix_min = array(1000);
+			var_dump($array);
 		foreach ($array as $station){
 				$address = $station->getElementsByTagName("address")->item(0)->nodeValue;
 				$city = $station->getElementsByTagName("city")->item(0)->nodeValue;
@@ -93,7 +94,7 @@ class ListeStationService {
 				$longitude = $station->getElementsByTagName("longitude")->item(0)->nodeValue;
 				$id_station = $station->getElementsByTagName("id_station")->item(0)->nodeValue;
 				$tel = $station->getElementsByTagName("tel")->item(0)->nodeValue;
-			$enseigne = $station->getElementsByTagName("enseigne_name")->item(0)->nodeValue;
+				$enseigne = $station->getElementsByTagName("enseigne_name")->item(0)->nodeValue;
 			
 			$price_list = new ListePrix();
 			$isBest=false;
@@ -103,10 +104,10 @@ class ListeStationService {
 				$date_update = $price->childNodes->item(1)->nodeValue;
 				$value = $price->childNodes->item(3)->nodeValue;
 				$diff = null;
+				$date_price = DateTime::CreateFromFormat("d/m/Y H:i:s",$date_update);
+				$date_actual = new DateTime();
+				$diff = round(round($date_actual->format('U') - $date_price->format('U	')) / (3600*24));
 				if ($carburant == $carbuType){
-					$date_price = DateTime::CreateFromFormat("d/m/Y H:i:s",$date_update);
-					$date_actual = new DateTime();
-					$diff = round(round($date_actual->format('U') - $date_price->format('U	')) / (3600*24));
 					if ($diff < 3){
 						$img = 'iconeStation_verte.png';
 					}elseif ($diff < 7){
