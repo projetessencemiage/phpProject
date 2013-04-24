@@ -1,5 +1,4 @@
-<h1>Liste des stations</h1>
-
+<!-- fonctions jquery.tablesorter pour le tri du tableau --> 
 <script type="text/javascript">
 	$(function() {		
 		$("#tablesorter-demo").tablesorter({sortList:[[4,0],[5,1]], widgets: ['zebra']});
@@ -20,7 +19,7 @@ if (array_key_exists("carburantType", $_POST)) {
 	$carbuType = "diesel";
 }
 
-//Recherche de la liste � afficher sur la map
+//Recherche de la liste a afficher
 if (array_key_exists('actionForm', $_POST)) {
 	Fonctions::inputHidden('actionForm', $_POST['actionForm']);
 	if ($_POST['actionForm'] == "searchVille") {
@@ -58,7 +57,7 @@ if (array_key_exists('actionForm', $_POST)) {
 	$critere = 'Recherche par default around me - Rayon 10 km';
 }
 
-//Recuperation des infos des Stations pour affichage dans la MAP
+//Recuperation des infos des Stations pour affichage dans le tableau
 $infoStations = $listeStation->getInformationsStations();
 //Gestion de la liste deroulante
 require_once('ListeCarburantClass.inc.php');
@@ -91,6 +90,8 @@ echo '
 	echo '<input type="hidden" id="carbuType" value="'.$carbuType.'"  />';
 
 ?>
+<h3>Liste des stations</h3>
+
 	<div class="row-fluid">
 	<div class="span4">
 	<fieldset>
