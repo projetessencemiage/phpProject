@@ -12,7 +12,7 @@ if (array_key_exists("carburantType", $_POST)) {
 }
 
 //Recherche de la liste a afficher
-if (array_key_exists('actionForm', $_POST)) {
+if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != "") {
 	Fonctions::inputHidden('actionForm', $_POST['actionForm']);
 	if ($_POST['actionForm'] == "searchVille") {
 		Fonctions::inputHidden('searchVille', $_POST['searchVille']);
@@ -47,6 +47,7 @@ if (array_key_exists('actionForm', $_POST)) {
 } else {
 	$listeStation->getStationsArroundMe('10', $carbuType);
 	$critere = 'Recherche par default around me - Rayon 10 km';
+	Fonctions::inputHidden('actionForm', '');
 }
 
 //Recuperation des infos des Stations pour affichage dans le tableau
@@ -84,15 +85,13 @@ echo '
 ?>
 <h3>Liste des stations</h3>
 
-	<div class="row-fluid">
-	<div class="span4">
 	<fieldset>
 				<label class="select"> Carburant &nbsp; <?php Fonctions::echoList('carburantType', $listeC, $defaultCarbu, true, false, 'changeCarbu()'); ?>
 				</label>
 	</fieldset>
-	</div>
-	</div>
+
 <?php	
+	//Tableau des stations
 	$stations = $listeStation->getStations();
 
 echo "<table id=\"tablesorter-demo\" class=\"tablesorter\" border=\"0\" cellpadding=\"0\" cellspacing=\"1\">
@@ -135,6 +134,6 @@ foreach ($stations as $key => $value) {
 echo "</tbody>";
 echo "</table>";
 Fonctions::inputHidden('stationFromList', '');
-Fonctions::inputHidden('actionForm', '');
-
 ?>
+
+<img src="images/carte.png" alt="Go to maps" title="Afficher les stations sur une carte" onClick="stationsToMaps()"/>

@@ -12,7 +12,7 @@ if (array_key_exists("carburantType", $_POST)) {
 }
 
 //Recherche de la liste � afficher sur la map
-if (array_key_exists('actionForm', $_POST)) {
+if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != '') {
 	Fonctions::inputHidden('actionForm', $_POST['actionForm']);
 	if ($_POST['actionForm'] == "searchVille") {
 		Fonctions::inputHidden('searchVille', $_POST['searchVille']);
