@@ -44,6 +44,8 @@ if (array_key_exists('actionForm', $_POST)) {
 		$rayonArround = $_POST["rayonAroundMe"];
 		$listeStation->getStationsArroundMe($rayonArround, $carbuType);
 		$critere = 'Recherche around me - Rayon: '.$rayonArround.' km';
+	} else if ($_POST['actionForm'] == "stationFromList") {
+		echo $_POST['stationFromList'];
 	}
 } else {
 	$listeStation->getStationsArroundMe('10', $carbuType);
@@ -102,7 +104,7 @@ echo '<input type="hidden" id="carbuType" value="'.$carbuType.'"  />';
 					<label class="select"> Type &nbsp; <?php Fonctions::echoList('addPriceCarbuType', $listeCarbuById); ?>
 					</label>
 					<input type="text" name="newPrice" id="newPrice" class="input-mini" placeholder="Price" />
-					<i class="icon-ok" onClick="addPrice()"></i>
+					<i id="icone" class="icon-edit" onClick="addPrice()"></i>
 					<input type="hidden" id="stationToChange" name="stationToChange" value=""/> 
 				</div>
 			</div>

@@ -1,13 +1,4 @@
-<h1>Liste des stations</h1>
-
-<script type="text/javascript">
-	$(function() {		
-		$("#tablesorter-demo").tablesorter({sortList:[[4,0],[5,1]], widgets: ['zebra']});
-		$("#options").tablesorter({sortList: [[0,0]], headers: { 3:{sorter: false}, 4:{sorter: false}}});
-	});	
-</script>
-	
-<?php 
+<?php
 require_once 'ListeStationServiceClass.inc.php';
 $infoStations = "";
 $critere = "";
@@ -20,7 +11,7 @@ if (array_key_exists("carburantType", $_POST)) {
 	$carbuType = "diesel";
 }
 
-//Recherche de la liste � afficher sur la map
+//Recherche de la liste a afficher
 if (array_key_exists('actionForm', $_POST)) {
 	Fonctions::inputHidden('actionForm', $_POST['actionForm']);
 	if ($_POST['actionForm'] == "searchVille") {
@@ -58,7 +49,7 @@ if (array_key_exists('actionForm', $_POST)) {
 	$critere = 'Recherche par default around me - Rayon 10 km';
 }
 
-//Recuperation des infos des Stations pour affichage dans la MAP
+//Recuperation des infos des Stations pour affichage dans le tableau
 $infoStations = $listeStation->getInformationsStations();
 //Gestion de la liste deroulante
 require_once('ListeCarburantClass.inc.php');
@@ -91,6 +82,8 @@ echo '
 	echo '<input type="hidden" id="carbuType" value="'.$carbuType.'"  />';
 
 ?>
+<h3>Liste des stations</h3>
+
 	<div class="row-fluid">
 	<div class="span4">
 	<fieldset>
@@ -120,6 +113,7 @@ foreach ($stations as $key => $value) {
 	$cp = $value->getCP();
 	$ville = $value->getVille();
 	$enseigne = $value->getEnseigne();
+	$id = $value->getID();
 	foreach ($value->getListePrix() as $typeCarbu => $array) {
 		$carburant = $typeCarbu ;
 		$prix = $array['Prix'];
@@ -133,11 +127,14 @@ foreach ($stations as $key => $value) {
 			echo "<td>".$cp."</td>";
 			echo "<td>".$prix."</td>";
 			echo "<td>".$dateMaj."</td>";
-			echo "<td>\"icone\"</td>";
+			echo '<td><img src="images/iconeStation_verte.png" alt="Maps" title="Go to maps" onClick="stationToMaps(\''.$id.'\')"/></td>';
 		echo "</tr>";
 		}
 	}
 }
 echo "</tbody>";
 echo "</table>";
+Fonctions::inputHidden('stationFromList', '');
+Fonctions::inputHidden('actionForm', '');
+
 ?>

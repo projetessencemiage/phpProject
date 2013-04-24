@@ -17,3 +17,17 @@ div #divStation {
  border-style:solid;
  border-radius: 10px;
 }
+
+strong.redClass {
+color:red;	
+}
+
+.majPrix {
+font-size: 0.8em;
+font-style: italic;
+}
+
+img.imgLoading {
+	height:50px;
+	width:50px;
+}
