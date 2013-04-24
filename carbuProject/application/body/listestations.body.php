@@ -1,11 +1,3 @@
-<!-- fonctions jquery.tablesorter pour le tri du tableau --> 
-<script type="text/javascript">
-	$(function() {		
-		$("#tablesorter-demo").tablesorter({sortList:[[4,0],[5,1]], widgets: ['zebra']});
-		$("#options").tablesorter({sortList: [[0,0]], headers: { 3:{sorter: false}, 4:{sorter: false}}});
-	});	
-</script>
-	
 <?php 
 require_once 'ListeStationServiceClass.inc.php';
 $infoStations = "";
@@ -121,6 +113,7 @@ foreach ($stations as $key => $value) {
 	$cp = $value->getCP();
 	$ville = $value->getVille();
 	$enseigne = $value->getEnseigne();
+	$id = $value->getID();
 	foreach ($value->getListePrix() as $typeCarbu => $array) {
 		$carburant = $typeCarbu ;
 		$prix = $array['Prix'];
@@ -134,11 +127,14 @@ foreach ($stations as $key => $value) {
 			echo "<td>".$cp."</td>";
 			echo "<td>".$prix."</td>";
 			echo "<td>".$dateMaj."</td>";
-			echo "<td>\"icone\"</td>";
+			echo '<td><img src="images/iconeStation_verte.png" alt="Maps" title="Go to maps" onClick="stationToMaps(\''.$id.'\')"/></td>';
 		echo "</tr>";
 		}
 	}
 }
 echo "</tbody>";
 echo "</table>";
+Fonctions::inputHidden('stationFromList', '');
+Fonctions::inputHidden('actionForm', '');
+
 ?>
