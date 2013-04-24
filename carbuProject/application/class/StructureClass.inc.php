@@ -36,6 +36,7 @@ class Structure {
 				
 		<!-- Script -->
 		<script  type="text/javascript" src="js/utile.js"></script>
+		<script  type="text/javascript" src="js/ajax.js"></script>
 		<script  type="text/javascript" src="js/Formulaires.js"></script>
 		<script type="text/javascript" src="js/jquery-latest.js"></script>
 		<script type="text/javascript" src="js/jquery.tablesorter.js"></script>

@@ -96,10 +96,10 @@ echo '<input type="hidden" id="carbuType" value="'.$carbuType.'"  />';
 			<div id="divInfoStation"></div>
 			<div id="divAddPriceStation">
 				<p onclick="addFormToAddPrice()">
-					<i class="icon-plus-sign"></i> Add price
+					<i class="icon-plus-sign"></i> Update price
 				</p>
 				<div id="addPriceForm" style="display: none">
-					<label class="select"> Add type &nbsp; <?php Fonctions::echoList('addPriceCarbuType', $listeCarbuById); ?>
+					<label class="select"> Type &nbsp; <?php Fonctions::echoList('addPriceCarbuType', $listeCarbuById); ?>
 					</label>
 					<input type="text" name="newPrice" id="newPrice" class="input-mini" placeholder="Price" />
 					<i class="icon-ok" onClick="addPrice()"></i>
@@ -116,4 +116,5 @@ echo '<input type="hidden" id="carbuType" value="'.$carbuType.'"  />';
 	type="hidden" name="infoStations" id="infoStations"
 	value="<?php echo $infoStations?>" />
 
-
+<div id="debug">
+</div>

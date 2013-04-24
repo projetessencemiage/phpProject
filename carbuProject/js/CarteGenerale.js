@@ -21,7 +21,22 @@ function addPrice() {
 	var carbuID = document.getElementById('addPriceCarbuType').value;
 	
 	if (!isNumber(prix) || prix == "") {
-		alert("Le champ prix doit être numérique");
+		alert("Le champ prix doit Ãªtre numÃ©rique");
+	} else {
+	
+	getXhr();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var chaine = xhr.responseText;
+			var rep = chaine.split('|');
+			if (rep[0] == 'OK'){
+				document.forms['formGeneral'].submit();
+			}
+			else alert(xhr.responseText);
+		}
 	}
-
+	xhr.open("POST", 'ajoutPrixAjax.inc.php', true);
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.send("prix=" + prix + "&stationID=" + stationID + "&carbuID="+	carbuID);
+	}
 }

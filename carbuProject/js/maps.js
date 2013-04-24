@@ -181,7 +181,6 @@ window.onload=function(){
 		var affichePriceList = "";
 		for (var key in listPrice) {
 			affichePriceList +=  '<br /><strong>' + key + '</strong> - ' + listPrice[key]['Prix'] + ' € (' + listPrice[key]['Maj'] + ')';
-			affichePriceList += ' <i class="icon-edit"></i>'
 		}
 		if (affichePriceList == "") {
 			affichePriceList = "Prix non disponible";
