@@ -104,7 +104,7 @@ echo '<input type="hidden" id="carbuType" value="'.$carbuType.'"  />';
 					<label class="select"> Type &nbsp; <?php Fonctions::echoList('addPriceCarbuType', $listeCarbuById); ?>
 					</label>
 					<input type="text" name="newPrice" id="newPrice" class="input-mini" placeholder="Price" />
-					<i class="icon-ok" onClick="addPrice()"></i>
+					<i id="icone" class="icon-edit" onClick="addPrice()"></i>
 					<input type="hidden" id="stationToChange" name="stationToChange" value=""/> 
 				</div>
 			</div>
