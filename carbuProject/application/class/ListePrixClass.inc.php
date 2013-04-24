@@ -30,6 +30,7 @@ class ListePrix {
 			$array = array();
 			$array['Prix'] = $prix->getPrix();
 			$array['DateMaj'] = $prix->getdatemaj();
+			$array['NbJMaj'] = $prix->getnbjoursmaj();
 			$arrayPrice[$prix->getcarburant()] = $array;
 		}
 		return $arrayPrice;
