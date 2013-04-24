@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once 'ListeStationServiceClass.inc.php';
 $infoStations = "";
 $critere = "";

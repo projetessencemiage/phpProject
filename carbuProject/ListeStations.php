@@ -2,8 +2,8 @@
 require_once 'application/inc/declarations.inc.php';
 $body = 'listestations.body.php';
 
+//fonctions jquery.tablesorter pour le tri du tableau
 $script = '
-<!-- fonctions jquery.tablesorter pour le tri du tableau --> 
 <script type="text/javascript">
 	$(function() {		
 		$("#tablesorter-demo").tablesorter({sortList:[[4,0],[5,1]], widgets: [\'zebra\']});

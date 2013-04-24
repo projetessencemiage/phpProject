@@ -45,7 +45,7 @@ if (array_key_exists('actionForm', $_POST)) {
 		$listeStation->getStationsArroundMe($rayonArround, $carbuType);
 		$critere = 'Recherche around me - Rayon: '.$rayonArround.' km';
 	} else if ($_POST['actionForm'] == "stationFromList") {
-		echo 'VAMOS - '.$_POST['stationFromList'];
+		echo $_POST['stationFromList'];
 	}
 } else {
 	$listeStation->getStationsArroundMe('10', $carbuType);
