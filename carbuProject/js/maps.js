@@ -97,6 +97,7 @@ window.onload=function(){
 		var myInfoWindow = new google.maps.InfoWindow(myWindowOptions);
 		google.maps.event.addListener(myMarker, 'click', function() {
 			addDivStation(markerInfos);
+			document.getElementById('defaultStationID').value = markerInfos[var_id];
 			if (oldInfoBulle != null) {
 				oldInfoBulle.close(myMap, oldMarker);
 				
