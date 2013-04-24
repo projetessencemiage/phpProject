@@ -26,6 +26,7 @@ function addPrice() {
 	
 	getXhr();
 	xhr.onreadystatechange = function() {
+		document.getElementById('icone').setAttribute("class","icon-refresh");
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			var chaine = xhr.responseText;
 			var rep = chaine.split('|');
