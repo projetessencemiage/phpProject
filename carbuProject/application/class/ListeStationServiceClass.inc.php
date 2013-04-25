@@ -96,9 +96,8 @@ class ListeStationService {
 		
 		$this->listeStations = array();
 			$array = $dom->getElementsByTagName('Station');
-			$station_min=null;
-			$prix_min = array(1000);
-			var_dump($array);
+			$station_min= array();
+			$prix_min = 1000;
 		foreach ($array as $station){
 				$address = $station->getElementsByTagName("address")->item(0)->nodeValue;
 				$city = $station->getElementsByTagName("city")->item(0)->nodeValue;
@@ -111,12 +110,12 @@ class ListeStationService {
 			
 			$price_list = new ListePrix();
 			$isBest=false;
+			$equal=false;
 			$img = "iconeStation_sans_prix.png";
 		foreach ($station->getElementsByTagName('Prix') as $price){
 				$carburant = $price->childNodes->item(0)->childNodes->item(1)->nodeValue;
 				$date_update = $price->childNodes->item(1)->nodeValue;
 				$value = $price->childNodes->item(3)->nodeValue;
-				$diff = null;
 				$date_price = DateTime::CreateFromFormat("d/m/Y H:i:s",$date_update);
 				$date_actual = new DateTime();
 				$diff = round(round($date_actual->format('U') - $date_price->format('U	')) / (3600*24));
@@ -134,6 +133,8 @@ class ListeStationService {
 					if( $value < $prix_min){
 					 $isBest = true;
 					$prix_min = $value;
+					}elseif ( $value == $prix_min){
+						$equal = true;
 					}
 				}
 				$price_list->addPrix(new Prix($carburant, $value, $date_update, $diff));
@@ -144,23 +145,32 @@ class ListeStationService {
 			$station = new StationService($address, $id_station, $enseigne, $city, $cp, $tel, $price_list, $lattitude, $longitude, $img,'');
 			if($isBest){
 				if(! is_null($station_min)){
-					$this->addStation($station_min);
+					
+					foreach ($station_min as $stationTmp){
+						$this->addStation($stationTmp);
+					}
 				}
-				$station_min = $station;
+				$station_min = array();
+				$station_min[] = $station;
+			}elseif ($equal){
+				$station_min[] = $station;
 			}else{
+			
 				$this->addStation($station);
 			}
 		}
-			if(! is_null($station_min)){
-				if($station_min->getIcone() == 'iconeStation_verte.png'){
-					$station_min->setIcone('iconeStation_verte_etoile.png');
-				}elseif ($station_min->getIcone() == 'iconeStation_orange.png'){
-					$station_min->setIcone('iconeStation_orange_etoile.png');
-				}elseif ($station_min->getIcone() == 'iconeStation_rouge.png'){
-					$station_min->setIcone('iconeStation_rouge_etoile.png');
+		foreach ($station_min as $station){
+			if(! is_null($station)){
+				if($station->getIcone() == 'iconeStation_verte.png'){
+					$station->setIcone('iconeStation_verte_etoile.png');
+				}elseif ($station->getIcone() == 'iconeStation_orange.png'){
+					$station->setIcone('iconeStation_orange_etoile.png');
+				}elseif ($station->getIcone() == 'iconeStation_rouge.png'){
+					$station->setIcone('iconeStation_rouge_etoile.png');
 				}
-				$this->addStation($station_min);
+				$this->addStation($station);
 			}
+		}
 		
 	}
 	
@@ -169,11 +179,10 @@ class ListeStationService {
 		$this->listeStations = array();
 		
 		$array = $dom->getElementsByTagName('StationAndDistance');
-		$station_min=null;
+			$station_min= array();
 		$prix_min = 1000;
 		
 		foreach ($array as $station){
-			
 			$distance = $station->childNodes->item(0)->nodeValue;
 			
 			$address = $station->childNodes->item(1)->getElementsByTagName("address")->item(0)->nodeValue;
@@ -189,16 +198,17 @@ class ListeStationService {
 				
 			$price_list = new ListePrix();
 			$isBest=false;
+			$equal=false;
 			$img = "iconeStation_sans_prix.png";
 			foreach ($station->childNodes->item(1)->getElementsByTagName('Prix') as $price){
 				$carburant = $price->childNodes->item(0)->childNodes->item(1)->nodeValue;
 				$date_update = $price->childNodes->item(1)->nodeValue;
 				$value = $price->childNodes->item(3)->nodeValue;
-				$diff = null;
-				if ($carburant == $carbuType){
-					$date_price = DateTime::CreateFromFormat("d/m/Y H:i:s",$date_update);
+				$date_price = DateTime::CreateFromFormat("d/m/Y H:i:s",$date_update);
 					$date_actual = new DateTime();
 					$diff = round(round($date_actual->format('U') - $date_price->format('U	')) / (3600*24));
+				if ($carburant == $carbuType){
+					
 					if ($diff < 3){
 						$img = 'iconeStation_verte.png';
 					}elseif ($diff < 7){
@@ -208,10 +218,11 @@ class ListeStationService {
 					}elseif ($diff > 15){
 						$img = 'iconeStation.png';
 					}
-						
 					if( $value < $prix_min){
 						$isBest = true;
 						$prix_min = $value;
+					}elseif ( $value == $prix_min){
+						$equal = true;
 					}
 				}
 				$price_list->addPrix(new Prix($carburant, $value, $date_update, $diff));
@@ -221,28 +232,35 @@ class ListeStationService {
 				$img = 'iconeStation_sans_prix.png';
 			}
 			$station = new StationService($address, $id_station, $enseigne, $city, $cp, $tel, $price_list, $lattitude, $longitude, $img, $distance);
-			
-			if($isBest){
+		if($isBest){
 				if(! is_null($station_min)){
-					$this->addStation($station_min);
+					foreach ($station_min as $stationTmp){
+						$this->addStation($stationTmp);
+					}
 				}
-				$station_min = $station;
+				$station_min = array();
+				$station_min[] = $station;
+			}elseif ($equal){
+				$station_min[] = $station;
 			}else{
 				$this->addStation($station);
 			}
-			
 		}
 		
-		if(! is_null($station_min)){
-			if($station_min->getIcone() == 'iconeStation_verte.png'){
-				$station_min->setIcone('iconeStation_verte_etoile.png');
-			}elseif ($station_min->getIcone() == 'iconeStation_orange.png'){
-				$station_min->setIcone('iconeStation_orange_etoile.png');
-			}elseif ($station_min->getIcone() == 'iconeStation_rouge.png'){
-				$station_min->setIcone('iconeStation_rouge_etoile.png');
+		//var_dump($station_min);
+	foreach ($station_min as $station){
+			if(! is_null($station)){
+				if($station->getIcone() == 'iconeStation_verte.png'){
+					$station->setIcone('iconeStation_verte_etoile.png');
+				}elseif ($station->getIcone() == 'iconeStation_orange.png'){
+					$station->setIcone('iconeStation_orange_etoile.png');
+				}elseif ($station->getIcone() == 'iconeStation_rouge.png'){
+					$station->setIcone('iconeStation_rouge_etoile.png');
+				}
+				$this->addStation($station);
 			}
-			$this->addStation($station_min);
 		}
+		
 	}
 	
 	public function getInformationsStations() {

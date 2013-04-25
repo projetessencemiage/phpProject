@@ -8,3 +8,8 @@ function stationToMaps(idStation) {
 	document.forms['formGeneral'].action = "CarteGenerale.php";
 	document.forms['formGeneral'].submit();
 }
+
+function stationsToMaps() {
+	document.forms['formGeneral'].action = "CarteGenerale.php";
+	document.forms['formGeneral'].submit();
+}
