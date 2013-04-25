@@ -46,6 +46,15 @@ window.onload=function(){
 		for (iteStation = 0 ; iteStation < listeStations.length ; iteStation++) {
 			createMarker(listeStations[iteStation]);
 		}
+		
+		// Don't zoom in too far on only one marker
+	    if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
+	       var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
+	       var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
+	       bounds.extend(extendPoint1);
+	       bounds.extend(extendPoint2);
+	    }
+		myMap.fitBounds(bounds);
 	}
 
 	//Ajouter un Marker � la MAP
@@ -75,7 +84,6 @@ window.onload=function(){
 			title: titlePrice
 		});
 		bounds.extend(my_position);
-		myMap.fitBounds(bounds);
 		
 		var infoBulles = '<p>'
 			+ '<address>'
@@ -97,13 +105,13 @@ window.onload=function(){
 		var myInfoWindow = new google.maps.InfoWindow(myWindowOptions);
 		google.maps.event.addListener(myMarker, 'click', function() {
 			addDivStation(markerInfos);
-			document.getElementById('defaultStationID').value = markerInfos[var_id];
+			document.getElementById('stationToAfficheInfoID').value = markerInfos[var_id];
 			if (oldInfoBulle != null) {
 				oldInfoBulle.close(myMap, oldMarker);
 				
 			}
 			if (oldInfoBulle != myInfoWindow) {
-				myInfoWindow.open(myMap,myMarker);
+			//	myInfoWindow.open(myMap,myMarker);
 				oldInfoBulle = myInfoWindow;
 				oldMarker = myMarker;
 			} else {
@@ -169,7 +177,7 @@ window.onload=function(){
 			+ '</p>'
 		document.getElementById('divStation').style.display = 'block';
 		document.getElementById('divInfoStation').innerHTML = divStation;
-		document.getElementById('stationToChange').value = marker[var_id];
+		document.getElementById('stationToUpdatePrice').value = marker[var_id];
 	}
 	
 	function affichePriceList(listPrice) {

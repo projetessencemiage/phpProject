@@ -3,6 +3,7 @@ function changeCarbu() {
 }
 
 function stationToMaps(idStation) {
+	document.getElementById('stationToAfficheInfoID').value = idStation;
 	document.getElementById('stationFromList').value = idStation;
 	document.getElementById('actionForm').value = 'stationFromList';
 	document.forms['formGeneral'].action = "CarteGenerale.php";
