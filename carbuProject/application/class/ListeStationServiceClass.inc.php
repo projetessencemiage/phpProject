@@ -92,17 +92,6 @@ class ListeStationService {
 		$this->arrayToListOfStationsDistance($dom,$carbuType);
 	}
 	
-	public function getStationsByID($id, $liste) {
-		$stationByID;
-		$this->listeStations = array();
-		foreach ($liste as $key => $value) {
-			if ($value->getID() == $id) {
-				$this->addStation($value);
-				$stationByID = $value;
-			}
-		}
-		return $stationByID;
-	}
 	public function arrayToListOfStations($dom, $carbuType){
 		
 		$this->listeStations = array();
