@@ -33,6 +33,7 @@ if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != "") {
 		$critere = 'Recherche par code postal - '.$cp;
 	} else if ($_POST['actionForm'] == "searchAdresse") {
 		Fonctions::inputHidden('searchAdresse', $_POST['searchAdresse']);
+		Fonctions::inputHidden('rayon', $_POST['rayon']);
 		$adr = $_POST["searchAdresse"];
 		$rayon = $_POST["rayon"];
 		$coords = $listeStation->getStationsByAdresse($adr, $rayon, $carbuType);

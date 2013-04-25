@@ -3,8 +3,8 @@
  * ------------------------------------------------------------------------
  * @Name : UserClass.inc.php
  * @Desc : Classe User
- * @Author : Atos
- * @Date : 29/03/2012 : création
+ * @Author : TGOU
+ * @Date : 25/04/2013
  * @Version : V1.0;
  * ------------------------------------------------------------------------
  **/
@@ -26,6 +26,16 @@ class User {
 		$this->role      = '';
 		$this->id_user      = '';
 	}
+	
+	public function isExistUser($nom) {
+		try {
+			$tableau = UserData::isExistUser($nom);
+			return $tableau[0][0];
+		} catch (MyException $e) {
+			throw new MyException($e->getError('User.isExistUser'));
+			return false;
+		}
+	}
 
 	public function getUser($nom) {
 		try {
@@ -40,15 +50,6 @@ class User {
 		}
 	}
 
-	public function isExistUser($nom) {
-		try {
-			$tableau = UserData::isExistUser($nom);
-			return $tableau[0][0];
-		} catch (MyException $e) {
-			throw new MyException($e->getError('User.isExistUser'));
-			return false;
-		}
-	}
 
 	public function getAllUser($nom) {
 		try {
