@@ -1,7 +1,10 @@
 <?php 
 require_once 'ListeStationServiceClass.inc.php';
+//Données des stations envoyées à la MAP
 $infoStations = "";
+//Libellé de la recherche pour l'entete
 $critere = "";
+//Action pour choix des stations
 $actionForm = "";
 $listeStation = new ListeStationService();
 //Gestion du carburant
@@ -10,8 +13,11 @@ if (array_key_exists("carburantType", $_POST)) {
 } else {
 	$carbuType = "diesel";
 }
+//Gestion des stations
+$stationToUpdatePrice;
+$stationToAfficheInfo;
 
-//Recherche de la liste � afficher sur la map
+//Recherche de la liste à afficher sur la map en fonction de l'action
 if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != '') {
 	Fonctions::inputHidden('actionForm', $_POST['actionForm']);
 	if ($_POST['actionForm'] == "searchVille") {
@@ -54,13 +60,25 @@ if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != '') {
 
 //Recuperation des infos des Stations pour affichage dans la MAP
 $infoStations = $listeStation->getInformationsStations();
+$nbStation =  count($listeStation->getStations());
 
 //Gestion affichage Station par default
-Fonctions::inputHidden('defaultStationID', '');
-if (array_key_exists('defaultStationID', $_POST) && $_POST['defaultStationID'] != "") {
-//$stationById = $listeStation->getStations
-} 
+Fonctions::inputHidden('stationToAfficheInfoID', '');
 
+if (array_key_exists('stationToAfficheInfoID', $_POST) && $_POST['stationToAfficheInfoID'] != "") {
+$stationToAfficheInfoID = $_POST['stationToAfficheInfoID'];
+$stationToAfficheInfo = $listeStation->getStationsByID($stationToAfficheInfoID, $listeStation->getStations());
+$styleDivStation = "";
+$afficheDivStation = true;
+$stationToUpdatePrice = $_POST['stationToAfficheInfoID'];
+} else {
+	$styleDivStation = 'style="display: none"';
+	$afficheDivStation = false;
+	$stationToAfficheInfoID = "";
+}
+
+//Gestion Station Update Price
+Fonctions::inputHidden('stationToUpdatePrice', $stationToAfficheInfoID);
 
 
 //Gestion de la liste déroulante
@@ -76,7 +94,6 @@ if (array_key_exists('carburantType', $_POST)) {
 
 
 //Affichage du message d'entete
-$nbStation =  count($listeStation->getStations());
 if ($nbStation > 0 ) {
 	$class = "alert-success";
 	$alert = "Info";
@@ -95,6 +112,7 @@ echo '
 
 echo '<input type="hidden" id="Stations" value="'.$infoStations.'"  />';
 echo '<input type="hidden" id="carbuType" value="'.$carbuType.'"  />';
+
 ?>
 <h3>Qui est le moins cher ?</h3>
 <div class="row-fluid">
@@ -103,9 +121,30 @@ echo '<input type="hidden" id="carbuType" value="'.$carbuType.'"  />';
 			<label class="select"> Carburant &nbsp; <?php Fonctions::echoList('carburantType', $listeC, $defaultCarbu, true, false, 'changeCarbu()'); ?>
 			</label>
 		</fieldset>
-		<div id="divStation" style="display: none">
-			<div id="divInfoStation">
-			
+		<?php
+		//Affichage de la DIV de la station
+		echo '
+		<div id="divStation" '.$styleDivStation.'>
+			<div id="divInfoStation">';
+		if ($afficheDivStation == true) {
+		echo '
+			<p><address><strong>'.
+			$stationToAfficheInfo->getEnseigne()
+			.'</strong><br>'.
+			$stationToAfficheInfo->getAdresseComplete()
+			.'<br><abbr title="Phone">Tel: </abbr>'.
+			$stationToAfficheInfo->getPhone()
+			.'</address></p><p>Price:';
+			$prices = $stationToAfficheInfo->getListePrix();
+			foreach ($prices as $carbu => $infos) {
+				if ($carbuType == $carbu) {
+					$redClass = "class='redClass'";
+				} else { $redClass = "";}
+				echo '<br /><strong '.$redClass.'>'.$carbu.'</strong> - '.$infos["Prix"].' € <span class="majPrix">'.Fonctions::getNbJourToString($infos["NbJMaj"]).'</span>';
+			}
+			echo '</p>';
+		}
+			?>
 			</div>
 			<div id="divAddPriceStation">
 				<p onclick="addFormToAddPrice()">
@@ -115,8 +154,7 @@ echo '<input type="hidden" id="carbuType" value="'.$carbuType.'"  />';
 					<label class="select"> Type &nbsp; <?php Fonctions::echoList('addPriceCarbuType', $listeCarbuById); ?>
 					</label>
 					<input type="text" name="newPrice" id="newPrice" class="input-mini" placeholder="Price" />
-					<i id="icone" class="icon-edit" onClick="addPrice()"></i>
-					<input type="hidden" id="stationToChange" name="stationToChange" value=""/> 
+					<i id="icone" class="icon-edit" onClick="addPrice()"></i> 
 				</div>
 			</div>
 		</div>
@@ -128,6 +166,3 @@ echo '<input type="hidden" id="carbuType" value="'.$carbuType.'"  />';
 <input
 	type="hidden" name="infoStations" id="infoStations"
 	value="<?php echo $infoStations?>" />
-
-<div id="debug">
-</div>

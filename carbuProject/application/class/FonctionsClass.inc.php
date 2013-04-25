@@ -392,5 +392,11 @@ class Fonctions {
 	public static function inputHidden($name, $value) {
 		echo '<input type="hidden" name="'.$name.'" id="'.$name.'" value="'.$value.'"/>';
 	}
+	
+	public static function getNbJourToString($j) {
+		if ($j == 0) return "MàJ Aujourd'hui";
+		if ($j == 1) return "MàJ Hier";
+		else return 'MàJ il y a '.$j.'j';
+	}
 }
 ?>

@@ -1,4 +1,5 @@
 function changeCarbu() {
+	document.getElementById('stationToAfficheInfoID').value = document.getElementById('stationToUpdatePrice').value;
 	document.forms['formGeneral'].submit(); 
 }
 
@@ -17,7 +18,7 @@ function addFormToAddPrice() {
 
 function addPrice() {
 	var prix = document.getElementById('newPrice').value;
-	var stationID = document.getElementById('stationToChange').value;
+	var stationID = document.getElementById('stationToUpdatePrice').value;
 	var carbuID = document.getElementById('addPriceCarbuType').value;
 	
 	if (!isNumber(prix) || prix == "") {
@@ -31,6 +32,7 @@ function addPrice() {
 			var chaine = xhr.responseText;
 			var rep = chaine.split('|');
 			if (rep[0] == 'OK'){
+				document.getElementById('stationToAfficheInfoID').value = stationID;
 				document.forms['formGeneral'].submit();
 			}
 			else alert(xhr.responseText);

@@ -4,7 +4,7 @@
 * @Name : StationServiceClass.inc.php
 * @Desc : Classe StationService
 * @Author : Thom
-* @Date : 06/04/2013 : création
+* @Date : 06/04/2013 : crï¿½ation
 * @Version : V1.0;
 * ------------------------------------------------------------------------
 **/
@@ -42,6 +42,11 @@ class StationService {
 	public function getAdresse(){
 		return $this->adresse;
 	}
+	
+	public function getAdresseComplete() {
+		return $this->adresse.' '.$this->CP.' '.$this->ville;	
+	}
+	
 	public function getEnseigne(){
 		return $this->enseigne;
 	}
@@ -64,7 +69,6 @@ class StationService {
 		return $this->id;
 	}
 	public function getListePrix() {
-		$priceList = array();
 		return $this->ListePrix->getListTypetoPrix();
 	}
 

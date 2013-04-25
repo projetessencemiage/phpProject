@@ -97,13 +97,13 @@ window.onload=function(){
 		var myInfoWindow = new google.maps.InfoWindow(myWindowOptions);
 		google.maps.event.addListener(myMarker, 'click', function() {
 			addDivStation(markerInfos);
-			document.getElementById('defaultStationID').value = markerInfos[var_id];
+			document.getElementById('stationToAfficheInfoID').value = markerInfos[var_id];
 			if (oldInfoBulle != null) {
 				oldInfoBulle.close(myMap, oldMarker);
 				
 			}
 			if (oldInfoBulle != myInfoWindow) {
-				myInfoWindow.open(myMap,myMarker);
+			//	myInfoWindow.open(myMap,myMarker);
 				oldInfoBulle = myInfoWindow;
 				oldMarker = myMarker;
 			} else {
@@ -169,7 +169,7 @@ window.onload=function(){
 			+ '</p>'
 		document.getElementById('divStation').style.display = 'block';
 		document.getElementById('divInfoStation').innerHTML = divStation;
-		document.getElementById('stationToChange').value = marker[var_id];
+		document.getElementById('stationToUpdatePrice').value = marker[var_id];
 	}
 	
 	function affichePriceList(listPrice) {
