@@ -46,6 +46,15 @@ window.onload=function(){
 		for (iteStation = 0 ; iteStation < listeStations.length ; iteStation++) {
 			createMarker(listeStations[iteStation]);
 		}
+		
+		// Don't zoom in too far on only one marker
+	    if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
+	       var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
+	       var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
+	       bounds.extend(extendPoint1);
+	       bounds.extend(extendPoint2);
+	    }
+		myMap.fitBounds(bounds);
 	}
 
 	//Ajouter un Marker � la MAP
@@ -75,7 +84,6 @@ window.onload=function(){
 			title: titlePrice
 		});
 		bounds.extend(my_position);
-		myMap.fitBounds(bounds);
 		
 		var infoBulles = '<p>'
 			+ '<address>'
