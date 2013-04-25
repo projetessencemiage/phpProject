@@ -100,10 +100,10 @@ echo "<table id=\"tablesorter-demo\" class=\"tablesorter\" border=\"0\" cellpadd
 		<tr>
 			<th>Carburant</th>
 			<th>Ville</th>
-			<th>Station</th>
 			<th>Code Postal</th>
+			<th>Station</th>
 			<th>Prix</th>
-			<th>Date de mise a jour</th>
+			<th>Mise à jour</th>
 			<th>Maps</th>
 		</tr>
 	</thead>";
@@ -117,17 +117,17 @@ foreach ($stations as $key => $value) {
 	foreach ($value->getListePrix() as $typeCarbu => $array) {
 		$carburant = $typeCarbu ;
 		$prix = $array['Prix'];
-		$dateMaj = $array['DateMaj'];
+		$dateMaj = Fonctions::getNbJourToString($array['NbJMaj']);
 		
 		if ($carburant == $carbuType ) {
 			echo "<tr>";
 			echo "<td>".$carburant."</td>";
 			echo "<td>".$ville."</td>";
-			echo "<td>".$enseigne."</td>";
 			echo "<td>".$cp."</td>";
+			echo "<td>".$enseigne."</td>";
 			echo "<td>".$prix."</td>";
 			echo "<td>".$dateMaj."</td>";
-			echo '<td><img src="images/iconeStation_verte.png" alt="Maps" title="Go to maps" onClick="stationToMaps(\''.$id.'\')"/></td>';
+			echo '<td><img src="images/icone_france_mini.png" alt="Maps" title="Go to maps" onClick="stationToMaps(\''.$id.'\')"/></td>';
 		echo "</tr>";
 		}
 	}
@@ -140,5 +140,5 @@ $stationEncode = urlencode($serializeStation);
 Fonctions::inputHidden('listeStation', $stationEncode);
 
 ?>
-
-<img src="images/carte.png" alt="Go to maps" title="Afficher les stations sur une carte" onClick="stationsToMaps()"/>
+<h3>Carte</h3>
+<P style="text-align:center"><img src="images/carte.png" alt="Go to maps" title="Afficher les stations sur une carte" onClick="stationsToMaps()"/></P>
