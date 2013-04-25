@@ -105,7 +105,7 @@ class ListeStationService {
 				$value = $price->childNodes->item(3)->nodeValue;
 				$date_price = DateTime::CreateFromFormat("d/m/Y H:i:s",$date_update);
 				$date_actual = new DateTime();
-				$diff = round(round($date_actual->format('U') - $date_price->format('U	')) / (3600*24));
+				$diff = round(round($date_actual->format('U') - $date_price->format('U')) / (3600*24));
 				if ($carburant == $carbuType){
 					if ($diff < 3){
 						$img = 'iconeStation_verte.png';
@@ -182,8 +182,7 @@ class ListeStationService {
 				
 			
 			$enseigne = $station->childNodes->item(1)->getElementsByTagName("enseigne_name")->item(0)->nodeValue;
-				
-			$price_list = new ListePrix();
+							$price_list = new ListePrix();
 			$isBest=false;
 			$equal=false;
 			$img = "iconeStation_sans_prix.png";
