@@ -59,7 +59,16 @@ if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != '') {
 
 //Recuperation des infos des Stations pour affichage dans la MAP
 $infoStations = $listeStation->getInformationsStations();
-//Gestion de la liste d�roulante
+
+//Gestion affichage Station par default
+Fonctions::inputHidden('defaultStationID', '');
+if (array_key_exists('defaultStationID', $_POST) && $_POST['defaultStationID'] != "") {
+//$stationById = $listeStation->getStations
+} 
+
+
+
+//Gestion de la liste déroulante
 require_once('ListeCarburantClass.inc.php');
 require_once('FonctionsClass.inc.php');
 $listeCarbu = new ListeCarburant();
@@ -100,7 +109,9 @@ echo '<input type="hidden" id="carbuType" value="'.$carbuType.'"  />';
 			</label>
 		</fieldset>
 		<div id="divStation" style="display: none">
-			<div id="divInfoStation"></div>
+			<div id="divInfoStation">
+			
+			</div>
 			<div id="divAddPriceStation">
 				<p onclick="addFormToAddPrice()">
 					<i class="icon-plus-sign"></i> Update price
