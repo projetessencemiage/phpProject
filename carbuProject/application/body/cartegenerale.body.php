@@ -2,6 +2,8 @@
 require_once 'ListeStationServiceClass.inc.php';
 //Données des stations envoyées à la MAP
 $infoStations = "";
+//Station a afficher dans la DIV Station
+$stationToAfficheInfoID = "";
 //Libellé de la recherche pour l'entete
 $critere = "";
 //Action pour choix des stations
@@ -53,10 +55,10 @@ if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != '') {
 	} else if ($_POST['actionForm'] == "stationFromList") {
 		Fonctions::inputHidden('stationFromList', $_POST['stationFromList']);
 		Fonctions::inputHidden('listeStation', $_POST['listeStation']);
-		$idStation = $_POST["stationFromList"];
+		$stationToAfficheInfoID = $_POST["stationFromList"];
 		$decodeListe = urldecode($_POST['listeStation']);
 		$stations = unserialize($decodeListe);
-		$listeStation->getStationsByID($idStation, $stations);
+		$listeStation->getStationsByID($stationToAfficheInfoID, $stations);
 	}
 } else {
 	$listeStation->getStationsArroundMe('10', $carbuType);
@@ -68,7 +70,7 @@ $infoStations = $listeStation->getInformationsStations();
 $nbStation =  count($listeStation->getStations());
 
 //Gestion affichage Station par default
-Fonctions::inputHidden('stationToAfficheInfoID', '');
+Fonctions::inputHidden('stationToAfficheInfoID', $stationToAfficheInfoID);
 
 if (array_key_exists('stationToAfficheInfoID', $_POST) && $_POST['stationToAfficheInfoID'] != "") {
 $stationToAfficheInfoID = $_POST['stationToAfficheInfoID'];
@@ -79,7 +81,6 @@ $stationToUpdatePrice = $_POST['stationToAfficheInfoID'];
 } else {
 	$styleDivStation = 'style="display: none"';
 	$afficheDivStation = false;
-	$stationToAfficheInfoID = "";
 }
 
 //Gestion Station Update Price

@@ -138,6 +138,7 @@ Fonctions::inputHidden('stationFromList', '');
 $serializeStation = serialize($stations);
 $stationEncode = urlencode($serializeStation);
 Fonctions::inputHidden('listeStation', $stationEncode);
+Fonctions::inputHidden('stationToAfficheInfoID', '');
 
 ?>
 <h3>Carte</h3>
