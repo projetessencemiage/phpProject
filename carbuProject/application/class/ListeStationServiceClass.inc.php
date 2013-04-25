@@ -54,6 +54,19 @@ class ListeStationService {
 		$dom->loadXML($result);
  		$this->arrayToListOfStations($dom, $carbuType);	
 	}
+	
+	public function getStationsByID($id, $liste) {
+		$stationByID;
+		$this->listeStations = array();
+		foreach ($liste as $key => $value) {
+			if ($value->getID() == $id) {
+				$this->addStation($value);
+				$stationByID = $value;
+			}
+		}		
+		return $stationByID;
+	}
+	
 	public function getStationsByAdresse($adr, $rayon, $carbuType) {
 		$array_position = Fonctions::getCoordFromAdresse($adr);
 		if (count($array_position) > 1) {

@@ -51,7 +51,12 @@ if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != '') {
 		$listeStation->getStationsArroundMe($rayonArround, $carbuType);
 		$critere = 'Recherche around me - Rayon: '.$rayonArround.' km';
 	} else if ($_POST['actionForm'] == "stationFromList") {
-		echo $_POST['stationFromList'];
+		Fonctions::inputHidden('stationFromList', $_POST['stationFromList']);
+		Fonctions::inputHidden('listeStation', $_POST['listeStation']);
+		$idStation = $_POST["stationFromList"];
+		$decodeListe = urldecode($_POST['listeStation']);
+		$stations = unserialize($decodeListe);
+		$listeStation->getStationsByID($idStation, $stations);
 	}
 } else {
 	$listeStation->getStationsArroundMe('10', $carbuType);
