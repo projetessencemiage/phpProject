@@ -3,9 +3,8 @@
  * ------------------------------------------------------------------------
  * @Name : StructureClass.inc.php
  * @Desc : Classe Structure
- * @Author : Atos
- * @Date : 29/03/2012 : cr�ation
- * @Task : commun
+ * @Author : TGOU
+ * @Date : 25/04/2013 : cr�ation
  * @Version : V1.0;
  * ------------------------------------------------------------------------
  **/
