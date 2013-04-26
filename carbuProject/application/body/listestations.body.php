@@ -99,6 +99,7 @@ echo '
 echo "<table id=\"tablesorter-demo\" class=\"tablesorter\" border=\"0\" cellpadding=\"0\" cellspacing=\"1\">
 	<thead>
 		<tr>
+			<th>Infos</th>
 			<th>Carburant</th>
 			<th>Ville</th>
 			<th>Code Postal</th>
@@ -122,6 +123,7 @@ foreach ($stations as $key => $value) {
 		
 		if ($carburant == $carbuType ) {
 			echo "<tr>";
+			echo '<td><img src="images/icone_infos_station.png" alt="Infos" title="infos station"></td>';
 			echo "<td>".$carburant."</td>";
 			echo "<td>".$ville."</td>";
 			echo "<td>".$cp."</td>";
