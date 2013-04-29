@@ -33,7 +33,6 @@ if ($login == "" || $pwd == "") {
 	}
 }
 
-
 echo 'OK|'.$code.'|'.$message;
 
 ?>
