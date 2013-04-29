@@ -14,7 +14,7 @@ require_once 'UserData.inc.php';
 // Classe User
 //---------------------------------------------------------------------------
 class User {
-	public $userName;
+	private $userName;
 	public $password;
 	public $role;
 	public $id_user;
@@ -27,16 +27,17 @@ class User {
 		$this->id_user      = '';
 	}
 	
-	public function isExistUser($nom) {
-		try {
-			$tableau = UserData::isExistUser($nom);
-			return $tableau[0][0];
-		} catch (MyException $e) {
-			throw new MyException($e->getError('User.isExistUser'));
-			return false;
-		}
+	public function isExistUser($login, $pwd) {
+		if ($login == 'TGOU' && $pwd == 'pass') {
+			$this->userName = 'Thomas';
+			return true;			
+		} return false;	
 	}
 
+	public function getUserName() {
+		return $this->userName;
+	}
+	
 	public function getUser($nom) {
 		try {
 			$tableau = UserData::getUser($nom);
