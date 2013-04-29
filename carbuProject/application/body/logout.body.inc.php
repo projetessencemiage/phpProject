@@ -2,14 +2,11 @@
 /**
  * ------------------------------------------------------------------------
  * @Name : logout.body.php
- * @Desc : script contrôle authentification
- * @Autor : Atos
- * @Date : 29/03/2012 : création
+ * @Desc : script contrÃ´le authentification
+ * @Autor : TGOU
+ * @Date : 26/04/2013
  * @Version : V1.0;
  * ------------------------------------------------------------------------
  **/
-unset($_SESSION['User']);
-unset($_SESSION['CodeMessage']);
-unset($_SESSION['Role']);
-unset($_SESSION['Id_User']);
+session_unset();
 ?>

@@ -398,5 +398,18 @@ class Fonctions {
 		if ($j == 1) return "MàJ Hier";
 		else return 'MàJ il y a '.$j.'j';
 	}
+	
+	public static function messageToString($affiche = false, $class="",  $alert = "", $message = "" ) {
+		$style = '';
+		if (!$affiche) {
+			$style = 'style="display:none"';
+		}
+		echo '
+		<div class="'.$class.'" id="msgMenuNav" '.$style.'>
+		<button type="button" class="close" data-dismiss="alert" onclick="quitBox(\'msgMenuNav\')" >&times;</button>
+		<strong id="msgMenuNavLib">'.$alert.'</strong><span id="msgMenuNavMessage">'.$message.'</span>
+		</div>
+		';
+	}
 }
 ?>
