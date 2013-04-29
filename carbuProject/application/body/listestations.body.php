@@ -116,14 +116,16 @@ foreach ($stations as $key => $value) {
 	$ville = $value->getVille();
 	$enseigne = $value->getEnseigne();
 	$id = $value->getID();
+	$adresse = $value->getAdresse();
+	$tel = $value->getPhone();
 	foreach ($value->getListePrix() as $typeCarbu => $array) {
 		$carburant = $typeCarbu ;
 		$prix = $array['Prix'];
 		$dateMaj = Fonctions::getNbJourToString($array['NbJMaj']);
 		
-		if ($carburant == $carbuType ) {
+		if ($carburant == $carbuType ) { 
 			echo "<tr>";
-			echo '<td><img src="images/icone_infos_station.png" alt="Infos" title="infos station"></td>';
+			echo '<td> <a onClick="window.open(\'application/body/popStation.body.php?adresse='.$adresse.' &cp='.$cp.' &ville='.$ville.' &enseigne='.$enseigne.' &tel='.$tel.'\',\'InfoStation\',\'toolbar=0, location=0, directories=0, status=0, scrollbars=0, resizable=1, copyhistory=0, menuBar=1, width=300, height=180\')"><img src="images/icone_infos_station.png" alt="Infos" title="infos station"></a></td>';
 			echo "<td>".$carburant."</td>";
 			echo "<td>".$ville."</td>";
 			echo "<td>".$cp."</td>";

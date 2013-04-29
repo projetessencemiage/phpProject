@@ -6,7 +6,7 @@ $body = 'listestations.body.php';
 $script = '
 <script type="text/javascript">
 	$(function() {		
-		$("#tablesorter-demo").tablesorter({sortList:[[4,0],[5,1]], widgets: [\'zebra\']});
+		$("#tablesorter-demo").tablesorter({sortList:[[5,0],[6,1]], widgets: [\'zebra\']});
 		$("#options").tablesorter({sortList: [[0,0]], headers: { 3:{sorter: false}, 4:{sorter: false}}});
 	});	
 </script>
