@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'application/inc/declarations.inc.php';
 $body = 'NewStation.body.php';
 $script = '<script  type="text/javascript" src="./js/newStation.js"></script>';
