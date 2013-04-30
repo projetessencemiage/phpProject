@@ -24,5 +24,5 @@ class Enseigne {
 	public function getenseigne_name(){
 		return $this->enseigne_name;
 	}
-		
+	
 }

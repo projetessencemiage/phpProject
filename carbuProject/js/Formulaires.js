@@ -19,6 +19,16 @@ function validerFormArroundMe() {
 	document.getElementById('actionForm').value = 'searchArroundMe';
 	return true;
 }
+
+function validerFormNewStation() {
+	var isValid = false;
+	if(document.getElementById('inputNewStation').value != '' ){
+		isValid = true;
+	}else{
+		alert("Veuillez renseigner l'adresse de la Station");
+	}
+	return isValid;
+}
 function validerFormSearchListStation(goTo) {
 	document.getElementById('formGeneral').action = goTo;
 	var checkInput = false;

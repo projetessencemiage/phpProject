@@ -396,7 +396,7 @@ class Fonctions {
 	public static function getNbJourToString($j) {
 		if ($j == 0) return "MàJ Aujourd'hui";
 		if ($j == 1) return "MàJ Hier";
-		else return 'MàJ il y a '.$j.'j';
+		else return 'MàJ il y a '.$j.' j';
 	}
 	
 	public static function messageToString($affiche = false, $class="",  $alert = "", $message = "" ) {
