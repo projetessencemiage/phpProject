@@ -2,7 +2,7 @@ window.onload=function(){
 	//Declaration variables
 	var myGeocoder = new google.maps.Geocoder();
 	var bounds = new google.maps.LatLngBounds();
-	var oldInfoBulle= null;
+	var oldImage = null;
 	var oldMarker = null;
 	var var_adresse = 'Adresse';
 	var var_enseigne = 'Enseigne';
@@ -12,6 +12,7 @@ window.onload=function(){
 	var var_lng = "Lng";
 	var var_phone = "Phone";
 	var var_id = "ID";
+	var centrerCarte = false;
 
 	//Recuperation des données
 	var infoStations = document.getElementById('Stations').value;
@@ -20,12 +21,13 @@ window.onload=function(){
 	//Centrage de la carte si Recherche par adresse sans résultat
 	if (document.getElementById('CoordCarte')) {
 		var split = document.getElementById('CoordCarte').value;
-		var lat = split.split('-')[0];
-		var lng = split.split('-')[1];
+		var lat = split.split('@')[0];
+		var lng = split.split('@')[1];
 		if (lat != "") {
 			var myLatLng = new google.maps.LatLng(lat, lng);
 		}
 	}
+	
 	var keyCarbu = document.getElementById('carbuType').value;
 	if (infoStations == "") {
 		var mapOptions = {
@@ -36,10 +38,21 @@ window.onload=function(){
 	} else {
 		//Options de la MAP
 		var mapOptions = {mapTypeId: google.maps.MapTypeId.ROADMAP};
+		centrerCarte = true;
 	}
 	var myMap = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 	var listeStation = getListeStations();
 	parseListToMarkers(listeStation);
+	
+	
+	if (document.getElementById('CoordCarte')) {
+	new google.maps.Marker({
+		position: myLatLng,
+		map: myMap,
+		title: 'Ma position'
+		});
+	}
+	
 	//Parcours de la liste de stations pour en faire des Markers
 	function parseListToMarkers(listeStations) {
 		var iteStation;
@@ -54,7 +67,9 @@ window.onload=function(){
 	       bounds.extend(extendPoint1);
 	       bounds.extend(extendPoint2);
 	    }
-		myMap.fitBounds(bounds);
+	    if (centrerCarte) {
+	    	myMap.fitBounds(bounds);
+	    }
 	}
 
 	//Ajouter un Marker � la MAP
@@ -106,17 +121,14 @@ window.onload=function(){
 		google.maps.event.addListener(myMarker, 'click', function() {
 			addDivStation(markerInfos);
 			document.getElementById('stationToAfficheInfoID').value = markerInfos[var_id];
-			if (oldInfoBulle != null) {
-				oldInfoBulle.close(myMap, oldMarker);
-				
-			}
-			if (oldInfoBulle != myInfoWindow) {
-			//	myInfoWindow.open(myMap,myMarker);
-				oldInfoBulle = myInfoWindow;
+			
+				var image = myMarker.getIcon();
+				myMarker.setIcon('images/iconeStation_E.png');
+				if (oldMarker != null) {
+					oldMarker.setIcon(oldImage);
+				}
 				oldMarker = myMarker;
-			} else {
-				oldInfoBulle = null;
-			}
+				oldImage = image;
 		});
 	}
 

@@ -45,7 +45,7 @@ if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != '') {
 		$adr = $_POST["searchAdresse"];
 		$rayon = $_POST["rayon"];
 		$coords = $listeStation->getStationsByAdresse($adr, $rayon, $carbuType);
-		Fonctions::inputHidden('CoordCarte', $coords['lat'].'-'.$coords['lng']);
+		Fonctions::inputHidden('CoordCarte', $coords['lat'].'@'.$coords['lng']);
 		$critere = 'Recherche par adresse - '.$adr.' avec un rayon de '.$rayon.' km';
 	} else if ($_POST['actionForm'] == "searchArroundMe") {
 		Fonctions::inputHidden('rayonAroundMe', $_POST['rayonAroundMe']);
@@ -59,6 +59,12 @@ if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != '') {
 		$decodeListe = urldecode($_POST['listeStation']);
 		$stations = unserialize($decodeListe);
 		$listeStation->getStationsByID($stationToAfficheInfoID, $stations);
+	} else if ($_POST['actionForm'] == "searchHome") {
+		Fonctions::inputHidden('searchAdresse', $_POST['searchAdresse']);
+		$adr = $_POST["searchAdresse"];
+		$coords = $listeStation->getStationsByAdresse($adr, '20', $carbuType);
+		Fonctions::inputHidden('CoordCarte', $coords['lat'].'@'.$coords['lng']);
+		$critere = 'Recherche domicile ('.$adr.') - Rayon de 20 km';
 	}
 } else {
 	$listeStation->getStationsArroundMe('10', $carbuType);

@@ -15,9 +15,11 @@ require_once 'UserData.inc.php';
 //---------------------------------------------------------------------------
 class User {
 	private $userName;
+	private $adresse;
 	public $password;
 	public $role;
 	public $id_user;
+	
 
 
 	function __construct() {
@@ -30,8 +32,13 @@ class User {
 	public function isExistUser($login, $pwd) {
 		if ($login == 'TGOU' && $pwd == 'pass') {
 			$this->userName = 'Thomas';
-			return true;			
+			$this->adresse = '10 allée de l\'église 40280 Benquet';
+			return true;
 		} return false;	
+	}
+	
+	public function getAdresse() {
+		return $this->adresse;
 	}
 
 	public function getUserName() {
