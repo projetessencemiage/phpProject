@@ -75,9 +75,6 @@ if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != '') {
 $infoStations = $listeStation->getInformationsStations();
 $nbStation =  count($listeStation->getStations());
 
-//Gestion affichage Station par default
-Fonctions::inputHidden('stationToAfficheInfoID', $stationToAfficheInfoID);
-
 if (array_key_exists('stationToAfficheInfoID', $_POST) && $_POST['stationToAfficheInfoID'] != "") {
 $stationToAfficheInfoID = $_POST['stationToAfficheInfoID'];
 $stationToAfficheInfo = $listeStation->getStationsByID($stationToAfficheInfoID, $listeStation->getStations());
@@ -91,7 +88,8 @@ $stationToUpdatePrice = $_POST['stationToAfficheInfoID'];
 
 //Gestion Station Update Price
 Fonctions::inputHidden('stationToUpdatePrice', $stationToAfficheInfoID);
-
+//Gestion affichage Station par default
+Fonctions::inputHidden('stationToAfficheInfoID', $stationToAfficheInfoID);
 
 //Gestion de la liste déroulante
 require_once('ListeCarburantClass.inc.php');

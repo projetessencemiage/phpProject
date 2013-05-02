@@ -16,8 +16,8 @@ require_once 'UserData.inc.php';
 class User {
 	private $userName;
 	private $adresse;
+	private $role;
 	public $password;
-	public $role;
 	public $id_user;
 	
 
@@ -33,6 +33,7 @@ class User {
 		if ($login == 'TGOU' && $pwd == 'pass') {
 			$this->userName = 'Thomas';
 			$this->adresse = '10 allée de l\'église 40280 Benquet';
+			$this->role = 2;
 			return true;
 		} return false;	
 	}
@@ -43,6 +44,10 @@ class User {
 
 	public function getUserName() {
 		return $this->userName;
+	}
+	
+	public function getRole() {
+		return $this->role;
 	}
 	
 	public function getUser($nom) {

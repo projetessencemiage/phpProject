@@ -18,20 +18,17 @@ require_once 'StructureClass.inc.php';
 require_once 'MyExceptionClass.inc.php';
 require_once 'FonctionsClass.inc.php';
 
-
-$fic='./application/inc/param_serveur.txt';
-
-
 date_default_timezone_set('Europe/London');
-
-define ('COULEUR_FOND','#99CCCC');
 
 define ('NL',"\r\n");
 
-define ('ROLE_SUPADM',0); //Role super-administrateur
-define ('ROLE_ADM', 1); //Role administrateur
-define ('ROLE_PROF', 2); //Role controleur de gestion
+define ('ROLE_VISITEUR', 0); //Role visiteur
+define ('ROLE_USER', 1); //Role user
+define ('ROLE_ADMIN', 2); //Role admin
 
 define ('URL_WCF', "http://projetm2miage.no-ip.biz:8084");//URL webService WCF
 define ('GMAP_KEY', "AIzaSyCCUByYr5--YM9yGNvIZQJbbq9htgLwm9U");
+
+define('USER', 'USER');
+define('USER_ROLE', 'USER_ROLE');
 ?>

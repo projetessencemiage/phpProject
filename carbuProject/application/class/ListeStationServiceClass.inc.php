@@ -92,6 +92,14 @@ class ListeStationService {
 		$this->arrayToListOfStationsDistance($dom,$carbuType);
 	}
 	
+	public function getStationsToValid(){
+		$this->soapClient->GetPrixCodePostal(array("codePostal" => '33400'));
+		$result = $this->soapClient->__getLastResponse();
+		$dom = new DomDocument();
+		$dom->loadXML($result);
+		$this->arrayToListOfStations($dom, '1');
+	}
+	
 	public function arrayToListOfStations($dom, $carbuType){
 		
 		$this->listeStations = array();
@@ -280,31 +288,5 @@ class ListeStationService {
 		}
 		return $infos;
 	}
-// 	function enforce_array($obj) {
-// 		$array = (array)$obj;
-// 		if(empty($array)) {
-// 			$array = '';
-// 		}
-// 		else {
-// 			foreach($array as $key=>$value) {
-// 				if(!is_scalar($value)) {
-// 					if(is_a($value,'SimpleXMLElement')) {
-// 						$tmp = memcache_objects_to_array($value);
-// 						if(!is_array($tmp)) {
-// 							$tmp = ''.$value;
-// 						}
-// 						$array[$key] = $tmp;
-// 					}
-// 					else {
-// 						$array[$key] = $this->enforce_array($value);
-// 					}
-// 				}
-// 				else {
-// 					$array[$key] = $value;
-// 				}
-// 			}
-// 		}
-// 		return $array;
-// 	}
-
+	
 }
