@@ -23,7 +23,6 @@ class User {
 	private $adresse;
 	private $cp;
 	private $ville;
-	private $phone;
 	private $mail;
 	private $role;
 	private $avatar;
@@ -38,7 +37,6 @@ class User {
 		$this->adresse = '';
 		$this->cp = '';
 		$this->ville = '';
-		$this->phone = '';
 		$this->mail = '';
 		$this->role = '';
 		$this->avatar = '';
@@ -53,7 +51,6 @@ class User {
 			$this->adresse = '10 allée de l\'église';
 			$this->cp = '40280';
 			$this->ville = 'Benquet';
-			$this->phone = '0600000011';
 			$this->mail = 'thomas@gmail.com';
 			return true;
 		} return false;	
@@ -83,13 +80,9 @@ class User {
 	public function getVille() {
 		return $this->ville;
 	}
-	public function getPhone() {
-		return $this->phone;
-	}
 	public function getMail() {
 		return $this->mail;
 	}
-	
 	public function getRole() {
 		return $this->role;
 	}
