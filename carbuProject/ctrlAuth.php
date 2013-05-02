@@ -25,8 +25,9 @@ if ($login == "" || $pwd == "") {
 	if ($user->isExistUser($login, $pwd)) {
 		$code = 1;
 		$message = "Bienvenue sur l'application";
-		$_SESSION['USER'] = serialize($user);
-		$_SESSION['navMessage'] = '';
+		$_SESSION[USER] = serialize($user);
+		$_SESSION[USER_ROLE] = $user->getRole();
+		$_SESSION['navMessage'] = 'Connexion';
 	} else {
 		$code = 3;
 		$message = "Login/Password incorect";

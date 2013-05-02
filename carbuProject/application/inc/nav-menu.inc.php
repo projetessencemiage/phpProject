@@ -40,9 +40,15 @@ echo '
     	$message = '';
     	$affiche = false;
     	if (array_key_exists('navMessage', $_SESSION)) {
-    		$class = 'alert alert-success';
-    		$alert = 'Well done ! - ';
-    		$message = 'Bienvenue '.$user->getUserName();
+    		if ($_SESSION['navMessage'] == 'Connexion') {
+    			$class = 'alert alert-success';
+    			$alert = 'Well done ! - ';
+    			$message = 'Bienvenue '.$user->getUserName();
+    		} else if ($_SESSION['navMessage'] == 'noDroit') {
+    			$class = 'alert alert-error';
+    			$alert = 'Interdit - ';
+    			$message = 'Vous n\'avez pas accès à cette page, droits insuffisants';
+    		}
     		$affiche = true;
     		unset($_SESSION['navMessage']);
     	}
