@@ -14,35 +14,80 @@ require_once 'UserData.inc.php';
 // Classe User
 //---------------------------------------------------------------------------
 class User {
+	private $id_user;
 	private $userName;
+	private $password;
+	private $civ;
+	private $nom;
+	private $prenom;
 	private $adresse;
-	public $password;
-	public $role;
-	public $id_user;
-	
-
+	private $cp;
+	private $ville;
+	private $phone;
+	private $mail;
+	private $role;
+	private $avatar;
 
 	function __construct() {
-		$this->userName  = '';
-		$this->password  = '';
-		$this->role      = '';
-		$this->id_user      = '';
+		$this->id_user = '';
+		$this->userName = '';
+		$this->password = '';
+		$this->civ = '';
+		$this->nom = '';
+		$this->prenom = '';
+		$this->adresse = '';
+		$this->cp = '';
+		$this->ville = '';
+		$this->phone = '';
+		$this->mail = '';
+		$this->role = '';
+		$this->avatar = '';
 	}
 	
 	public function isExistUser($login, $pwd) {
 		if ($login == 'TGOU' && $pwd == 'pass') {
-			$this->userName = 'Thomas';
-			$this->adresse = '10 allée de l\'église 40280 Benquet';
+			$this->userName = $login;
+			$this->civ = 'M. ';
+			$this->nom = 'Gourgues';
+			$this->prenom = 'Thomas';
+			$this->adresse = '10 allée de l\'église';
+			$this->cp = '40280';
+			$this->ville = 'Benquet';
+			$this->phone = '0600000000';
+			$this->mail = 'thomas.gourgues@gmail.com';
 			return true;
 		} return false;	
 	}
 	
+	public function getId_user() {
+		return $this->id_user;
+	}
+	public function getUserName() {
+		return $this->userName;
+	}
+	public function getCiv() {
+		return $this->civ;
+	}
+	public function getNom() {
+		return $this->nom;
+	}
+	public function getPrenom() {
+		return $this->prenom;
+	}
 	public function getAdresse() {
 		return $this->adresse;
 	}
-
-	public function getUserName() {
-		return $this->userName;
+	public function getCp() {
+		return $this->cp;
+	}
+	public function getVille() {
+		return $this->ville;
+	}
+	public function getPhone() {
+		return $this->phone;
+	}
+	public function getMail() {
+		return $this->mail;
 	}
 	
 	public function getUser($nom) {
