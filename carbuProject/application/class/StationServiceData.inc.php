@@ -11,12 +11,13 @@
 
 class StationServiceData {
 	static function validerStation($id) {
-	//Appel WS
+	$soapClient = new SoapClient(URL_WCF."/ActionAdmin.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
+	$soapClient->ValiderStation(array("id_station" => $id));
 	}
 	
 	static function annulerStation($id) {
-	//Appel WS
-		
+	$soapClient = new SoapClient(URL_WCF."/ActionAdmin.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
+	$soapClient->SupprimerStation(array("id_station" => $id));
 	}
 };
 ?>

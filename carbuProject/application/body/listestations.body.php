@@ -106,8 +106,11 @@ echo "<table id=\"tablesorter-demo\" class=\"tablesorter\" border=\"0\" cellpadd
 			<th>Station</th>
 			<th>Prix</th>
 			<th>Mise à jour</th>
-			<th>Maps</th>
-		</tr>
+			<th>Maps</th>";
+			if (Fonctions::getRole($_SESSION) == ROLE_ADMIN) {
+				echo "<th>Update</th>";
+			}
+		echo "</tr>
 	</thead>";
 
 echo "<tbody>";
@@ -133,7 +136,17 @@ foreach ($stations as $key => $value) {
 			echo "<td>".$prix."</td>";
 			echo "<td>".$dateMaj."</td>";
 			echo '<td><img src="images/icone_france_mini.png" alt="Maps" title="Go to maps" onClick="stationToMaps(\''.$id.'\')"/></td>';
-		echo "</tr>";
+			if (Fonctions::getRole($_SESSION) == ROLE_ADMIN) {
+				echo '<td>';
+				echo '<a  onClick="goToInfoStation(\''.$id.'\')" title="Informations sur la station ">';
+				echo '<i class="icon-pencil"></i>';
+				echo '</a>';
+				echo '</td>';
+				$sStation = serialize($value);
+				$eStation = urlencode($sStation);
+				Fonctions::inputHidden('station'.$id, $eStation);
+			}
+			echo "</tr>";
 		}
 	}
 }
@@ -144,7 +157,6 @@ $serializeStation = serialize($stations);
 $stationEncode = urlencode($serializeStation);
 Fonctions::inputHidden('listeStation', $stationEncode);
 Fonctions::inputHidden('stationToAfficheInfoID', '');
-
 ?>
 <h3>Carte</h3>
 <P style="text-align:center"><img src="images/carte.png" alt="Go to maps" title="Afficher les stations sur une carte" onClick="stationsToMaps()"/></P>
