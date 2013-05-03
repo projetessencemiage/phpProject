@@ -4,7 +4,7 @@ echo "<h3>Bienvenue sur votre espace personnel</h3>";
 
 $user = unserialize($_SESSION['USER']);
 
-echo $user->getCiv().$user->getPrenom().' '.$user->getNom();echo "</br>";
+echo "Bonjour ".$user->getCiv().$user->getPrenom().' '.$user->getNom();echo "</br>";
 
 echo"
 

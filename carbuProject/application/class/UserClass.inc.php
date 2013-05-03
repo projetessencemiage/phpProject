@@ -97,6 +97,12 @@ class User {
 	public function getRole() {
 		return $this->role;
 	}
+	public function getCarbu() {
+		return $this->carbu;
+	}
+	public function getStation() {
+		return $this->station;
+	}
 	
 	public function getAdresseComplete() {
 		return $this->adresse.' '.$this->getCp().' '.$this->ville;
