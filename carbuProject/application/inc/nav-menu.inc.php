@@ -25,6 +25,7 @@ echo '
     							<input id="connexionLogin" type="text" class="input-small" placeholder="Login">
     							<input id="connexionPwd" type="password" class="input-small" placeholder="Password">
     							<button onClick="return connexionUser()" class="btn-success">Connexion</button>
+    							<button onClick="return newUser() " class="btn-success">Sign In</button>
     							';
     						} else {
     							echo '
