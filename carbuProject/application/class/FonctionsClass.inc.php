@@ -411,5 +411,13 @@ class Fonctions {
 		</div>
 		';
 	}
+	
+	public static function getRole($session) {
+		if (array_key_exists(USER_ROLE, $session)) {
+			return $_SESSION[USER_ROLE];
+		} else {
+			return ROLE_VISITEUR;
+		}
+	}
 }
 ?>

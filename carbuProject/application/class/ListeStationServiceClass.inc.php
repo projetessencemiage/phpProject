@@ -92,6 +92,15 @@ class ListeStationService {
 		$this->arrayToListOfStationsDistance($dom,$carbuType);
 	}
 	
+	public function getStationsToValid(){
+		$soapAdmin = new SoapClient(URL_WCF."/ActionAdmin.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
+		$soapAdmin->ListStationAValider(array());
+		$result = $soapAdmin->__getLastResponse();
+		$dom = new DomDocument();
+		$dom->loadXML($result);
+		$this->arrayToListOfStations($dom, '1');
+	}
+	
 	public function arrayToListOfStations($dom, $carbuType){
 		
 		$this->listeStations = array();
@@ -107,6 +116,7 @@ class ListeStationService {
 				$id_station = $station->getElementsByTagName("id_station")->item(0)->nodeValue;
 				$tel = $station->getElementsByTagName("tel")->item(0)->nodeValue;
 				$enseigne = $station->getElementsByTagName("enseigne_name")->item(0)->nodeValue;
+				$dateCreation = $station->getElementsByTagName("dateCreation")->item(0)->nodeValue;
 			
 			$price_list = new ListePrix();
 			$isBest=false;
@@ -142,7 +152,7 @@ class ListeStationService {
 			if(sizeof($price_list->getListTypetoPrix()) == 0){
 			$img = 'iconeStation_sans_prix.png';
 			}
-			$station = new StationService($address, $id_station, $enseigne, $city, $cp, $tel, $price_list, $lattitude, $longitude, $img,'');
+			$station = new StationService($address, $id_station, $enseigne, $city, $cp, $tel, $price_list, $lattitude, $longitude, $img,'', $dateCreation);
 			if($isBest){
 				if(! is_null($station_min)){
 					
@@ -280,31 +290,5 @@ class ListeStationService {
 		}
 		return $infos;
 	}
-// 	function enforce_array($obj) {
-// 		$array = (array)$obj;
-// 		if(empty($array)) {
-// 			$array = '';
-// 		}
-// 		else {
-// 			foreach($array as $key=>$value) {
-// 				if(!is_scalar($value)) {
-// 					if(is_a($value,'SimpleXMLElement')) {
-// 						$tmp = memcache_objects_to_array($value);
-// 						if(!is_array($tmp)) {
-// 							$tmp = ''.$value;
-// 						}
-// 						$array[$key] = $tmp;
-// 					}
-// 					else {
-// 						$array[$key] = $this->enforce_array($value);
-// 					}
-// 				}
-// 				else {
-// 					$array[$key] = $value;
-// 				}
-// 			}
-// 		}
-// 		return $array;
-// 	}
-
+	
 }

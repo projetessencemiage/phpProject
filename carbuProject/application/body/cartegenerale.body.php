@@ -51,7 +51,7 @@ if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != '') {
 		Fonctions::inputHidden('rayonAroundMe', $_POST['rayonAroundMe']);
 		$rayonArround = $_POST["rayonAroundMe"];
 		$listeStation->getStationsArroundMe($rayonArround, $carbuType);
-		$critere = 'Recherche around me - Rayon: '.$rayonArround.' km';
+		$critere = 'Recherche autour de ma position actuelle - Rayon: '.$rayonArround.' km';
 	} else if ($_POST['actionForm'] == "stationFromList") {
 		Fonctions::inputHidden('stationFromList', $_POST['stationFromList']);
 		Fonctions::inputHidden('listeStation', $_POST['listeStation']);
@@ -68,15 +68,12 @@ if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != '') {
 	}
 } else {
 	$listeStation->getStationsArroundMe('10', $carbuType);
-	$critere = 'Recherche par default around me - Rayon 10 km';
+	$critere = 'Recherche autour de ma position actuelle - Rayon 10 km';
 }
 
 //Recuperation des infos des Stations pour affichage dans la MAP
 $infoStations = $listeStation->getInformationsStations();
 $nbStation =  count($listeStation->getStations());
-
-//Gestion affichage Station par default
-Fonctions::inputHidden('stationToAfficheInfoID', $stationToAfficheInfoID);
 
 if (array_key_exists('stationToAfficheInfoID', $_POST) && $_POST['stationToAfficheInfoID'] != "") {
 $stationToAfficheInfoID = $_POST['stationToAfficheInfoID'];
@@ -91,7 +88,8 @@ $stationToUpdatePrice = $_POST['stationToAfficheInfoID'];
 
 //Gestion Station Update Price
 Fonctions::inputHidden('stationToUpdatePrice', $stationToAfficheInfoID);
-
+//Gestion affichage Station par default
+Fonctions::inputHidden('stationToAfficheInfoID', $stationToAfficheInfoID);
 
 //Gestion de la liste déroulante
 require_once('ListeCarburantClass.inc.php');

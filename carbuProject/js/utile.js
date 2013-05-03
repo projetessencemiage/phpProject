@@ -24,10 +24,10 @@ function connexionUser() {
 			if (rep[0] == 'OK'){
 				var code = rep[1];
 				var message = rep[2];
-				if(code == 1) {
+				if(code == 0) {
 					document.forms['formGeneral'].submit();
 				} else {
-					afficherMsgMenuNav(code, message);
+					afficherMsgMenuNav(3, message);
 				}
 			}
 			else alert('ERREUR' + xhr.responseText);
