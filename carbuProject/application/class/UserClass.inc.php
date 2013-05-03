@@ -23,7 +23,6 @@ class User {
 	private $adresse;
 	private $cp;
 	private $ville;
-	private $phone;
 	private $mail;
 	private $role;
 	private $avatar;
@@ -40,7 +39,6 @@ class User {
 		$this->adresse = '';
 		$this->cp = '';
 		$this->ville = '';
-		$this->phone = '';
 		$this->mail = '';
 		$this->role = '';
 		$this->avatar = '';
@@ -93,13 +91,9 @@ class User {
 	public function getVille() {
 		return $this->ville;
 	}
-	public function getPhone() {
-		return $this->phone;
-	}
 	public function getMail() {
 		return $this->mail;
 	}
-	
 	public function getRole() {
 		return $this->role;
 	}
@@ -107,41 +101,6 @@ class User {
 	public function getAdresseComplete() {
 		return $this->adresse.' '.$this->getCp().' '.$this->ville;
 	}
-	public function getUser($nom) {
-		try {
-			$tableau = UserData::getUser($nom);
-			$this->userName  = $tableau[0][0];
-			$this->password  = $tableau[0][1];
-			$this->role     = $tableau[0][2];
-			$this->id_user     = $tableau[0][3];
-		} catch (MyException $e) {
-			throw new MyException($e->getError('User.getUser'));
-			return false;
-		}
-	}
-
-
-	public function getAllUser($nom) {
-		try {
-			$users = UserData::getAllUsers($nom);
-			return $users;
-		} catch (MyException $e) {
-			throw new MyException($e->getError('User.getAllUsers'));
-			return false;
-		}
-	}
-	public function save() {
-		try {
-	    if (!$this->isExistUser($this->userName)){
-		UserData::create($this);
-	    }else{
-		UserData::update($this);
-	    }
-	} catch (MyException $e) {
-	    throw new MyException($e->getError('User.save'));
-	    return false;
-        }
-    }
 };
 
 ?>

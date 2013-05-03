@@ -27,6 +27,8 @@ echo '
     							<button onClick="return connexionUser()" class="btn-success">Connexion</button>
     							';
     						} else {
+    							echo '
+    							<ul class="nav"><li><a href="UserInfo.php" title="Profil">Mon compte</a></li>';
     							echo '<button onClick="return deconnexionUser()" class="btn btn-danger">Déconnexion</button>';
     						}
     					echo '</div>
