@@ -24,9 +24,6 @@ function validerFormNewStation(goTo) {
 		} else if (adresse == '' ) {
 			alert('Veuillez renseigner l\'adresse');
 			isValid = false;
-		} else if (tel == '' | tel.length != 10) {
-			alert('Veuillez renseigner le numéro de téléphone');
-			isValid = false;
 		} else if (city == '') {
 			alert('Veuillez renseigner la ville');
 			isValid = false;

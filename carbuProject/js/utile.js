@@ -64,3 +64,8 @@ function deconnexionUser() {
 	document.forms['formGeneral'].action = "logout.php";
 	document.forms['formGeneral'].submit();
 }
+
+function newUser(){
+	document.forms['formGeneral'].action = "Inscription.php";
+	document.forms['formGeneral'].submit();
+}
