@@ -23,8 +23,9 @@ class StationService {
 	private $longitude;
 	private $icone;
 	private $distance;
+	private $dateCreation;
 
-	function __construct($adr, $_id, $_enseigne, $_city, $_code_postal, $_tel, $_ListePrix, $_lattitude, $_longitude, $_icone, $_distance) {
+	function __construct($adr, $_id, $_enseigne, $_city, $_code_postal, $_tel, $_ListePrix, $_lattitude, $_longitude, $_icone, $_distance, $_dateCreation='') {
 		$this->adresse  = $adr;
 		$this->id = $_id;
 		$this->enseigne = $_enseigne;
@@ -36,9 +37,9 @@ class StationService {
 		$this->longitude = $_longitude;
 		$this->distance = $_distance;
 		$this->icone = $_icone;
+		$this->dateCreation = $_dateCreation;
 	}
 	
-
 	public function getAdresse(){
 		return $this->adresse;
 	}
@@ -80,6 +81,9 @@ class StationService {
 	}
 	public function setIcone($newIcone) {
 		$this->icone = $newIcone;
+	}
+	public function getDateCreation(){
+		return $this->dateCreation;
 	}
 
 }

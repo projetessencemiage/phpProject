@@ -4,7 +4,7 @@ if (array_key_exists(USER, $_SESSION)) {
 	$user = unserialize($_SESSION[USER]);
 	//Gestion de la carte autour de chez moi
 	//adresse de l'user
-	$adresseUser =  $user->getAdresse();
+	$adresseUser =  $user->getAdresseComplete();
 	//Champ caché pour le JS
 	Fonctions::inputHidden('searchAdresse', $adresseUser);
 	Fonctions::inputHidden('actionForm', '');	

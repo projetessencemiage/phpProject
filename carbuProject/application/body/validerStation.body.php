@@ -10,6 +10,7 @@ $stations = $listeStation->getStations();
 	<table id="tablesorter-demo" class="tablesorter" border="0" cellpadding="0" cellspacing="1">
 	<thead>
 		<tr>
+			<th>Date d'ajout</th>
 			<th>Code Postal</th>
 			<th>Ville</th>
 			<th>Adresse</th>
@@ -20,12 +21,14 @@ $stations = $listeStation->getStations();
 	</thead>
 	<?php 
 	foreach ($stations as $key => $station) {
+		$date = $station->getDateCreation();
 		$cp = $station->getCP();
 		$ville = $station->getVille();
 		$adresse = $station->getAdresse();
 		$enseigne = $station->getEnseigne();
 		$id = $station->getID();
 				echo "<tr>";
+				echo "<td>".$date."</td>";
 				echo "<td>".$cp."</td>";
 				echo "<td>".$ville."</td>";
 				echo "<td>".$adresse."</td>";

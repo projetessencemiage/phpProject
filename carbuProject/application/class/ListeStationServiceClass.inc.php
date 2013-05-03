@@ -93,8 +93,9 @@ class ListeStationService {
 	}
 	
 	public function getStationsToValid(){
-		$this->soapClient->GetPrixCodePostal(array("codePostal" => '33400'));
-		$result = $this->soapClient->__getLastResponse();
+		$soapAdmin = new SoapClient(URL_WCF."/ActionAdmin.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
+		$soapAdmin->ListStationAValider(array());
+		$result = $soapAdmin->__getLastResponse();
 		$dom = new DomDocument();
 		$dom->loadXML($result);
 		$this->arrayToListOfStations($dom, '1');
@@ -115,6 +116,7 @@ class ListeStationService {
 				$id_station = $station->getElementsByTagName("id_station")->item(0)->nodeValue;
 				$tel = $station->getElementsByTagName("tel")->item(0)->nodeValue;
 				$enseigne = $station->getElementsByTagName("enseigne_name")->item(0)->nodeValue;
+				$dateCreation = $station->getElementsByTagName("dateCreation")->item(0)->nodeValue;
 			
 			$price_list = new ListePrix();
 			$isBest=false;
@@ -150,7 +152,7 @@ class ListeStationService {
 			if(sizeof($price_list->getListTypetoPrix()) == 0){
 			$img = 'iconeStation_sans_prix.png';
 			}
-			$station = new StationService($address, $id_station, $enseigne, $city, $cp, $tel, $price_list, $lattitude, $longitude, $img,'');
+			$station = new StationService($address, $id_station, $enseigne, $city, $cp, $tel, $price_list, $lattitude, $longitude, $img,'', $dateCreation);
 			if($isBest){
 				if(! is_null($station_min)){
 					
