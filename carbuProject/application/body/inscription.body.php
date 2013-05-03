@@ -12,9 +12,14 @@ if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != "") {
 		$securimage = new Securimage();
 		$result = $securimage->check($_POST['captcha_code']); 
 		if ($result == false) {
-			header("location:inscription.php");
+			echo '
+			<div class="alert alert-error" id="boxMsg">
+			<button type="button" class="close" data-dismiss="alert" onclick="quitBox(\'boxMsg\')" >&times;</button>
+			<strong> Erreur - </strong> Captcha incorrect
+			<br/>
+			</div>';
+			exit;
 		}
-			
 		
 		$civilite = $_POST["civil"];
 		$pseudo = $_POST["pseudo"];
@@ -71,14 +76,14 @@ if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != "") {
 					onChange="deleteInput('mail')" /> 
 			</fieldset>
 			<fieldset>
+			<INPUT type= "radio" name="civil" value="monsieur" checked="checked"> Monsieur
+			<INPUT type= "radio" name="civil" value="madame"> Madame
+			<INPUT type= "radio" name="civil" value="mademoiselle"> Mademoiselle
+			</fieldset>
+			<fieldset>
 			<input type="text" name="nom" id="nom"
 					placeholder="Nom"
 					onChange="deleteInput('nom')" /> 
-			</fieldset>
-			<fieldset>
-			<INPUT type= "radio" name="civil" value="monsieur"> Monsieur
-			<INPUT type= "radio" name="civil" value="madame"> Madame
-			<INPUT type= "radio" name="civil" value="mademoiselle"> Mam'zelle
 			</fieldset>
 			<fieldset>
 			<input type="text" name="prenom" id="prenom"
@@ -114,7 +119,7 @@ if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != "") {
 				<a href="#" onclick="document.getElementById('captcha').src = 'securimage/securimage_show.php?' + Math.random(); return false">[ Different Image ]</a>
 			</fieldset>
 			<p>
-				<input type="submit" value="Around me"
+				<input type="submit" value="S'inscrire"
 					onClick="return validerFormNewUser('Inscription.php')" class="btn btn-success" />
 			</p>
 		</div>
