@@ -4,19 +4,15 @@ require_once('FonctionsClass.inc.php');
 require_once('/securimage/securimage.php');
 
 $listeCarbu = new ListeCarburant();
-$listeC = $listeCarbu->getListCarburant();
+$listeC = $listeCarbu->getListCarburant("id");
+
 if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != "") {
 	Fonctions::inputHidden('actionForm', $_POST['actionForm']);
 	if ($_POST['actionForm'] == "newUser") {
 		$securimage = new Securimage();
-		if ($securimage->check($_POST['captcha_code']) == false) {
-			echo '
-			<div class="alert alert-error" id="boxMsg">
-			<button type="button" class="close" data-dismiss="alert" onclick="quitBox(\'boxMsg\')" >&times;</button>
-			<strong> Erreur - </strong> Captcha erronée
-			<br/>
-			</div>';
-			exit;
+		$result = $securimage->check($_POST['captcha_code']); 
+		if ($result == false) {
+			header("location:inscription.php");
 		}
 			
 		
@@ -31,13 +27,9 @@ if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != "") {
 		$city = $_POST["city"];
 		$carbu = $_POST["carburantType"];
 		
-		var_dump($pseudo);
-		var_dump($mdp);
-		var_dump($mail);
-		var_dump($carbu);
 		try{
 			$clientSoap = new SoapClient("http://projetm2miage.no-ip.biz:8084/UserService.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
-			$clientSoap->InscriptionUser(array("civilite" => $civilite,"nom" => $nom, "prenom" => $prenom, "pseudo" => $pseudo, "email" => $email,"mdp" => $mdp,"adress" => $adresse, "code_postal" => $cp, "ville" => $city, "url_avatar" => null, "string_id_station_favorite" => null, "string_id_carburant_pref" => $carbu));
+			$clientSoap->InscriptionUser(array("civilite" => $civilite,"nom" => $nom, "prenom" => $prenom, "pseudo" => $pseudo, "email" => $mail,"mdp" => $mdp,"adresse" => $address, "code_postal" => $cp, "ville" => $city, "url_avatar" => null, "string_id_station_favorite" => null, "string_id_carburant_pref" => $carbu));
 			var_dump($clientSoap->__getLastResponse());
 		}catch (Exception $e){
 			echo '
@@ -46,6 +38,7 @@ if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != "") {
 			<strong> Erreur - </strong> Impossible de joindre le service
 			<br/>
 			</div>';
+			
 		}
 	}
 }
@@ -60,7 +53,7 @@ if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != "") {
 	</div>
 </div>
 <div class="row-fluid">
-	<div class="span12"
+	<div class="span12">
 		<div id="divAroundMe">
 			<fieldset>
 			<input type="text" name="pseudo" id="pseudo"
