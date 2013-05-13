@@ -60,7 +60,7 @@ if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != "") {
 	</div>
 </div>
 <div class="row-fluid">
-	<div class="span12"
+	<div class="span12">
 		<div id="divAroundMe">
 			<fieldset>
 			<input type="text" name="pseudo" id="pseudo"

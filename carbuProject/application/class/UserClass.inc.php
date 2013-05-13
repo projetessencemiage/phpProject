@@ -97,6 +97,9 @@ class User {
 	public function getRole() {
 		return $this->role;
 	}
+	public function getAvatar() {
+		return $this->avatar;
+	}
 	public function getCarbu() {
 		return $this->carbu;
 	}
