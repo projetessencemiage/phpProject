@@ -1,6 +1,5 @@
 
 function validerFormNewUser(goTo) {
-	alert("test");
 	document.getElementById('formGeneral').action = goTo;
 	var checkInput = false;
 	var isValid = true;
@@ -14,7 +13,6 @@ function validerFormNewUser(goTo) {
 		var city = document.getElementById('city').value;
 		var carburant = document.getElementById('carburantType').value;
 
-		alert(carburant);
 		if (pseudo == '') {
 			alert('Veuillez renseigner vvotre pseudonyme de connexion');
 			isValid = false;

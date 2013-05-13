@@ -12,6 +12,7 @@
 require_once 'StationServiceClass.inc.php';
 require_once 'ListePrixClass.inc.php';
 require_once 'PrixClass.inc.php';
+require_once 'EnseigneClass.inc.php';
 
 class ListeStationService {
 	private $listeStations;
@@ -115,9 +116,10 @@ class ListeStationService {
 				$longitude = $station->getElementsByTagName("longitude")->item(0)->nodeValue;
 				$id_station = $station->getElementsByTagName("id_station")->item(0)->nodeValue;
 				$tel = $station->getElementsByTagName("tel")->item(0)->nodeValue;
-				$enseigne = $station->getElementsByTagName("enseigne_name")->item(0)->nodeValue;
 				$dateCreation = $station->getElementsByTagName("dateCreation")->item(0)->nodeValue;
-			
+				$enseigneName = $station->getElementsByTagName("enseigne_name")->item(0)->nodeValue;
+				$enseigneID = $station->getElementsByTagName("id_enseigne")->item(0)->nodeValue;
+				$enseigne = new Enseigne($enseigneID, $enseigneName);
 			$price_list = new ListePrix();
 			$isBest=false;
 			$equal=false;
@@ -191,7 +193,6 @@ class ListeStationService {
 		$array = $dom->getElementsByTagName('StationAndDistance');
 			$station_min= array();
 		$prix_min = 1000;
-		
 		foreach ($array as $station){
 			$distance = $station->childNodes->item(0)->nodeValue;
 			
@@ -204,8 +205,10 @@ class ListeStationService {
 			$tel = $station->childNodes->item(1)->getElementsByTagName("tel")->item(0)->nodeValue;
 				
 			
-			$enseigne = $station->childNodes->item(1)->getElementsByTagName("enseigne_name")->item(0)->nodeValue;
-							$price_list = new ListePrix();
+			$enseigneName = $station->childNodes->item(1)->getElementsByTagName("enseigne_name")->item(0)->nodeValue;
+			$enseigneID = $station->childNodes->item(1)->getElementsByTagName("id_enseigne")->item(0)->nodeValue;
+			$enseigne = new Enseigne($enseigneID, $enseigneName);
+			$price_list = new ListePrix();
 			$isBest=false;
 			$equal=false;
 			$img = "iconeStation_sans_prix.png";

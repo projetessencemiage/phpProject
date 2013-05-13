@@ -10,6 +10,7 @@
 **/
 require_once 'StationServiceData.inc.php';
 require_once 'ListePrixClass.inc.php';
+require_once 'EnseigneClass.inc.php';
 
 class StationService {
 	private $id;
@@ -49,8 +50,13 @@ class StationService {
 	}
 	
 	public function getEnseigne(){
+		return $this->enseigne->getenseigne_name();
+	}
+	
+	public function getEnseigneObject(){
 		return $this->enseigne;
 	}
+	
 	public function getVille(){
 		return $this->ville;
 	}

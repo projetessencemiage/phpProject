@@ -14,6 +14,7 @@
 class UserData {
 	
 	static function isExistUser($login, $mdp) {
+		$mdp = hash('SHA256', $mdp);
 		#requete de v�rification du nom et du mot de passe
 		$soapClient = new SoapClient(URL_WCF."/UserService.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
 		$soapClient->Identification(array("identifiant" => $login, "mdp" => $mdp));
