@@ -419,5 +419,12 @@ class Fonctions {
 			return ROLE_VISITEUR;
 		}
 	}
+	
+	public static function activeMenu($page, $urlEnCours) {
+		if( strstr($urlEnCours, $page)) {
+			return 'active';
+		}
+		return '';
+	}
 }
 ?>
