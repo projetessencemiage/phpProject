@@ -1,8 +1,28 @@
 <?php 
-//POST infos stations
-$idStation =  $_POST['stationToAfficheInfoID'];
-$stationD = urldecode($_POST['station'.$idStation]);
-$station = unserialize($stationD);
+
+if (array_key_exists('stationToAfficheInfoID', $_POST)) {
+	//POST infos stations
+	$idStation =  $_POST['stationToAfficheInfoID'];
+	$stationSer = $_POST['station'.$idStation];
+	$stationD = urldecode($stationSer);
+	$station = unserialize($stationD);	
+} else if (array_key_exists('actionPage', $_POST)) {
+	if ($_POST['actionPage'] == 'actionUpdateInfos') {
+	Fonctions::messageToString(true, 'alert alert-success', 'OK - ', 'Infos station mise à jour avec succès');
+	} else if ($_POST['actionPage'] == 'actionUpdatePrix') {
+	Fonctions::messageToString(true, 'alert alert-success', 'OK - ', 'Prix station mise à jour avec succès');
+	}
+	$stationSer = $_POST['stationSubmit'];
+	$stationD = urldecode($stationSer);
+	$station = unserialize($stationD);
+	$idStation = $station->getID();
+	$station = StationServiceData::getStationById($idStation);
+}
+
+//Champ caché pour l'input
+Fonctions::inputHidden('stationSubmit', $stationSer);
+Fonctions::inputHidden('actionPage', '');
+
 
 //Liste déroulante Liste Enseignes
 $list_enseignes = new ListeEnseigne();
@@ -56,8 +76,8 @@ Fonctions::inputHidden('idStation',$idStation);
 		</fieldset>
 		<fieldset>
 			<input type="text" name="newStationAdresse" id="newStationAdresse"	placeholder="Adresse de la nouvelle station" value="<?php echo $station->getAdresse();?>" /> 
-			<input type="text"	value="<?php echo $station->getCP();?>" name="newStationCp" id="newStationCp" placeholder="Code postal" />
-			<input type="text" value="<?php echo $station->getVille();?>" name="newStationCity" id="newStationCity"	placeholder="Ville" />
+			<input type="text"	value="<?php echo $station->getCP();?>" name="newStationCp" id="newStationCp" placeholder="Code postal"/>
+			<input type="text" value="<?php echo $station->getVille();?>" name="newStationCity" id="newStationCity"	placeholder="Ville"/>
 		</fieldset>
 		<fieldset>
 			<input type="text" name="newStationPhone" id="newStationPhone" placeholder="Numéro de téléphone" value="<?php echo $station->getPhone();?>" />
@@ -74,6 +94,6 @@ Fonctions::inputHidden('idStation',$idStation);
 				placeholder="Price" />
 		</fieldset>
 	</fieldset>
-	<a class="btn btn-success">Update</a>
+	<a class="btn btn-success" onClick="validerFormUpdatePrix()">Update</a>
 </div>
 <div id="divErreur"/>
