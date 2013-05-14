@@ -9,6 +9,6 @@ function apparaitre(){
             else
            {
                    document.getElementById("texte").style.visibility = "hidden";
-                  document.getElementById("afficher_cacher").innerHTML = "<a href='#' onclick='apparaitre();'>Modifier</a>";
+                  document.getElementById("afficher_cacher").innerHTML = "<a href='#' onclick='apparaitre();'>Modifier mes informations</a>";
            }
 }
