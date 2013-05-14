@@ -51,8 +51,7 @@ function validerFormUpdateInfo() {
 	var newAdresse = document.getElementById('newStationAdresse').value;
 	var newCP = document.getElementById('newStationCp').value;
 	var newVille = document.getElementById('newStationCity').value;
-	var newPhone = document.getElementById('newStationPhone').value;
-	
+	var newPhone = document.getElementById('newStationPhone').value;	
 	getXhr();
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
@@ -62,14 +61,11 @@ function validerFormUpdateInfo() {
 			var msg = split[2];
 			if (split[0] == 'OK') {
 				if (code == 'true') {
-					afficherMsgMenuNav('1', 'Station mise à jour avec succès');
-					document.getElementById('enseigneHtml').innerHTML = newEnseigneName;
-					document.getElementById('adresseHtml').innerHTML = newAdresse + ' ' + newCP + ' ' + newVille;
-					document.getElementById('phoneHtml').innerHTML = newPhone;
+					document.getElementById('actionPage').value = 'actionUpdateInfos';
+					document.forms['formGeneral'].submit();
 				} else {
 					afficherMsgMenuNav('3', msg);
 				}
-				formUpdateInfo();
 			} else {
 				document.getElementById('divErreur').innerHTML  = chaine;
 			}
@@ -84,4 +80,31 @@ function validerFormUpdateInfo() {
 			"&newCP=" + newCP + 
 			"&newVille=" + newVille + 
 			"&newPhone=" + newPhone);
+}
+
+function validerFormUpdatePrix() {
+	var prix = document.getElementById('newPrice').value;
+	var stationID = document.getElementById('idStation').value;
+	var carbuID = document.getElementById('addPriceCarbuType').value;
+	
+	if (!isNumber(prix) || prix == "") {
+		afficherMsgMenuNav('3', "Le champ prix doit être numérique");
+	} else {
+	
+	getXhr();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var chaine = xhr.responseText;
+			var rep = chaine.split('|');
+			if (rep[0] == 'OK'){
+				document.getElementById('actionPage').value = 'actionUpdatePrix';
+				document.forms['formGeneral'].submit();
+			}
+			else alert(xhr.responseText);
+		}
+	}
+	xhr.open("POST", 'ajoutPrixAjax.inc.php', true);
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.send("prix=" + prix + "&stationID=" + stationID + "&carbuID="+	carbuID);
+	}
 }
