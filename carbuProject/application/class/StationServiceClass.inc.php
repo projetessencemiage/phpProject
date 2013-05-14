@@ -91,6 +91,26 @@ class StationService {
 	public function getDateCreation(){
 		return $this->dateCreation;
 	}
-
+	
+	public function setEnseigneName($_enseigne) {
+		$this->enseigne->setName($_enseigne);
+	}
+	
+	public function setEnseigneID($_enseigne) {
+		$this->enseigne->setID($_enseigne);
+	}
+	
+	public function setAdresse($_adresse) {
+		$this->adresse = $_adresse;
+	}
+	public function setVille($_ville) {
+		$this->ville = $_ville;
+	}
+	public function setCP($_cp) {
+		$this->CP = $_cp;
+	}
+	public function setPhone($_phone) {
+		$this->phone = $_phone;
+	}
 }
 ?>

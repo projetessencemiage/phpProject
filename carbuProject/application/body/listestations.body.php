@@ -43,11 +43,11 @@ if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != "") {
 		Fonctions::inputHidden('rayonAroundMe', $_POST['rayonAroundMe']);
 		$rayonArround = $_POST["rayonAroundMe"];
 		$listeStation->getStationsArroundMe($rayonArround, $carbuType);
-		$critere = 'Recherche around me - Rayon: '.$rayonArround.' km';
+		$critere = 'Recherche autour de ma position actuelle - Rayon: '.$rayonArround.' km';
 	}
 } else {
 	$listeStation->getStationsArroundMe('10', $carbuType);
-	$critere = 'Recherche par default around me - Rayon 10 km';
+	$critere = 'Recherche autour de ma position actuelle - Rayon 10 km';
 	Fonctions::inputHidden('actionForm', '');
 }
 

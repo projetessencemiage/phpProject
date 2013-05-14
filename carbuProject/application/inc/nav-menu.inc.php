@@ -5,6 +5,7 @@ require_once 'UserClass.inc.php';
 if (array_key_exists('USER', $_SESSION)) {
 	$user = unserialize($_SESSION['USER']);
 }
+$urlEnCours = $_SERVER['REQUEST_URI'];
 
 echo '
 <h3 class="muted">Carbu Project</h3>
@@ -12,11 +13,11 @@ echo '
 				<div class="navbar-inner">
 					<div class="container">
 						<ul class="nav">
-							<li class="active"><a href="index.php">Home</a></li>
-							<li><a href="CarteGenerale.php" title="Qui est le moins cher ? ">Qui est le moins cher ?</a></li>
-							<li><a href="ListeStations.php" title="Liste des stations ">Liste des stations</a></li>
-							<li><a href="Formulaires.php" title="Formulaire">Trouver une station</a></li>
-							<li><a href="NewStation.php" title="NewStation">Ajouter une station</a></li>
+							<li class="'.Fonctions::activeMenu("index.php", $urlEnCours).'"><a href="index.php">Home</a></li>
+							<li class="'.Fonctions::activeMenu("CarteGenerale.php", $urlEnCours).'"><a href="CarteGenerale.php" title="Qui est le moins cher ? ">Qui est le moins cher ?</a></li>
+							<li class="'.Fonctions::activeMenu("ListeStations.php", $urlEnCours).'"><a href="ListeStations.php" title="Liste des stations ">Liste des stations</a></li>
+							<li class="'.Fonctions::activeMenu("Formulaires.php", $urlEnCours).'"><a href="Formulaires.php" title="Formulaire">Trouver une station</a></li>
+							<li class="'.Fonctions::activeMenu("NewStation.php", $urlEnCours).'"><a href="NewStation.php" title="NewStation">Ajouter une station</a></li>
 						</ul>
 						 
 						<div class="navbar-form pull-right">';
@@ -24,13 +25,13 @@ echo '
     							echo '
     							<input id="connexionLogin" type="text" class="input-small" placeholder="Login">
     							<input id="connexionPwd" type="password" class="input-small" placeholder="Password">
-    							<button onClick="return connexionUser()" class="btn-success">Connexion</button>
+    							<a  class="btn btn-small btn-success" onClick="return connexionUser()">Connexion</a>
     							<a href="inscription.php" class="btn btn-small btn-primary" title="NewUser">Inscription</a>
     							';
     						} else {
     							echo '
     							<ul class="nav"><li><a href="UserInfo.php" title="Profil">Mon compte</a></li>';
-    							echo '<button onClick="return deconnexionUser()" class="btn btn-danger">Déconnexion</button>';
+    							echo '<a onClick="return deconnexionUser()" class="btn btn-danger">Déconnexion</a>';
     						}
     					echo '</div>
 					</div>
