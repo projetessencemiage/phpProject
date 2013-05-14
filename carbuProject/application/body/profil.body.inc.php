@@ -1,17 +1,45 @@
 <?php 
+require_once('ListeCarburantClass.inc.php');
+require_once('FonctionsClass.inc.php');
 
 echo "<h3>Bienvenue sur votre espace personnel</h3>";
-
 $user = unserialize($_SESSION['USER']);
+
+if (array_key_exists('actionPage', $_POST)) {
+	if ($_POST['actionPage'] == 'actionUpdateInfosUser') {
+		$civilite = $_POST['civ'];
+		$nom = $_POST['nom'];
+		$prenom = $_POST['prenom'];
+		$add = $_POST['address'];
+		$cp = $_POST['cp'];
+		$ville = $_POST['city'];
+		$email = $_POST['mail'];
+		$pseudo = $user->getUserName();
+		$url = '';
+		$avatar = $user->getAvatar();
+		$carbu = $user->getCarbu();
+		$id_station = $user->getStation();
+		UserData::updateInfosUser($civilite, $nom, $prenom, $pseudo, $email, $add, $cp, $ville, $url, $id_station, $carbu);	
+		Fonctions::messageToString(true, 'alert alert-success', 'OK - ', 'MAJ OK');		
+	}
+} 
+
+
+$pseudo = $user->getUserName();
+$civilite = $user->getCiv();
 $nom = $user->getNom();
 $prenom = $user->getPrenom();
 $adresse = $user->getAdresseComplete();
-$mail = $user->getMail();
+$add = $user->getAdresse();
+$cp = $user->getCp();
+$ville = $user->getVille();
+$email = $user->getMail();
 $avatar = $user->getAvatar();
-$carburant = $user->getCarbu();
+$carbu = $user->getCarbu();
 $id_station = $user->getStation();
 
-echo "Bonjour ".$user->getCiv().$user->getPrenom().' '.$user->getNom();echo "</br>";
+
+echo "Bonjour ".$civilite.' '.$prenom.' '.$nom;echo "</br>";
 
 echo"
 <div id=\"content\">
@@ -20,31 +48,79 @@ echo"
 Nom: $nom </br>
 Prenom: $prenom </br>
 Adresse: $adresse </br>
-Mail: $mail </br></br>
-<div id=\"afficher_cacher\"><a href=\"#\" onclick=\"apparaitre();\">Modifier</a></div>
-<div id=\"texte\" style=\"visibility:hidden\">code pour modifier mes informations</div>
+Mail: $email </br></br>
+<div id=\"afficher_cacher\"><a onclick=\"apparaitre();\">Modifier mes informations</a></div>
+<div id=\"texte\" style=\"visibility:hidden\">
+";
+
+echo"
+<div class=\"row-fluid\">
+	<div class=\"span12\">
+		<div id=\"divAroundMe\">
+		
+			<fieldset>
+			<input type= \"radio\" name=\"civ\" id=\"civ\" value=\"monsieur\" checked=\"checked\"> Monsieur
+			<input type= \"radio\" name=\"civ\" id=\"civ\" value=\"madame\"> Madame
+			<input type= \"radio\" name=\"civ\" id=\"civ\" value=\"mademoiselle\"> Mademoiselle
+			</fieldset>
+			<fieldset>
+			<input type=\"text\" name=\"nom\" id=\"nom\"
+					value=\"$nom\" placeholder=\"nom\"
+					onChange=\"deleteInput('nom')\" /> 
+			</fieldset>
+			<fieldset>
+			<input type=\"text\" name=\"prenom\" id=\"prenom\"
+					value=\"$prenom\" placeholder=\"Prenom\"
+					onChange=\"deleteInput('prenom')\" /> 
+			</fieldset>
+			<fieldset>
+			<input type=\"text\" name=\"mail\" id=\"mail\"
+					value=\"$email\" placeholder=\"mail\"
+					onChange=\"deleteInput('mail')\" /> 
+			</fieldset>
+			<fieldset>
+			<input type=\"text\" name=\"address\" id=\"address\"
+					value=\"$add\" placeholder=\"adresse\" 
+					onChange=\"deleteInput('address')\" /> 
+			</fieldset>
+			<fieldset>
+			<input type=\"text\" name=\"cp\" id=\"cp\"
+					value=\"$cp\" placeholder=\"code postal\"
+					onChange=\"deleteInput('cp')\" /> 
+			</fieldset>
+			<fieldset>
+			<input type=\"text\" name=\"city\" id=\"city\"
+					value=\"$ville\" placeholder=\"ville\"
+					onChange=\"deleteInput('city')\" /> 
+			</fieldset>
+			
+			<p>
+				<input value=\"Save\"  onClick=\"validerFormUpdateInfoUser()\" class=\"btn btn-success\" />
+			</p>
+			
+		</div>
+	</div>
+</div>
+
+</div>
 </ul>
 
 <ul style=\"float : left; width : 250px; list-style-position: inside; list-style-type: square; margin : 0; padding : 0;\">
 <li><H5>Mon Avatar</h5></li>
-Avatar: $avatar </br></br></br></br></br>
-<div id=\"afficher_cacher\"><a href=\"#\" onclick=\"apparaitre();\">Modifier</a></div>
-<div id=\"texte\" style=\"visibility:hidden\">code pour modifier mon avatar</div>
+Avatar: $avatar
 </ul>
 
 <ul style=\"float : left; width : 250px; list-style-position: inside; list-style-type: square; margin : 0; padding : 0;\">
 <li><h5>Ma station favorion</h5></li>
-Carburant: $carburant </br>
-Station: $id_station </br></br></br></br>
-<div id=\"afficher_cacher\"><a href=\"#\" onclick=\"apparaitre();\">Modifier</a></div>
-<div id=\"texte\" style=\"visibility:hidden\">code pour modifier ma station favorite</div>
+Carburant: $carbu </br>
+Station: $id_station
 </ul>
 
 <ul style=\"float : left; width : 250px; list-style-position: inside; list-style-type: square; margin : 0; padding : 0;\">
 <li><h5><a href=\"desinscrire.php\">Me désinscrire</a></h5></li>
 </ul>
 </div>
-
 ";
+Fonctions::inputHidden('actionPage', '');
 ?>
 

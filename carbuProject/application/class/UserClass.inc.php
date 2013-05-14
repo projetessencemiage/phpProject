@@ -79,6 +79,7 @@ class User {
 	public function getNom() {
 		return $this->nom;
 	}
+	
 	public function getPrenom() {
 		return $this->prenom;
 	}
