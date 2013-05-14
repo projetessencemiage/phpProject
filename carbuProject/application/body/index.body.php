@@ -42,11 +42,11 @@ if (array_key_exists(USER, $_SESSION)) {
 if ($isLogger) {
 ?>
 <div class="row-fluid">
-	<div class="span6">
+	<div class="span4">
 		<h5>Autour de chez moi ...</h5>
 	 <img onclick="afficheMapsWithHome()" src="./images/homeSearch.png" ALT="Voir carte autour de chez moi" TITLE="Voir carte autour de chez moi">
 	</div>
-	<div class="span6">
+	<div class="span4">
 		<h5>Mon profil</h5>
 		<a href="UserInfo.php" title="Voir mon profil "> <img
 			SRC="./images/profil.png" ALT="Voir mon profil" TITLE="Voir mon profil">
@@ -59,16 +59,23 @@ if ($isLogger) {
 if (Fonctions::getRole($_SESSION) == ROLE_ADMIN) {
 ?>
 <div class="row-fluid">
-	<div class="span6">
+	<div class="span4">
 		<h5>Valider stations</h5>
 	 <a href="validerStation.php">
 	 <img src="./images/stations.png" ALT="Valider stations" TITLE="Valider stations">
 	 </a>
 	</div>
-	<div class="span6">
+	<div class="span4">
 		<h5>Mon profil</h5>
 		<a href="UserInfo.php" title="Voir mon profil "> <img
 			SRC="./images/profil.png" ALT="Voir mon profil" TITLE="Voir mon profil">
+		</a>
+		</p>
+	</div>
+	<div class="span4">
+		<h5>Gestion des utilisateurs</h5>
+		<a href="UsersSetting.php" title="Gestion des utilisateurs "> <img
+			SRC="./images/profil.png" ALT="Gestion des utilisateurs" TITLE="Gestion des utilisateurs">
 		</a>
 		</p>
 	</div>

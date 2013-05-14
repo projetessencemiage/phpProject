@@ -29,21 +29,21 @@ class User {
 	private $carbu;
 	private $station;
 
-	function __construct() {
-		$this->id_user = '';
-		$this->userName = '';
-		$this->password = '';
-		$this->civ = '';
-		$this->nom = '';
-		$this->prenom = '';
-		$this->adresse = '';
-		$this->cp = '';
-		$this->ville = '';
-		$this->mail = '';
-		$this->role = '';
-		$this->avatar = '';
-		$this->carbu = '';
-		$this->station = '';
+	function __construct($id,$username, $password, $civ, $nom, $prenom, $adresse, $cp, $ville, $mail, $role, $avatar, $carbu, $station) {
+		$this->id_user = $id;
+		$this->userName = $username;
+		$this->password = $password;
+		$this->civ = $civ;
+		$this->nom = $nom;
+		$this->prenom = $prenom;
+		$this->adresse = $adresse;
+		$this->cp = $cp;
+		$this->ville = $ville;
+		$this->mail = $mail;
+		$this->role = $role;
+		$this->avatar = $avatar;
+		$this->carbu = $carbu;
+		$this->station = $station;
 	}
 	
 	public function isExistUser($login, $pwd) {
