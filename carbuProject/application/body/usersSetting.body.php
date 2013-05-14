@@ -50,8 +50,16 @@ echo "<table id=\"tablesorter-demo\" class=\"tablesorter\" border=\"0\" cellpadd
 					<td>".$user->getAdresse()."</td>
 					<td>".$user->getCp()."</td>
 					<td>".$user->getVille()."</td>
-					<td>".$user->getRole()."</td>
-				</tr>";
+					<td>".$user->getRole()."</td>";
+			if($user->getRole() == "user"){
+					echo "<td>
+							<a href=\"delete.php\"> 
+					<img src=\"./images/stations.png\" ALT=\"Supprimer la station\">
+					</a>
+					</td>";
+			}	
+			
+				echo "</tr>";
 		}
 
 echo "</tbody></table>";
