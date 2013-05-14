@@ -29,7 +29,7 @@ class User {
 	private $carbu;
 	private $station;
 
-	function __construct($id,$username, $password, $civ, $nom, $prenom, $adresse, $cp, $ville, $mail, $role, $avatar, $carbu, $station) {
+	function __construct($id="",$username="", $password="", $civ="", $nom="", $prenom="", $adresse="", $cp="", $ville="", $mail="", $role="", $avatar="", $carbu="", $station="") {
 		$this->id_user = $id;
 		$this->userName = $username;
 		$this->password = $password;
