@@ -76,24 +76,44 @@ class User {
 	public function getCiv() {
 		return $this->civ;
 	}
+	public function setCiv($civ) {
+		$this->civ = $civ;
+	}
 	public function getNom() {
 		return $this->nom;
 	}
-	
+	public function setNom($nom) {
+		$this->nom = $nom;
+	}
 	public function getPrenom() {
 		return $this->prenom;
+	}
+	public function setPrenom($prenom) {
+		$this->prenom = $prenom;
 	}
 	public function getAdresse() {
 		return $this->adresse;
 	}
+	public function setAdresse($adresse) {
+		$this->adresse = $adresse;
+	}
 	public function getCp() {
 		return $this->cp;
+	}
+	public function setCp($cp) {
+		$this->cp = $cp;
 	}
 	public function getVille() {
 		return $this->ville;
 	}
+	public function setVille($ville) {
+		$this->ville = $ville;
+	}
 	public function getMail() {
 		return $this->mail;
+	}
+	public function setMail($mail) {
+		$this->mail = $mail;
 	}
 	public function getRole() {
 		return $this->role;
