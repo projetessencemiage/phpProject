@@ -25,6 +25,7 @@ function connexionUser() {
 				var code = rep[1];
 				var message = rep[2];
 				if(code == 0) {
+					document.forms['formGeneral'].action = "index.php";
 					document.forms['formGeneral'].submit();
 				} else {
 					afficherMsgMenuNav(3, message);

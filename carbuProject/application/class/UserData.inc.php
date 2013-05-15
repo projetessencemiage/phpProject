@@ -27,7 +27,19 @@ class UserData {
 		$reponse[] = $userXML;  		
 		return $reponse;
 	}
-	
+	static function reInitMdp($identifiant, $cle, $mdp) {
+		$nouveauMDP = hash('SHA256', $mdp);
+		$soapClient = new SoapClient(URL_WCF."/UserService.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
+		$soapClient->ReinitialisationMDP(array("identifiant" => $identifiant, "cle" => $cle, "nouveauMDP" => $nouveauMDP));
+		$result = $soapClient->__getLastResponse();
+		$dom = new DomDocument();
+		$dom->loadXML($result);
+		$code = $dom->getElementsByTagName('reponse')->item(0)->nodeValue;
+		$msg = $dom->getElementsByTagName('message')->item(0)->nodeValue;
+		$reponse[] = $code;
+		$reponse[] = $msg;
+		return $reponse;
+	}
 	static function updateInfosUser($civilite, $nom, $prenom, $pseudo, $email, $adresse, $cp, $ville, $url, $id_station, $carbu) {
 		$clientSoap = new SoapClient("http://projetm2miage.no-ip.biz:8084/UserService.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
 		//$clientSoap->MiseAJourProfilUser(array("civilite" => $civilite,"nom" => $nom, "prenom" => $prenom, "pseudo" => $pseudo, "email" => $email, "adress" => $adresse, "code_postal" => $cp, "ville" => $ville, "url_avatar" => $url, "string_id_station_favorite" => $id_station, "string_id_carburant_pref" => $carbu));
