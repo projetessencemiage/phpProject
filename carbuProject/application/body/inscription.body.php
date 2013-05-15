@@ -32,7 +32,7 @@ if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != "") {
 		$city = $_POST["city"];
 		$carbu = $_POST["carburantType"];
 		try{
-			$clientSoap = new SoapClient("http://projetm2miage.no-ip.biz:8084/UserService.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
+			$clientSoap = new SoapClient(URL_WCF."/UserService.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
 			$clientSoap->InscriptionUser(array("civilite" => $civilite,"nom" => $nom, "prenom" => $prenom, "pseudo" => $pseudo, "email" => $mail,"mdp" => $mdp,"adresse" => $address, "code_postal" => $cp, "ville" => $city, "url_avatar" => null, "string_id_station_favorite" => null, "string_id_carburant_pref" => $carbu));
 		}catch (Exception $e){
 			echo '

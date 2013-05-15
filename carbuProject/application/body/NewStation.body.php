@@ -16,10 +16,10 @@ if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != "") {
 		
 		try{
 		if (Fonctions::getRole($_SESSION) == ROLE_ADMIN) {
-			$clientSoap = new SoapClient("http://projetm2miage.no-ip.biz:8084/ActionAdmin.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
+			$clientSoap = new SoapClient(URL_WCF."/ActionAdmin.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
 			$clientSoap->AjouterStationAdmin(array("address" => $adresse, "code_postal" => $cp, "city" => $ville, "tel" => $tel, "id_enseigne" => $enseigneName, "price_list" => array()));
 		} else {
-			$clientSoap = new SoapClient("http://projetm2miage.no-ip.biz:8084/ActionCommunaute.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
+			$clientSoap = new SoapClient(URL_WCF."/ActionCommunaute.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
 			$clientSoap->PushStationWithAddress(array("address" => $adresse, "code_postal" => $cp, "city" => $ville, "tel" => $tel, "id_enseigne" => $enseigneName, "price_list" => array()));
 		}
 		var_dump($clientSoap->__getLastResponse());

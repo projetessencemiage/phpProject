@@ -29,11 +29,11 @@ class UserData {
 	}
 	
 	static function updateInfosUser($civilite, $nom, $prenom, $pseudo, $email, $adresse, $cp, $ville, $url, $id_station, $carbu) {
-		$clientSoap = new SoapClient("http://projetm2miage.no-ip.biz:8084/UserService.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
+		$clientSoap = new SoapClient(URL_WCF."/UserService.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
 		//$clientSoap->MiseAJourProfilUser(array("civilite" => $civilite,"nom" => $nom, "prenom" => $prenom, "pseudo" => $pseudo, "email" => $email, "adress" => $adresse, "code_postal" => $cp, "ville" => $ville, "url_avatar" => $url, "string_id_station_favorite" => $id_station, "string_id_carburant_pref" => $carbu));
 	}
 	static function removeUser($pseudo){
-		$clientSoap = new SoapClient("http://projetm2miage.no-ip.biz:8084/ActionAdmin.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
+		$clientSoap = new SoapClient(URL_WCF."/ActionAdmin.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
 		$clientSoap->SuppressionCompteByAdmin(array("identifiant" => $pseudo));
 	}
 };

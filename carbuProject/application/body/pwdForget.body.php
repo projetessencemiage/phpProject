@@ -19,7 +19,7 @@ if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != "") {
 		}
 		$pseudo = $_POST["pseudo"];
 		try{
-			$clientSoap = new SoapClient("http://projetm2miage.no-ip.biz:8084/UserService.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
+			$clientSoap = new SoapClient(URL_WCF."/UserService.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
 			$clientSoap->MotDePasseOublie(array("identifiant" => $pseudo));
 		}catch (Exception $e){
 			echo '

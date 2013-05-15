@@ -13,7 +13,7 @@ class listeUsersClass {
 	private $listeUsers;
 
 	function __construct() {
-		$this->soapClient = new SoapClient("http://projetm2miage.no-ip.biz:8084/ActionAdmin.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
+		$this->soapClient = new SoapClient(URL_WCF."/ActionAdmin.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
 		$this->listeUsers = array();
 	}
 	
