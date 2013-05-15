@@ -28,5 +28,19 @@ class UserData {
 		return $reponse;
 	}
 	
+	static function reInitMdp($identifiant, $cle, $mdp) {
+		$nouveauMDP = hash('SHA256', $mdp);
+		$soapClient = new SoapClient(URL_WCF."/UserService.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
+		$soapClient->ReinitialisationMDP(array("identifiant" => $identifiant, "cle" => $cle, "nouveauMDP" => $nouveauMDP));
+		$result = $soapClient->__getLastResponse();
+		$dom = new DomDocument();
+		$dom->loadXML($result);
+		$code = $dom->getElementsByTagName('reponse')->item(0)->nodeValue;
+		$msg = $dom->getElementsByTagName('message')->item(0)->nodeValue;
+		$reponse[] = $code;
+		$reponse[] = $msg;
+		return $reponse;
+		
+	}
 };
 ?>
