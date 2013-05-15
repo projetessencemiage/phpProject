@@ -5,7 +5,7 @@ require_once('/securimage/securimage.php');
 
 if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != "") {
 	Fonctions::inputHidden('actionForm', $_POST['actionForm']);
-	if ($_POST['actionForm'] == "newPassword") {
+	if ($_POST['actionForm'] == "pwdForget") {
 		$securimage = new Securimage();
 		$result = $securimage->check($_POST['captcha_code']); 
 		if ($result == false) {
@@ -18,11 +18,9 @@ if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != "") {
 			exit;
 		}
 		$pseudo = $_POST["pseudo"];
-		var_dump($carbu);
 		try{
 			$clientSoap = new SoapClient("http://projetm2miage.no-ip.biz:8084/UserService.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
 			$clientSoap->MotDePasseOublie(array("identifiant" => $pseudo));
-			var_dump($clientSoap->__getLastResponse());
 		}catch (Exception $e){
 			echo '
 			<div class="alert alert-error" id="boxMsg">
