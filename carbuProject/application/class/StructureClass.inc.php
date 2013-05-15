@@ -70,7 +70,8 @@ class Structure {
 		echo ' method="post">';
 		echo '<div class="container">	
 			<div class="masthead">';
-				require_once 'nav-menu.inc.php';
+		echo '<img src="./images/banniere.jpg"/>';		
+		require_once 'nav-menu.inc.php';
 			echo '</div>';
 		
 		echo '
