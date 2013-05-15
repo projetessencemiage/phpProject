@@ -27,6 +27,7 @@ echo '
     							<input id="connexionPwd" type="password" class="input-small" placeholder="Password">
     							<a  class="btn btn-small btn-success" onClick="return connexionUser()">Connexion</a>
     							<a href="inscription.php" class="btn btn-small btn-primary" title="NewUser">Inscription</a>
+    							<a href="pwdForget.php" title="J\'ai oublié mon mot de passe">?</a>
     							';
     						} else {
     							echo '

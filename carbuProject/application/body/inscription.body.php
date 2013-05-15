@@ -31,7 +31,7 @@ if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != "") {
 		$cp = $_POST["cp"];
 		$city = $_POST["city"];
 		$carbu = $_POST["carburantType"];
-		
+		var_dump($carbu);
 		try{
 			$clientSoap = new SoapClient("http://projetm2miage.no-ip.biz:8084/UserService.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
 			$clientSoap->InscriptionUser(array("civilite" => $civilite,"nom" => $nom, "prenom" => $prenom, "pseudo" => $pseudo, "email" => $mail,"mdp" => $mdp,"adresse" => $address, "code_postal" => $cp, "ville" => $city, "url_avatar" => null, "string_id_station_favorite" => null, "string_id_carburant_pref" => $carbu));
@@ -66,7 +66,7 @@ if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != "") {
 					onChange="deleteInput('pseudo')" /> 
 			</fieldset>
 			<fieldset>
-			<input type="text" name="mdp" id="mdp"
+			<input type="password" name="mdp" id="mdp"
 					placeholder="Mot de passe *"
 					onChange="deleteInput('mdp')" /> 
 			</fieldset>

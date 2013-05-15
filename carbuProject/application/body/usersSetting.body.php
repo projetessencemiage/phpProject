@@ -5,13 +5,10 @@ require_once 'ListeUsersClass.inc.php';
 //Recherche de la liste a afficher
 if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != "") {
 	Fonctions::inputHidden('actionForm', $_POST['actionForm']);
-	if ($_POST['actionForm'] == "searchVille") {
-		Fonctions::inputHidden('searchVille', $_POST['searchVille']);
-		Fonctions::inputHidden('searchVilleDpt', $_POST['searchVilleDpt']);
-		$ville = $_POST["searchVille"];
-		$dpt = $_POST["searchVilleDpt"];
-		$listeStation->getStationsByVille($ville, $dpt, $carbuType);
-		$critere = 'Recherche par ville - '.$ville. ' ('.$dpt.')';
+	Fonctions::inputHidden('actionForm', $_POST['pseudoUser']);
+	if ($_POST['actionForm'] == "deleteUser") {
+		$pseudo = $_POST["pseudoUser"];
+		UserData::removeUser($pseudo);
 	}
 }
 
@@ -53,8 +50,8 @@ echo "<table id=\"tablesorter-demo\" class=\"tablesorter\" border=\"0\" cellpadd
 					<td>".$user->getRole()."</td>";
 			if($user->getRole() == "user"){
 					echo "<td>
-							<a href=\"delete.php\"> 
-					<img src=\"./images/stations.png\" ALT=\"Supprimer la station\">
+							<a onclick=\"deleteUser('".$user->getUserName()."')\"> 
+					<img src=\"./images/delete.png\" ALT=\"Supprimer la station\" aligne=\"center\">
 					</a>
 					</td>";
 			}	
@@ -64,4 +61,5 @@ echo "<table id=\"tablesorter-demo\" class=\"tablesorter\" border=\"0\" cellpadd
 
 echo "</tbody></table>";
 Fonctions::inputHidden('actionForm', '');
+Fonctions::inputHidden('pseudoUser', '');
 ?>

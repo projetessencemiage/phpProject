@@ -28,7 +28,6 @@ class listeUsersClass {
 		$result = $this->soapClient->__getLastResponse();
 			$dom = new DomDocument();
 			$dom->loadXML($result);
-			echo $result;
 			$tab = $dom->getElementsByTagName('User');
 			foreach ($tab as $user){
 				$adress = $user->childNodes->item(0)->nodeValue;
