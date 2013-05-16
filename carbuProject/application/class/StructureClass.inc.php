@@ -68,7 +68,7 @@ class Structure {
 		echo ' id="formGeneral"';
 		echo ' action="'.$action.'"';
 		echo ' method="post">';
-		echo '<div class="container">	
+		echo '<div id="corps" class="container">	
 			<div class="masthead">';
 		echo '<img src="./images/banniere.jpg"/>';		
 		require_once 'nav-menu.inc.php';
