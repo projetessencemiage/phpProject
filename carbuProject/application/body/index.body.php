@@ -17,6 +17,8 @@ if (array_key_exists(USER, $_SESSION)) {
 <h2>Qui est le moins cher ?</h2>
 
 <div class="row-fluid">
+	<div class="span2">
+	</div>
 	<div class="span4">
 		<h5>Autour de moi ...</h5>
 		<a href="CarteGenerale.php" title="Qui est le moins cher ? "> <img
@@ -30,18 +32,16 @@ if (array_key_exists(USER, $_SESSION)) {
 			TITLE="Liste des stations">
 		</a>
 	</div>
-	<div class="span4">
-		<h5>Statistiques</h5>
-		<a href="ListeStations.php" title="Liste des stations"> <img
-			SRC="./images/stats.png" ALT="Liste des stations"
-			TITLE="Liste des stations">
-		</a>
+	<div class="span2">
 	</div>
 </div>
 <?php 
 if ($isLogger) {
 ?>
+<hr>
 <div class="row-fluid">
+	<div class="span2">
+	</div>
 	<div class="span4">
 		<h5>Autour de chez moi ...</h5>
 	 <img onclick="afficheMapsWithHome()" src="./images/homeSearch.png" ALT="Voir carte autour de chez moi" TITLE="Voir carte autour de chez moi">
@@ -53,31 +53,31 @@ if ($isLogger) {
 		</a>
 		</p>
 	</div>
+	<div class="span2">
+	</div>
 </div>
 <?php 
 }
 if (Fonctions::getRole($_SESSION) == ROLE_ADMIN) {
 ?>
+<hr>
 <div class="row-fluid">
+	<div class="span2">
+	</div>
 	<div class="span4">
 		<h5>Valider stations</h5>
 	 <a href="validerStation.php">
-	 <img src="./images/stations.png" ALT="Valider stations" TITLE="Valider stations">
+	 <img src="./images/check.png" ALT="Valider stations" TITLE="Valider stations">
 	 </a>
-	</div>
-	<div class="span4">
-		<h5>Mon profil</h5>
-		<a href="UserInfo.php" title="Voir mon profil "> <img
-			SRC="./images/profil.png" ALT="Voir mon profil" TITLE="Voir mon profil">
-		</a>
-		</p>
 	</div>
 	<div class="span4">
 		<h5>Gestion des utilisateurs</h5>
 		<a href="UsersSetting.php" title="Gestion des utilisateurs "> <img
-			SRC="./images/profil.png" ALT="Gestion des utilisateurs" TITLE="Gestion des utilisateurs">
+			SRC="./images/usersGestion.png" ALT="Gestion des utilisateurs" TITLE="Gestion des utilisateurs">
 		</a>
 		</p>
+	</div>
+	<div class="span2">
 	</div>
 </div>
 <?php 
