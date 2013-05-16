@@ -18,11 +18,20 @@ if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != "") {
 		if (Fonctions::getRole($_SESSION) == ROLE_ADMIN) {
 			$clientSoap = new SoapClient(URL_WCF."/ActionAdmin.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
 			$clientSoap->AjouterStationAdmin(array("address" => $adresse, "code_postal" => $cp, "city" => $ville, "tel" => $tel, "id_enseigne" => $enseigneName, "price_list" => array()));
+			$result = $clientSoap->__getLastResponse();
+			$dom = new DomDocument();
+			$dom->loadXML($result);
+			echo "
+			<div class=\"alert alert-success\" id=\"boxMsg\">
+			<button type=\"button\" class=\"close\" data-dismiss=\"alert\" onclick=\"quitBox('boxMsg')\" >&times;</button>
+			<strong> OK - </strong>".$dom->getElementsByTagName('message')->item(0)->nodeValue."
+			<br/>
+			</div>";
+			exit;
 		} else {
 			$clientSoap = new SoapClient(URL_WCF."/ActionCommunaute.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
 			$clientSoap->PushStationWithAddress(array("address" => $adresse, "code_postal" => $cp, "city" => $ville, "tel" => $tel, "id_enseigne" => $enseigneName, "price_list" => array()));
 		}
-		var_dump($clientSoap->__getLastResponse());
 		}catch (Exception $e){
 			echo '
 			<div class="alert alert-error" id="boxMsg">
