@@ -4,7 +4,7 @@
  * @Name : ListeCarburantClass.inc.php
  * @Desc : Classe ListeCarburantService
  * @Author : Thom
- * @Date : 16/04/2013 : création
+ * @Date : 16/04/2013 : crï¿½ation
  * @Version : V1.0;
  * ------------------------------------------------------------------------
  **/
@@ -17,7 +17,7 @@ class ListeCarburant {
 	}
 
 	function getListCarburant($type = '') {
-		$clientSoap = new SoapClient("http://projetm2miage.no-ip.biz:8084/RecuperationOutilsDonnees.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
+		$clientSoap = new SoapClient(URL_WCF."/RecuperationOutilsDonnees.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
 		$this->listeCarburant = array();
 		try {
 			$return = $clientSoap->getIdAndTypeEssence(array());

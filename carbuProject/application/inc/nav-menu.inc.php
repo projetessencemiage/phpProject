@@ -8,7 +8,6 @@ if (array_key_exists('USER', $_SESSION)) {
 $urlEnCours = $_SERVER['REQUEST_URI'];
 
 echo '
-<h3 class="muted">Carbu Project</h3>
 			<div class="navbar">
 				<div class="navbar-inner">
 					<div class="container">

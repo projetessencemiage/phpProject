@@ -25,7 +25,7 @@ class ListeEnseigne {
 		
 		try{
 			$this->listeEnseigne = array();
-			$clientSoap = new SoapClient("http://projetm2miage.no-ip.biz:8084/RecuperationOutilsDonnees.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
+			$clientSoap = new SoapClient(URL_WCF."/RecuperationOutilsDonnees.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
 			$clientSoap->getIdAndNomEnseigne();
 			$result = $clientSoap->__getLastResponse();
 			$dom = new DomDocument();
