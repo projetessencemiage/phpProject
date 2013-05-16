@@ -6,8 +6,8 @@ function supprimerStation(idStation) {
 			var chaine = xhr.responseText;
 			var rep = chaine.split('|');
 			if (rep[0] == 'OK'){
-				alert('Suppr OK');
-				//document.forms['formGeneral'].submit();
+				document.forms['formGeneral'].action = 'ListeStations.php';
+				document.forms['formGeneral'].submit();
 			}
 			else alert('ERREUR' + xhr.responseText);
 		}

@@ -74,17 +74,6 @@ window.onload=function(){
 	    }
 	}
 
-	//Ajouter un Marker � la MAP
-	function addMarker(stationToMark) {
-		var adresse = stationToMark[var_adresse];	
-		myGeocoder.geocode( { 'address': adresse}, function(results, status) {		
-			// Si la recherche à fonctionné
-			if( status == google.maps.GeocoderStatus.OK ) { 
-				createMarker(stationToMark);
-			} // Fin si status OK		
-		});
-	}
-
 	//Creation d'un MARKER sur la map
 	function createMarker(markerInfos) {
 		//Gestion image
@@ -101,7 +90,7 @@ window.onload=function(){
 			var titlePrice = "Non disponible";
 		} else {
 			var titlePrice = markerInfos[var_listPrice][keyCarbu]['Prix'] + ' €';
-		}		
+		}
 		var myMarker = new google.maps.Marker({
 			position: my_position,
 			map: myMap,
@@ -109,25 +98,7 @@ window.onload=function(){
 			title: titlePrice
 		});
 		bounds.extend(my_position);
-		
-		var infoBulles = '<p>'
-			+ '<address>'
-			+ ' <strong>' +  markerInfos[var_enseigne] + '</strong><br>'
-			+  markerInfos[var_adresse] + '<br>'
-			+ ' <abbr title="Phone">Tel: </abbr>' + markerInfos[var_phone]
-			+ ' </address>'
-			+ ' </p>'
-			+ '<p>Price: '
-			+  affichePriceList(markerInfos[var_listPrice])
-			+ '</p>'
-			
-		//Ajout Fenetre 
-		var myWindowOptions = {
-				content: infoBulles
-		};
 
-		// Création de la fenêtre
-		var myInfoWindow = new google.maps.InfoWindow(myWindowOptions);
 		google.maps.event.addListener(myMarker, 'click', function() {
 			addDivStation(markerInfos);
 			document.getElementById('stationToAfficheInfoID').value = markerInfos[var_id];
