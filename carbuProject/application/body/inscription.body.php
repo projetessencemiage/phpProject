@@ -34,6 +34,16 @@ if (array_key_exists('actionForm', $_POST) && $_POST['actionForm'] != "") {
 		try{
 			$clientSoap = new SoapClient(URL_WCF."/UserService.svc?wsdl", array('encoding'=>'UTF-8','trace'=>1));
 			$clientSoap->InscriptionUser(array("civilite" => $civilite,"nom" => $nom, "prenom" => $prenom, "pseudo" => $pseudo, "email" => $mail,"mdp" => $mdp,"adresse" => $address, "code_postal" => $cp, "ville" => $city, "url_avatar" => null, "string_id_station_favorite" => null, "string_id_carburant_pref" => $carbu));
+			$result = $clientSoap->__getLastResponse();
+			$dom = new DomDocument();
+			$dom->loadXML($result);
+			echo "
+			<div class=\"alert alert-success\" id=\"boxMsg\">
+			<button type=\"button\" class=\"close\" data-dismiss=\"alert\" onclick=\"quitBox('boxMsg')\" >&times;</button>
+			<strong> OK - </strong>".$dom->getElementsByTagName('message')->item(0)->nodeValue."
+			<br/>
+			</div>";
+			exit;
 		}catch (Exception $e){
 			echo '
 			<div class="alert alert-error" id="boxMsg">
